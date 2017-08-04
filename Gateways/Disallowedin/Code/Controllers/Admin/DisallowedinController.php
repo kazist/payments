@@ -13,7 +13,7 @@
  * @author sbc
  */
 
-namespace Finance\Gateways\Disallowedin\Code\Controllers\Admin;
+namespace Payments\Gateways\Disallowedin\Code\Controllers\Admin;
 
 defined('KAZIST') or exit('Not Kazist Framework');
 
