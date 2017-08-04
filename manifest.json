@@ -1,0 +1,10 @@
+{
+    "name": "kazist/payments",
+    "title": "Payments",
+    "icon": "icons\/payments.png",
+    "extension": "component",
+    "path": "applications/Payments/",
+    "home_link": "payments\/payments",
+    "description": "Payments Information",
+    "version": 1
+}
