@@ -31,80 +31,36 @@
         "namespace": "Payments\\Gateways\\Withdrawrates",
         "controller": "WithdrawratesController"
     },
-    "PaymentsMasspay": {
-        "namespace": "Payments\\Masspay",
-        "controller": "MasspayController"
-    },
     "PaymentsPayments": {
         "namespace": "Payments\\Payments",
         "controller": "PaymentsController"
-    },
-    "PaymentsPaymentsEvripay": {
-        "namespace": "Payments\\Payments\\Evripay",
-        "controller": "EvripayController"
-    },
-    "PaymentsPaymentsIpay": {
-        "namespace": "Payments\\Payments\\Ipay",
-        "controller": "IpayController"
-    },
-    "PaymentsPaymentsPayza": {
-        "namespace": "Payments\\Payments\\Payza",
-        "controller": "PayzaController"
-    },
-    "PaymentsPaymentsSolidtrust": {
-        "namespace": "Payments\\Payments\\Solidtrust",
-        "controller": "SolidtrustController"
     },
     "PaymentsRates": {
         "namespace": "Payments\\Rates",
         "controller": "RatesController"
     },
-    "PaymentsTokens": {
-        "namespace": "Payments\\Tokens",
-        "controller": "TokensController"
-    },
     "PaymentsTransactions": {
         "namespace": "Payments\\Transactions",
         "controller": "TransactionsController"
-    },
-    "PaymentsTransfers": {
-        "namespace": "Payments\\Transfers",
-        "controller": "TransfersController"
-    },
-    "PaymentsTransfersAllowedin": {
-        "namespace": "Payments\\Transfers\\Allowedin",
-        "controller": "AllowedinController"
-    },
-    "PaymentsTransfersDisallowedin": {
-        "namespace": "Payments\\Transfers\\Disallowedin",
-        "controller": "DisallowedinController"
-    },
-    "PaymentsWithdraws": {
-        "namespace": "Payments\\Withdraws",
-        "controller": "WithdrawsController"
-    },
-    "PaymentsPaymentsPaypal": {
-        "namespace": "Payments\\Payments\\Paypal",
-        "controller": "PaypalController"
     },
     "PaymentsRatesFiles": {
         "namespace": "Payments\\Rates\\Files",
         "controller": "FilesController"
     },
-    "PaymentsTokensTypes": {
-        "namespace": "Payments\\Tokens\\Types",
-        "controller": "TypesController"
+    "PaymentsWallets": {
+        "namespace": "Payments\\Wallets",
+        "controller": "WalletsController"
     },
-    "PaymentsPaymentsBonus": {
-        "namespace": "Payments\\Payments\\Bonus",
-        "controller": "BonusController"
+    "PaymentsSources": {
+        "namespace": "Payments\\Sources",
+        "controller": "SourcesController"
     },
-    "PaymentsPaymentsTokens": {
-        "namespace": "Payments\\Payments\\Tokens",
-        "controller": "TokensController"
+    "PaymentsInvoices": {
+        "namespace": "Payments\\Invoices",
+        "controller": "InvoicesController"
     },
-    "PaymentsPaymentsPesapal": {
-        "namespace": "Payments\\Payments\\Pesapal",
-        "controller": "PesapalController"
+    "PaymentsInvoicesItems": {
+        "namespace": "Payments\\Invoices\\Items",
+        "controller": "ItemsController"
     }
 }

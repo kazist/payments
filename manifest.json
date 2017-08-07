@@ -3,7 +3,7 @@
     "title": "Payments",
     "icon": "icons\/payments.png",
     "extension": "component",
-    "path": "applications/Payments/",
+    "path": "Payments/",
     "home_link": "payments\/payments",
     "description": "Payments Information",
     "version": 1

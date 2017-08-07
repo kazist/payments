@@ -1,0 +1,18 @@
+[{
+        "name": "payments_paying_methods",
+        "label": "Payment Procedure",
+        "default": "direct",
+        "type": "select",
+        "source": {
+            "custom": [{
+                    "value": "both",
+                    "text": "Pay for Items Wallets/Directly"
+                }, {
+                    "value": "direct",
+                    "text": "Pay for Items Directly."
+                }, {
+                    "value": "wallets",
+                    "text": "Pay for Items Wallets."
+                }]
+        }
+    }]

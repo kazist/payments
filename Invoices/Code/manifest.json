@@ -1,0 +1,13 @@
+{
+    "name": "invoices",
+    "title": "Payments Invoices",
+    "explanation": "  Payments Invoices",
+    "description": "  Payments Invoices",
+    "version": 3,
+    "has_view": "1",
+    "tie_field": "0",
+    "email_on_new": "0",
+    "email_on_edit": "0",
+    "email_on_delete": "0",
+    "date_file_modified": "2017-08-07 12:47:18"
+}
