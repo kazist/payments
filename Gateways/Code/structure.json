@@ -269,6 +269,7 @@
                                                                         "user_right": null,
                                                                         "hide_on_new": null,
                                                                         "fields": [
+                                                                            "form_path",
                                                                             "url",
                                                                             "parameters"
                                                                         ]
@@ -451,6 +452,7 @@
             "has_label": [
                 "short_name",
                 "long_name",
+                "currency_id",
                 "image",
                 "input_label",
                 "can_withdraw",
@@ -1047,6 +1049,27 @@
             }
         },
         {
+            "name": "form_path",
+            "html_type": "text",
+            "mysql_type": "varchar",
+            "view_side": "",
+            "index": "",
+            "size": "",
+            "readonly": "0",
+            "default_value": "",
+            "format_value": "",
+            "parameters": {
+                "general": [],
+                "source": [],
+                "save": {
+                    "view_side": "both",
+                    "index": ""
+                },
+                "media": [],
+                "payment": []
+            }
+        },
+        {
             "dropdown_filter": "1",
             "nullable": "1",
             "name": "published",
@@ -1231,7 +1254,7 @@
     ],
     "primarykey": "id",
     "table_name": "payments_gateways",
-    "table_alias": "fg",
+    "table_alias": "pg",
     "foreignkey": "",
     "renamedfields": "",
     "main_fields": [
@@ -1248,68 +1271,69 @@
     "query": {
         "from": {
             "table": "Payments\\Gateways\\Code\\Tables\\Gateways",
-            "alias": "fg",
+            "alias": "pg",
             "name": "#__payments_gateways"
         },
         "select": [
-            "fg.id",
-            "fg.short_name",
-            "fg.long_name",
-            "fg.currency_id",
+            "pg.id",
+            "pg.short_name",
+            "pg.long_name",
+            "pg.currency_id",
             "sc.name AS currency_id_name",
-            "fg.image",
+            "pg.image",
             "mm.title AS image_title",
             "mm.file AS image_file",
-            "fg.input_label",
-            "fg.input_instruction",
-            "fg.can_withdraw",
-            "fg.can_payment",
-            "fg.can_transfer",
-            "fg.record_deposit",
-            "fg.params",
-            "fg.payment_instruction",
-            "fg.transfer_instruction",
-            "fg.withdraw_instruction",
-            "fg.withdraw_file_prefix",
-            "fg.withdraw_file_structure",
-            "fg.withdraw_file_suffix",
-            "fg.withdraw_limit",
-            "fg.file_type",
-            "fg.file_limit",
-            "fg.published",
-            "fg.ordering",
-            "fg.url",
-            "fg.created_by",
+            "pg.input_label",
+            "pg.input_instruction",
+            "pg.can_withdraw",
+            "pg.can_payment",
+            "pg.can_transfer",
+            "pg.record_deposit",
+            "pg.params",
+            "pg.payment_instruction",
+            "pg.transfer_instruction",
+            "pg.withdraw_instruction",
+            "pg.withdraw_file_prefix",
+            "pg.withdraw_file_structure",
+            "pg.withdraw_file_suffix",
+            "pg.withdraw_limit",
+            "pg.file_type",
+            "pg.file_limit",
+            "pg.form_path",
+            "pg.published",
+            "pg.ordering",
+            "pg.url",
+            "pg.created_by",
             "uu.name AS created_by_name",
-            "fg.date_created",
-            "fg.modified_by",
-            "uu_343.name AS modified_by_name",
-            "fg.date_modified"
+            "pg.date_created",
+            "pg.modified_by",
+            "uu_7805.name AS modified_by_name",
+            "pg.date_modified"
         ],
         "leftjoin": [
             {
                 "table": "Setup\\Currencies\\Code\\Tables\\Currencies",
                 "alias": "sc",
                 "name": "#__setup_currencies",
-                "on": "fg.currency_id = sc.id"
+                "on": "pg.currency_id = sc.id"
             },
             {
                 "table": "Media\\Media\\Code\\Tables\\Media",
                 "alias": "mm",
                 "name": "#__media_media",
-                "on": "fg.image = mm.id"
+                "on": "pg.image = mm.id"
             },
             {
                 "table": "Users\\Users\\Code\\Tables\\Users",
                 "alias": "uu",
                 "name": "#__users_users",
-                "on": "fg.created_by = uu.id"
+                "on": "pg.created_by = uu.id"
             },
             {
                 "table": "Users\\Users\\Code\\Tables\\Users",
-                "alias": "uu_343",
+                "alias": "uu_7805",
                 "name": "#__users_users",
-                "on": "fg.modified_by = uu_343.id"
+                "on": "pg.modified_by = uu_7805.id"
             }
         ]
     }

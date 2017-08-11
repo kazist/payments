@@ -20,7 +20,7 @@ Payments\Gateways\Code\Tables\Gateways:
       name: currency_id
       type: integer
       length: 11
-      nullable: false
+      nullable: true
     image:
       name: image
       type: integer
@@ -34,7 +34,7 @@ Payments\Gateways\Code\Tables\Gateways:
     input_instruction:
       name: input_instruction
       type: text
-      nullable: false
+      nullable: true
     can_withdraw:
       name: can_withdraw
       type: integer
@@ -98,6 +98,10 @@ Payments\Gateways\Code\Tables\Gateways:
       type: string
       length: 255
       nullable: true
+    form_path:
+      name: form_path
+      type: string
+      length: 255
     published:
       name: published
       type: integer

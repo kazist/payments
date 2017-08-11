@@ -163,6 +163,13 @@ class Gateways extends \Kazist\Table\BaseTable
     protected $file_limit;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="form_path", type="string", length=255)
+     */
+    protected $form_path;
+
+    /**
      * @var integer
      *
      * @ORM\Column(name="published", type="integer", length=11, nullable=true)
@@ -215,7 +222,7 @@ class Gateways extends \Kazist\Table\BaseTable
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -223,9 +230,10 @@ class Gateways extends \Kazist\Table\BaseTable
     }
 
     /**
-     * Set short_name
+     * Set shortName
      *
      * @param string $shortName
+     *
      * @return Gateways
      */
     public function setShortName($shortName)
@@ -236,9 +244,9 @@ class Gateways extends \Kazist\Table\BaseTable
     }
 
     /**
-     * Get short_name
+     * Get shortName
      *
-     * @return string 
+     * @return string
      */
     public function getShortName()
     {
@@ -246,9 +254,10 @@ class Gateways extends \Kazist\Table\BaseTable
     }
 
     /**
-     * Set long_name
+     * Set longName
      *
      * @param string $longName
+     *
      * @return Gateways
      */
     public function setLongName($longName)
@@ -259,9 +268,9 @@ class Gateways extends \Kazist\Table\BaseTable
     }
 
     /**
-     * Get long_name
+     * Get longName
      *
-     * @return string 
+     * @return string
      */
     public function getLongName()
     {
@@ -269,22 +278,23 @@ class Gateways extends \Kazist\Table\BaseTable
     }
 
     /**
-     * Set currency_id
+     * Set currencyId
      *
-     * @param integer $currency_id
+     * @param integer $currencyId
+     *
      * @return Gateways
      */
-    public function setCurrencyId($currency_id)
+    public function setCurrencyId($currencyId)
     {
-        $this->currency_id = $currency_id;
+        $this->currency_id = $currencyId;
 
         return $this;
     }
 
     /**
-     * Get currency_id
+     * Get currencyId
      *
-     * @return integer 
+     * @return integer
      */
     public function getCurrencyId()
     {
@@ -295,6 +305,7 @@ class Gateways extends \Kazist\Table\BaseTable
      * Set image
      *
      * @param integer $image
+     *
      * @return Gateways
      */
     public function setImage($image)
@@ -307,7 +318,7 @@ class Gateways extends \Kazist\Table\BaseTable
     /**
      * Get image
      *
-     * @return integer 
+     * @return integer
      */
     public function getImage()
     {
@@ -315,9 +326,10 @@ class Gateways extends \Kazist\Table\BaseTable
     }
 
     /**
-     * Set input_label
+     * Set inputLabel
      *
      * @param string $inputLabel
+     *
      * @return Gateways
      */
     public function setInputLabel($inputLabel)
@@ -328,9 +340,9 @@ class Gateways extends \Kazist\Table\BaseTable
     }
 
     /**
-     * Get input_label
+     * Get inputLabel
      *
-     * @return string 
+     * @return string
      */
     public function getInputLabel()
     {
@@ -338,9 +350,10 @@ class Gateways extends \Kazist\Table\BaseTable
     }
 
     /**
-     * Set input_instruction
+     * Set inputInstruction
      *
      * @param string $inputInstruction
+     *
      * @return Gateways
      */
     public function setInputInstruction($inputInstruction)
@@ -351,9 +364,9 @@ class Gateways extends \Kazist\Table\BaseTable
     }
 
     /**
-     * Get input_instruction
+     * Get inputInstruction
      *
-     * @return string 
+     * @return string
      */
     public function getInputInstruction()
     {
@@ -361,9 +374,10 @@ class Gateways extends \Kazist\Table\BaseTable
     }
 
     /**
-     * Set can_withdraw
+     * Set canWithdraw
      *
      * @param integer $canWithdraw
+     *
      * @return Gateways
      */
     public function setCanWithdraw($canWithdraw)
@@ -374,9 +388,9 @@ class Gateways extends \Kazist\Table\BaseTable
     }
 
     /**
-     * Get can_withdraw
+     * Get canWithdraw
      *
-     * @return integer 
+     * @return integer
      */
     public function getCanWithdraw()
     {
@@ -384,9 +398,10 @@ class Gateways extends \Kazist\Table\BaseTable
     }
 
     /**
-     * Set can_payment
+     * Set canPayment
      *
      * @param integer $canPayment
+     *
      * @return Gateways
      */
     public function setCanPayment($canPayment)
@@ -397,9 +412,9 @@ class Gateways extends \Kazist\Table\BaseTable
     }
 
     /**
-     * Get can_payment
+     * Get canPayment
      *
-     * @return integer 
+     * @return integer
      */
     public function getCanPayment()
     {
@@ -407,9 +422,10 @@ class Gateways extends \Kazist\Table\BaseTable
     }
 
     /**
-     * Set can_transfer
+     * Set canTransfer
      *
      * @param integer $canTransfer
+     *
      * @return Gateways
      */
     public function setCanTransfer($canTransfer)
@@ -420,9 +436,9 @@ class Gateways extends \Kazist\Table\BaseTable
     }
 
     /**
-     * Get can_transfer
+     * Get canTransfer
      *
-     * @return integer 
+     * @return integer
      */
     public function getCanTransfer()
     {
@@ -430,9 +446,10 @@ class Gateways extends \Kazist\Table\BaseTable
     }
 
     /**
-     * Set record_deposit
+     * Set recordDeposit
      *
      * @param integer $recordDeposit
+     *
      * @return Gateways
      */
     public function setRecordDeposit($recordDeposit)
@@ -443,9 +460,9 @@ class Gateways extends \Kazist\Table\BaseTable
     }
 
     /**
-     * Get record_deposit
+     * Get recordDeposit
      *
-     * @return integer 
+     * @return integer
      */
     public function getRecordDeposit()
     {
@@ -456,6 +473,7 @@ class Gateways extends \Kazist\Table\BaseTable
      * Set params
      *
      * @param string $params
+     *
      * @return Gateways
      */
     public function setParams($params)
@@ -468,7 +486,7 @@ class Gateways extends \Kazist\Table\BaseTable
     /**
      * Get params
      *
-     * @return string 
+     * @return string
      */
     public function getParams()
     {
@@ -476,9 +494,10 @@ class Gateways extends \Kazist\Table\BaseTable
     }
 
     /**
-     * Set payment_instruction
+     * Set paymentInstruction
      *
      * @param string $paymentInstruction
+     *
      * @return Gateways
      */
     public function setPaymentInstruction($paymentInstruction)
@@ -489,9 +508,9 @@ class Gateways extends \Kazist\Table\BaseTable
     }
 
     /**
-     * Get payment_instruction
+     * Get paymentInstruction
      *
-     * @return string 
+     * @return string
      */
     public function getPaymentInstruction()
     {
@@ -499,9 +518,10 @@ class Gateways extends \Kazist\Table\BaseTable
     }
 
     /**
-     * Set transfer_instruction
+     * Set transferInstruction
      *
      * @param string $transferInstruction
+     *
      * @return Gateways
      */
     public function setTransferInstruction($transferInstruction)
@@ -512,9 +532,9 @@ class Gateways extends \Kazist\Table\BaseTable
     }
 
     /**
-     * Get transfer_instruction
+     * Get transferInstruction
      *
-     * @return string 
+     * @return string
      */
     public function getTransferInstruction()
     {
@@ -522,9 +542,10 @@ class Gateways extends \Kazist\Table\BaseTable
     }
 
     /**
-     * Set withdraw_instruction
+     * Set withdrawInstruction
      *
      * @param string $withdrawInstruction
+     *
      * @return Gateways
      */
     public function setWithdrawInstruction($withdrawInstruction)
@@ -535,9 +556,9 @@ class Gateways extends \Kazist\Table\BaseTable
     }
 
     /**
-     * Get withdraw_instruction
+     * Get withdrawInstruction
      *
-     * @return string 
+     * @return string
      */
     public function getWithdrawInstruction()
     {
@@ -545,9 +566,10 @@ class Gateways extends \Kazist\Table\BaseTable
     }
 
     /**
-     * Set withdraw_file_prefix
+     * Set withdrawFilePrefix
      *
      * @param string $withdrawFilePrefix
+     *
      * @return Gateways
      */
     public function setWithdrawFilePrefix($withdrawFilePrefix)
@@ -558,9 +580,9 @@ class Gateways extends \Kazist\Table\BaseTable
     }
 
     /**
-     * Get withdraw_file_prefix
+     * Get withdrawFilePrefix
      *
-     * @return string 
+     * @return string
      */
     public function getWithdrawFilePrefix()
     {
@@ -568,9 +590,10 @@ class Gateways extends \Kazist\Table\BaseTable
     }
 
     /**
-     * Set withdraw_file_structure
+     * Set withdrawFileStructure
      *
      * @param string $withdrawFileStructure
+     *
      * @return Gateways
      */
     public function setWithdrawFileStructure($withdrawFileStructure)
@@ -581,9 +604,9 @@ class Gateways extends \Kazist\Table\BaseTable
     }
 
     /**
-     * Get withdraw_file_structure
+     * Get withdrawFileStructure
      *
-     * @return string 
+     * @return string
      */
     public function getWithdrawFileStructure()
     {
@@ -591,9 +614,10 @@ class Gateways extends \Kazist\Table\BaseTable
     }
 
     /**
-     * Set withdraw_file_suffix
+     * Set withdrawFileSuffix
      *
      * @param string $withdrawFileSuffix
+     *
      * @return Gateways
      */
     public function setWithdrawFileSuffix($withdrawFileSuffix)
@@ -604,9 +628,9 @@ class Gateways extends \Kazist\Table\BaseTable
     }
 
     /**
-     * Get withdraw_file_suffix
+     * Get withdrawFileSuffix
      *
-     * @return string 
+     * @return string
      */
     public function getWithdrawFileSuffix()
     {
@@ -614,9 +638,10 @@ class Gateways extends \Kazist\Table\BaseTable
     }
 
     /**
-     * Set withdraw_limit
+     * Set withdrawLimit
      *
      * @param integer $withdrawLimit
+     *
      * @return Gateways
      */
     public function setWithdrawLimit($withdrawLimit)
@@ -627,9 +652,9 @@ class Gateways extends \Kazist\Table\BaseTable
     }
 
     /**
-     * Get withdraw_limit
+     * Get withdrawLimit
      *
-     * @return integer 
+     * @return integer
      */
     public function getWithdrawLimit()
     {
@@ -637,9 +662,10 @@ class Gateways extends \Kazist\Table\BaseTable
     }
 
     /**
-     * Set file_type
+     * Set fileType
      *
      * @param string $fileType
+     *
      * @return Gateways
      */
     public function setFileType($fileType)
@@ -650,9 +676,9 @@ class Gateways extends \Kazist\Table\BaseTable
     }
 
     /**
-     * Get file_type
+     * Get fileType
      *
-     * @return string 
+     * @return string
      */
     public function getFileType()
     {
@@ -660,9 +686,10 @@ class Gateways extends \Kazist\Table\BaseTable
     }
 
     /**
-     * Set file_limit
+     * Set fileLimit
      *
      * @param string $fileLimit
+     *
      * @return Gateways
      */
     public function setFileLimit($fileLimit)
@@ -673,9 +700,9 @@ class Gateways extends \Kazist\Table\BaseTable
     }
 
     /**
-     * Get file_limit
+     * Get fileLimit
      *
-     * @return string 
+     * @return string
      */
     public function getFileLimit()
     {
@@ -683,9 +710,34 @@ class Gateways extends \Kazist\Table\BaseTable
     }
 
     /**
+     * Set formPath
+     *
+     * @param string $formPath
+     *
+     * @return Gateways
+     */
+    public function setFormPath($formPath)
+    {
+        $this->form_path = $formPath;
+
+        return $this;
+    }
+
+    /**
+     * Get formPath
+     *
+     * @return string
+     */
+    public function getFormPath()
+    {
+        return $this->form_path;
+    }
+
+    /**
      * Set published
      *
      * @param integer $published
+     *
      * @return Gateways
      */
     public function setPublished($published)
@@ -698,7 +750,7 @@ class Gateways extends \Kazist\Table\BaseTable
     /**
      * Get published
      *
-     * @return integer 
+     * @return integer
      */
     public function getPublished()
     {
@@ -709,6 +761,7 @@ class Gateways extends \Kazist\Table\BaseTable
      * Set ordering
      *
      * @param integer $ordering
+     *
      * @return Gateways
      */
     public function setOrdering($ordering)
@@ -721,7 +774,7 @@ class Gateways extends \Kazist\Table\BaseTable
     /**
      * Get ordering
      *
-     * @return integer 
+     * @return integer
      */
     public function getOrdering()
     {
@@ -732,6 +785,7 @@ class Gateways extends \Kazist\Table\BaseTable
      * Set url
      *
      * @param string $url
+     *
      * @return Gateways
      */
     public function setUrl($url)
@@ -744,7 +798,7 @@ class Gateways extends \Kazist\Table\BaseTable
     /**
      * Get url
      *
-     * @return string 
+     * @return string
      */
     public function getUrl()
     {
@@ -752,9 +806,9 @@ class Gateways extends \Kazist\Table\BaseTable
     }
 
     /**
-     * Get created_by
+     * Get createdBy
      *
-     * @return integer 
+     * @return integer
      */
     public function getCreatedBy()
     {
@@ -762,9 +816,9 @@ class Gateways extends \Kazist\Table\BaseTable
     }
 
     /**
-     * Get date_created
+     * Get dateCreated
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getDateCreated()
     {
@@ -772,9 +826,9 @@ class Gateways extends \Kazist\Table\BaseTable
     }
 
     /**
-     * Get modified_by
+     * Get modifiedBy
      *
-     * @return integer 
+     * @return integer
      */
     public function getModifiedBy()
     {
@@ -782,9 +836,9 @@ class Gateways extends \Kazist\Table\BaseTable
     }
 
     /**
-     * Get date_modified
+     * Get dateModified
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getDateModified()
     {
@@ -798,3 +852,4 @@ class Gateways extends \Kazist\Table\BaseTable
         // Add your code here
     }
 }
+
