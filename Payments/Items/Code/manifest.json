@@ -1,0 +1,9 @@
+{
+    "name": "Items",
+    "title": "Payments Items",
+    "explanation": "  Payments Items",
+    "description": "  Payments Items",
+    "version": 1,
+    "has_view": 1,
+    "tie_field": 0
+}
