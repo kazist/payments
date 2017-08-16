@@ -942,7 +942,7 @@ class PaymentsModel extends BaseModel {
 
         $factory = new KazistFactory();
 
-        $record = $factory->getRecord('#__payments_gateways', 'fg', array('short_name=:short_name'), array('short_name' => $name));
+        $record = $factory->getRecord('#__payments_gateways', 'pg', array('short_name=:short_name'), array('short_name' => $name));
 
         return $record;
     }

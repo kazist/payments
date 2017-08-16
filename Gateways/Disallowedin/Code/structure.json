@@ -223,7 +223,7 @@
     ],
     "primarykey": "id",
     "table_name": "payments_gateways_disallowedin",
-    "table_alias": "fgd",
+    "table_alias": "pgd",
     "foreignkey": "",
     "renamedfields": "",
     "main_fields": [
@@ -241,46 +241,46 @@
     "query": {
         "from": {
             "table": "Payments\\Gateways\\Disallowedin\\Code\\Tables\\Disallowedin",
-            "alias": "fgd",
+            "alias": "pgd",
             "name": "#__payments_gateways_disallowedin"
         },
         "select": [
-            "fgd.id",
-            "fgd.country_id",
+            "pgd.id",
+            "pgd.country_id",
             "sc.name AS country_id_name",
-            "fgd.gateway_id",
-            "fg.long_name AS gateway_id_long_name",
-            "fgd.created_by",
+            "pgd.gateway_id",
+            "pg.long_name AS gateway_id_long_name",
+            "pgd.created_by",
             "uu.name AS created_by_name",
-            "fgd.date_created",
-            "fgd.modified_by",
+            "pgd.date_created",
+            "pgd.modified_by",
             "uu_6588.name AS modified_by_name",
-            "fgd.date_modified"
+            "pgd.date_modified"
         ],
         "leftjoin": [
             {
                 "table": "Setup\\Countries\\Code\\Tables\\Countries",
                 "alias": "sc",
                 "name": "#__setup_countries",
-                "on": "fgd.country_id = sc.id"
+                "on": "pgd.country_id = sc.id"
             },
             {
                 "table": "Payments\\Gateways\\Code\\Tables\\Gateways",
-                "alias": "fg",
+                "alias": "pg",
                 "name": "#__payments_gateways",
-                "on": "fgd.gateway_id = fg.id"
+                "on": "pgd.gateway_id = pg.id"
             },
             {
                 "table": "Users\\Users\\Code\\Tables\\Users",
                 "alias": "uu",
                 "name": "#__users_users",
-                "on": "fgd.created_by = uu.id"
+                "on": "pgd.created_by = uu.id"
             },
             {
                 "table": "Users\\Users\\Code\\Tables\\Users",
                 "alias": "uu_6588",
                 "name": "#__users_users",
-                "on": "fgd.modified_by = uu_6588.id"
+                "on": "pgd.modified_by = uu_6588.id"
             }
         ]
     }

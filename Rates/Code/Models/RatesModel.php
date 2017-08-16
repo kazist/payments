@@ -117,7 +117,7 @@ class RatesModel extends BaseModel {
         $email = new Email();
         $factory = new KazistFactory();
 
-        $rate_file = $factory->getRecord('#__payments_rates_file', 'frf', array('id=:id'), array('id' => $rate_file_id));
+        $rate_file = $factory->getRecord('#__payments_rates_file', 'prf', array('id=:id'), array('id' => $rate_file_id));
         $users = $factory->getRecords('#__users_users', 'uu', array('is_admin=:is_admin'), array('is_admin' => 1));
         $attachments = array($this->file_path);
 
@@ -308,15 +308,15 @@ class RatesModel extends BaseModel {
     public function getChargeRates() {
 
         $where_arr = array();
-        $where_arr[] = 'fr.effected_on=:weekly';
-        $where_arr[] = 'fr.effected_on=:monthly';
-        $where_arr[] = 'fr.effected_on=:yearly';
+        $where_arr[] = 'pr.effected_on=:weekly';
+        $where_arr[] = 'pr.effected_on=:monthly';
+        $where_arr[] = 'pr.effected_on=:yearly';
 
         $query = new Query();
-        $query->select('fr.*');
-        $query->from('#__payments_rates', 'fr');
+        $query->select('pr.*');
+        $query->from('#__payments_rates', 'pr');
         $query->where(implode(' OR ', $where_arr));
-        $query->andWhere('fr.next_effected_on_date < NOW()');
+        $query->andWhere('pr.next_effected_on_date < NOW()');
         $query->setParameter('weekly', 'weekly');
         $query->setParameter('monthly', 'monthly');
         $query->setParameter('yearly', 'yearly');

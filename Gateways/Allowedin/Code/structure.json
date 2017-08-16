@@ -223,7 +223,7 @@
     ],
     "primarykey": "id",
     "table_name": "payments_gateways_allowedin",
-    "table_alias": "fga",
+    "table_alias": "pga",
     "foreignkey": "",
     "renamedfields": "",
     "main_fields": [
@@ -241,46 +241,46 @@
     "query": {
         "from": {
             "table": "Payments\\Gateways\\Allowedin\\Code\\Tables\\Allowedin",
-            "alias": "fga",
+            "alias": "pga",
             "name": "#__payments_gateways_allowedin"
         },
         "select": [
-            "fga.id",
-            "fga.country_id",
+            "pga.id",
+            "pga.country_id",
             "sc.name AS country_id_name",
-            "fga.gateway_id",
-            "fg.long_name AS gateway_id_long_name",
-            "fga.created_by",
+            "pga.gateway_id",
+            "pg.long_name AS gateway_id_long_name",
+            "pga.created_by",
             "uu.name AS created_by_name",
-            "fga.date_created",
-            "fga.modified_by",
+            "pga.date_created",
+            "pga.modified_by",
             "uu_4802.name AS modified_by_name",
-            "fga.date_modified"
+            "pga.date_modified"
         ],
         "leftjoin": [
             {
                 "table": "Setup\\Countries\\Code\\Tables\\Countries",
                 "alias": "sc",
                 "name": "#__setup_countries",
-                "on": "fga.country_id = sc.id"
+                "on": "pga.country_id = sc.id"
             },
             {
                 "table": "Payments\\Gateways\\Code\\Tables\\Gateways",
-                "alias": "fg",
+                "alias": "pg",
                 "name": "#__payments_gateways",
-                "on": "fga.gateway_id = fg.id"
+                "on": "pga.gateway_id = pg.id"
             },
             {
                 "table": "Users\\Users\\Code\\Tables\\Users",
                 "alias": "uu",
                 "name": "#__users_users",
-                "on": "fga.created_by = uu.id"
+                "on": "pga.created_by = uu.id"
             },
             {
                 "table": "Users\\Users\\Code\\Tables\\Users",
                 "alias": "uu_4802",
                 "name": "#__users_users",
-                "on": "fga.modified_by = uu_4802.id"
+                "on": "pga.modified_by = uu_4802.id"
             }
         ]
     }

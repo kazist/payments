@@ -34,12 +34,12 @@ class DepositsModel extends BaseModel {
             $user_id = $user->id;
         }
 
-        $query->leftJoin('ssd', '#__payments_gateways', 'fg', 'fg.id=fp.gateway_id');
-        $query->addSelect('fp.amount_required, fp.amount_paid, fp.receipt_no, fp.code');
-        $query->addSelect('fg.short_name as gateway_id_short_name');
+        $query->leftJoin('ssd', '#__payments_gateways', 'pg', 'pg.id=pp.gateway_id');
+        $query->addSelect('pp.amount_required, pp.amount_paid, pp.receipt_no, pp.code');
+        $query->addSelect('pg.short_name as gateway_id_short_name');
 
         if ($search['gateway_id'] <> '') {
-            $query->where('fp.gateway_id = ' . (int) $search['gateway_id']);
+            $query->where('pp.gateway_id = ' . (int) $search['gateway_id']);
         }
 
         if ($user_id) {

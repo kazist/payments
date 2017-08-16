@@ -223,7 +223,7 @@
     ],
     "primarykey": "id",
     "table_name": "payments_gateways_withdrawrates",
-    "table_alias": "fgw",
+    "table_alias": "pgw",
     "foreignkey": "",
     "renamedfields": "",
     "main_fields": [
@@ -242,46 +242,46 @@
     "query": {
         "from": {
             "table": "Payments\\Gateways\\Withdrawrates\\Code\\Tables\\Withdrawrates",
-            "alias": "fgw",
+            "alias": "pgw",
             "name": "#__payments_gateways_withdrawrates"
         },
         "select": [
-            "fgw.id",
-            "fgw.gateway_id",
-            "fg.long_name AS gateway_id_long_name",
-            "fgw.rate_id",
+            "pgw.id",
+            "pgw.gateway_id",
+            "pg.long_name AS gateway_id_long_name",
+            "pgw.rate_id",
             "fr.title AS rate_id_title",
-            "fgw.created_by",
+            "pgw.created_by",
             "uu.name AS created_by_name",
-            "fgw.date_created",
-            "fgw.modified_by",
+            "pgw.date_created",
+            "pgw.modified_by",
             "uu_2805.name AS modified_by_name",
-            "fgw.date_modified"
+            "pgw.date_modified"
         ],
         "leftjoin": [
             {
                 "table": "Payments\\Gateways\\Code\\Tables\\Gateways",
-                "alias": "fg",
+                "alias": "pg",
                 "name": "#__payments_gateways",
-                "on": "fgw.gateway_id = fg.id"
+                "on": "pgw.gateway_id = pg.id"
             },
             {
                 "table": "Payments\\Rates\\Code\\Tables\\Rates",
                 "alias": "fr",
                 "name": "#__payments_rates",
-                "on": "fgw.rate_id = fr.id"
+                "on": "pgw.rate_id = fr.id"
             },
             {
                 "table": "Users\\Users\\Code\\Tables\\Users",
                 "alias": "uu",
                 "name": "#__users_users",
-                "on": "fgw.created_by = uu.id"
+                "on": "pgw.created_by = uu.id"
             },
             {
                 "table": "Users\\Users\\Code\\Tables\\Users",
                 "alias": "uu_2805",
                 "name": "#__users_users",
-                "on": "fgw.modified_by = uu_2805.id"
+                "on": "pgw.modified_by = uu_2805.id"
             }
         ]
     }

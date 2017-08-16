@@ -310,9 +310,9 @@ class GatewaysModel extends BaseModel {
         $db = $factory->getDatabase();
 
         $query = new Query();
-        $query->select('fgp.*');
-        $query->from('#__payments_gateways_paymentrates', 'fgp');
-        $query->where('fgp.gateway_id=:gateway_id');
+        $query->select('pgp.*');
+        $query->from('#__payments_gateways_paymentrates', 'pgp');
+        $query->where('pgp.gateway_id=:gateway_id');
         $query->setParameter('gateway_id', $gateway_id);
 
         $records = $query->loadObjectList();
@@ -342,9 +342,9 @@ class GatewaysModel extends BaseModel {
         $db = $factory->getDatabase();
 
         $query = new Query();
-        $query->select('fgp.*');
-        $query->from('#__payments_gateways_withdrawrates', 'fgp');
-        $query->where('fgp.gateway_id=:gateway_id');
+        $query->select('pgp.*');
+        $query->from('#__payments_gateways_withdrawrates', 'pgp');
+        $query->where('pgp.gateway_id=:gateway_id');
         $query->setParameter('gateway_id', $gateway_id);
 
         $records = $query->loadObjectList();
@@ -374,9 +374,9 @@ class GatewaysModel extends BaseModel {
         $db = $factory->getDatabase();
 
         $query = new Query();
-        $query->select('fgp.*');
-        $query->from('#__payments_gateways_transferrates', 'fgp');
-        $query->where('fgp.gateway_id=:gateway_id');
+        $query->select('pgp.*');
+        $query->from('#__payments_gateways_transferrates', 'pgp');
+        $query->where('pgp.gateway_id=:gateway_id');
         $query->setParameter('gateway_id', $gateway_id);
 
         $records = $query->loadObjectList();
@@ -406,9 +406,9 @@ class GatewaysModel extends BaseModel {
         $db = $factory->getDatabase();
 
         $query = new Query();
-        $query->select('fgp.*');
-        $query->from('#__payments_gateways_allowedin', 'fgp');
-        $query->where('fgp.gateway_id=:gateway_id');
+        $query->select('pgp.*');
+        $query->from('#__payments_gateways_allowedin', 'pgp');
+        $query->where('pgp.gateway_id=:gateway_id');
         $query->setParameter('gateway_id', $gateway_id);
 
         $records = $query->loadObjectList();
@@ -438,9 +438,9 @@ class GatewaysModel extends BaseModel {
         $db = $factory->getDatabase();
 
         $query = new Query();
-        $query->select('fgp.*');
-        $query->from('#__payments_gateways_disallowedin', 'fgp');
-        $query->where('fgp.gateway_id=:gateway_id');
+        $query->select('pgp.*');
+        $query->from('#__payments_gateways_disallowedin', 'pgp');
+        $query->where('pgp.gateway_id=:gateway_id');
         $query->setParameter('gateway_id', $gateway_id);
 
         $records = $query->loadObjectList();
@@ -504,8 +504,8 @@ class GatewaysModel extends BaseModel {
         $db = $factory->getDatabase();
 
         $query = new Query();
-        $query->select('fgp.*');
-        $query->from('#__payments_gateways_parameters', 'fgp');
+        $query->select('pgp.*');
+        $query->from('#__payments_gateways_parameters', 'pgp');
         $query->where('gateway_id=:gateway_id');
         $query->setParameter('gateway_id', $gateway_id);
 

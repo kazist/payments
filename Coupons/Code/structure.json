@@ -417,7 +417,7 @@
     ],
     "primarykey": "id",
     "table_name": "payments_coupons",
-    "table_alias": "fc",
+    "table_alias": "pc",
     "foreignkey": "",
     "renamedfields": "",
     "main_fields": [
@@ -434,43 +434,43 @@
     "query": {
         "from": {
             "table": "Payments\\Coupons\\Code\\Tables\\Coupons",
-            "alias": "fc",
+            "alias": "pc",
             "name": "#__payments_coupons"
         },
         "select": [
-            "fc.id",
-            "fc.coupon",
-            "fc.used",
-            "fc.date_used",
-            "fc.used_by",
+            "pc.id",
+            "pc.coupon",
+            "pc.used",
+            "pc.date_used",
+            "pc.used_by",
             "uu.name AS used_by_name",
-            "fc.amount",
-            "fc.used_once",
-            "fc.created_by",
+            "pc.amount",
+            "pc.used_once",
+            "pc.created_by",
             "uu_2821.name AS created_by_name",
-            "fc.date_created",
-            "fc.modified_by",
+            "pc.date_created",
+            "pc.modified_by",
             "uu_1222.name AS modified_by_name",
-            "fc.date_modified"
+            "pc.date_modified"
         ],
         "leftjoin": [
             {
                 "table": "Users\\Users\\Code\\Tables\\Users",
                 "alias": "uu",
                 "name": "#__users_users",
-                "on": "fc.used_by = uu.id"
+                "on": "pc.used_by = uu.id"
             },
             {
                 "table": "Users\\Users\\Code\\Tables\\Users",
                 "alias": "uu_2821",
                 "name": "#__users_users",
-                "on": "fc.created_by = uu_2821.id"
+                "on": "pc.created_by = uu_2821.id"
             },
             {
                 "table": "Users\\Users\\Code\\Tables\\Users",
                 "alias": "uu_1222",
                 "name": "#__users_users",
-                "on": "fc.modified_by = uu_1222.id"
+                "on": "pc.modified_by = uu_1222.id"
             }
         ]
     }

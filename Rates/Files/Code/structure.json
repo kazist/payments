@@ -443,7 +443,7 @@
     ],
     "primarykey": "id",
     "table_name": "payments_rates_files",
-    "table_alias": "frf",
+    "table_alias": "prf",
     "foreignkey": "",
     "renamedfields": "",
     "main_fields": [
@@ -460,45 +460,45 @@
     "query": {
         "from": {
             "table": "Payments\\Rates\\Files\\Code\\Tables\\Files",
-            "alias": "frf",
+            "alias": "prf",
             "name": "#__payments_rates_files"
         },
         "select": [
-            "frf.id",
-            "frf.year",
-            "frf.month",
-            "frf.token",
-            "frf.is_processed",
-            "frf.type",
-            "frf.max_limit",
-            "frf.file",
+            "prf.id",
+            "prf.year",
+            "prf.month",
+            "prf.token",
+            "prf.is_processed",
+            "prf.type",
+            "prf.max_limit",
+            "prf.file",
             "mm.title AS file_title",
             "mm.file AS file_file",
-            "frf.created_by",
+            "prf.created_by",
             "uu.name AS created_by_name",
-            "frf.date_created",
-            "frf.modified_by",
+            "prf.date_created",
+            "prf.modified_by",
             "uu_3095.name AS modified_by_name",
-            "frf.date_modified"
+            "prf.date_modified"
         ],
         "leftjoin": [
             {
                 "table": "Media\\Media\\Code\\Tables\\Media",
                 "alias": "mm",
                 "name": "#__media_media",
-                "on": "frf.file = mm.id"
+                "on": "prf.file = mm.id"
             },
             {
                 "table": "Users\\Users\\Code\\Tables\\Users",
                 "alias": "uu",
                 "name": "#__users_users",
-                "on": "frf.created_by = uu.id"
+                "on": "prf.created_by = uu.id"
             },
             {
                 "table": "Users\\Users\\Code\\Tables\\Users",
                 "alias": "uu_3095",
                 "name": "#__users_users",
-                "on": "frf.modified_by = uu_3095.id"
+                "on": "prf.modified_by = uu_3095.id"
             }
         ]
     }

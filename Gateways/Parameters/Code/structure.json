@@ -262,7 +262,7 @@
     ],
     "primarykey": "id",
     "table_name": "payments_gateways_parameters",
-    "table_alias": "fgp",
+    "table_alias": "pgp",
     "foreignkey": "",
     "renamedfields": "",
     "main_fields": [
@@ -279,27 +279,27 @@
     "query": {
         "from": {
             "table": "Payments\\Gateways\\Parameters\\Code\\Tables\\Parameters",
-            "alias": "fgp",
+            "alias": "pgp",
             "name": "#__payments_gateways_parameters"
         },
         "select": [
-            "fgp.id",
-            "fgp.gateway_id",
-            "fg.long_name AS gateway_id_long_name",
-            "fgp.name",
-            "fgp.value",
-            "fgp.is_private",
-            "fgp.created_by",
-            "fgp.date_created",
-            "fgp.modified_by",
-            "fgp.date_modified"
+            "pgp.id",
+            "pgp.gateway_id",
+            "pg.long_name AS gateway_id_long_name",
+            "pgp.name",
+            "pgp.value",
+            "pgp.is_private",
+            "pgp.created_by",
+            "pgp.date_created",
+            "pgp.modified_by",
+            "pgp.date_modified"
         ],
         "leftjoin": [
             {
                 "table": "Payments\\Gateways\\Code\\Tables\\Gateways",
-                "alias": "fg",
+                "alias": "pg",
                 "name": "#__payments_gateways",
-                "on": "fgp.gateway_id = fg.id"
+                "on": "pgp.gateway_id = pg.id"
             }
         ]
     }

@@ -899,7 +899,7 @@
     ],
     "primarykey": "id",
     "table_name": "payments_rates",
-    "table_alias": "fr",
+    "table_alias": "pr",
     "foreignkey": "",
     "renamedfields": "",
     "main_fields": [
@@ -916,55 +916,55 @@
     "query": {
         "from": {
             "table": "Payments\\Rates\\Code\\Tables\\Rates",
-            "alias": "fr",
+            "alias": "pr",
             "name": "#__payments_rates"
         },
         "select": [
-            "fr.id",
-            "fr.title",
-            "fr.short_name",
-            "fr.value",
-            "fr.rule",
-            "fr.type",
-            "fr.effected_on",
-            "fr.amount_limit",
-            "fr.start_amount",
-            "fr.end_amount",
-            "fr.country_id",
+            "pr.id",
+            "pr.title",
+            "pr.short_name",
+            "pr.value",
+            "pr.rule",
+            "pr.type",
+            "pr.effected_on",
+            "pr.amount_limit",
+            "pr.start_amount",
+            "pr.end_amount",
+            "pr.country_id",
             "sc.name AS country_id_name",
-            "fr.file_limit",
-            "fr.file_type",
-            "fr.file_prefix",
-            "fr.file_structure",
-            "fr.file_suffix",
-            "fr.is_visible",
-            "fr.next_effected_on_date",
-            "fr.published",
-            "fr.created_by",
+            "pr.file_limit",
+            "pr.file_type",
+            "pr.file_prefix",
+            "pr.file_structure",
+            "pr.file_suffix",
+            "pr.is_visible",
+            "pr.next_effected_on_date",
+            "pr.published",
+            "pr.created_by",
             "uu.name AS created_by_name",
-            "fr.date_created",
-            "fr.modified_by",
+            "pr.date_created",
+            "pr.modified_by",
             "uu_8881.name AS modified_by_name",
-            "fr.date_modified"
+            "pr.date_modified"
         ],
         "leftjoin": [
             {
                 "table": "Setup\\Countries\\Code\\Tables\\Countries",
                 "alias": "sc",
                 "name": "#__setup_countries",
-                "on": "fr.country_id = sc.id"
+                "on": "pr.country_id = sc.id"
             },
             {
                 "table": "Users\\Users\\Code\\Tables\\Users",
                 "alias": "uu",
                 "name": "#__users_users",
-                "on": "fr.created_by = uu.id"
+                "on": "pr.created_by = uu.id"
             },
             {
                 "table": "Users\\Users\\Code\\Tables\\Users",
                 "alias": "uu_8881",
                 "name": "#__users_users",
-                "on": "fr.modified_by = uu_8881.id"
+                "on": "pr.modified_by = uu_8881.id"
             }
         ]
     }
