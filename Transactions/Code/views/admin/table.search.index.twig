@@ -10,10 +10,12 @@
             <b>Type</b><br>
             {{ forms.input(' search.type', 'select', search.type, null, null, null, null, null, typesinput  ) }}
         </div>
-        <div class="col-sm-1">
-            <b>Level</b><br>
-            {{ forms.input(' search.level', 'select', search.level, null, null, null, null, null, levelsinput  ) }}
-        </div>
+        {% if get_setting('payments_use_transactions_levels') %}
+            <div class="col-sm-1">
+                <b>Level</b><br>
+                {{ forms.input(' search.level', 'select', search.level, null, null, null, null, null, levelsinput  ) }}
+            </div>
+        {% endif %}
         <div class="col-sm-2">
             <b>From</b><br>
             {{ forms.input(' search.from', 'text', search.from) }}

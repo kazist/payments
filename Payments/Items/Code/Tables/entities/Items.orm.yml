@@ -6,24 +6,69 @@ Payments\Payments\Items\Code\Tables\Items:
       type: integer
       generator: { strategy: AUTO }
   fields:
-    title:
-      name: title
+    payment_id:
+      name: payment_id
+      type: integer
+      length: 11
+      nullable: false
+    item_id:
+      name: item_id
+      type: integer
+      length: 11
+      nullable: false
+    user_id:
+      name: user_id
+      type: integer
+      length: 11
+    payment_source:
+      name: payment_source
       type: string
       length: 255
+      nullable: true
+    description:
+      name: description
+      type: text
+      nullable: true
+    amount:
+      scale: 2
+      precision: 11
+      name: amount
+      type: decimal
+      nullable: false
+    quantity:
+      name: quantity
+      type: integer
+      length: 11
+      nullable: true
+    unit_price:
+      scale: 2
+      precision: 11
+      name: unit_price
+      type: decimal
+      nullable: true
     created_by:
       name: created_by
       type: integer
       length: 11
+      nullable: true
     date_created:
       name: date_created
       type: datetime
+      nullable: true
     modified_by:
       name: modified_by
       type: integer
       length: 11
+      nullable: true
     date_modified:
       name: date_modified
       type: datetime
+      nullable: true
+  indexes:
+    payment_id_index:
+      columns: [payment_id]
+    user_id_index:
+      columns: [user_id]
   lifecycleCallbacks:
     prePersist:
       - onPrePersist

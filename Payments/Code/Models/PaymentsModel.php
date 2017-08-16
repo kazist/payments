@@ -25,6 +25,7 @@ use Payments\Payments\Code\Events\PaymentEvent;
  */
 class PaymentsModel extends BaseModel {
 
+    public $ingore_search_query = false;
     public $currency = 'USD';
     public $currency_rate = '1';
     public $total_amount = 0;
@@ -37,7 +38,10 @@ class PaymentsModel extends BaseModel {
     public $quantity = 0;
     public $amount = 0;
     public $user_id = 0;
+    public $payment_source = '';
     public $payment = '';
+    public $items = '';
+    public $deposit_gateway = '';
 
     public function appendSearchQuery($query) {
 
@@ -50,28 +54,30 @@ class PaymentsModel extends BaseModel {
 
         $query = parent:: appendSearchQuery($query);
 
-        if (WEB_IS_ADMIN) {
+        if (!$ingore_search_query) {
+            if (WEB_IS_ADMIN) {
 
-            $user_id = $this->request->query->get('user_id');
+                $user_id = $this->request->query->get('user_id');
 
-            if ($user_id) {
-                $query->andWhere('fp.user_id=' . $user_id);
-            } elseif ($search['from']) {
-                $query->andWhere('fp.user_id=:user_id');
-                $query->setParameter('user_id', $this->getUserIdByUsername($search['from']));
-            }
-        } else {
-            if ($user_id) {
-                $query->andWhere('fp.user_id=' . $user_id);
+                if ($user_id) {
+                    $query->andWhere('pp.user_id=' . $user_id);
+                } elseif ($search['from']) {
+                    $query->andWhere('pp.user_id=:user_id');
+                    $query->setParameter('user_id', $this->getUserIdByUsername($search['from']));
+                }
             } else {
-                $query->andWhere('1=-1');
+                if ($user_id) {
+                    $query->andWhere('pp.user_id=' . $user_id);
+                } else {
+                    $query->andWhere('1=-1');
+                }
             }
+
+            $query->andWhere('pp.amount>0');
+
+            $query->andWhere('pp.completed=1');
         }
 
-        $query->andWhere('fp.amount>0');
-
-        $query->andWhere('fp.completed=1');
-        
         return $query;
     }
 
@@ -103,8 +109,8 @@ class PaymentsModel extends BaseModel {
 
 
         $query = new Query();
-        $query->select('SUM(ft.' . $type . ') as total');
-        $query->from('#__payments_transactions', 'ft');
+        $query->select('SUM(pt.' . $type . ') as total');
+        $query->from('#__payments_transactions', 'pt');
         $query->where('user_id=:user_id');
         $query->setParameter('user_id', $user_id);
 
@@ -117,8 +123,8 @@ class PaymentsModel extends BaseModel {
 
         $query = new Query();
         $query->select('*');
-        $query->from('#__setup_currencies', 'swc');
-        $query->where('swc.id=:id');
+        $query->from('#__setup_currencies', 'sc');
+        $query->where('sc.id=:id');
         $query->setParameter('id', $gateway->currency_id);
         $record = $query->loadObject();
 
@@ -143,8 +149,8 @@ class PaymentsModel extends BaseModel {
 
         $query = new Query();
         $query->select('*');
-        $query->from('#__setup_currencies', 'swc');
-        $query->where('swc.country_id=:country_id');
+        $query->from('#__setup_currencies', 'sc');
+        $query->where('sc.country_id=:country_id');
         $query->setParameter('country_id', $country_id);
         $record = $query->loadObject();
 
@@ -152,8 +158,8 @@ class PaymentsModel extends BaseModel {
         if (!$record->published) {
             $query = new Query();
             $query->select('*');
-            $query->from('#__setup_currencies', 'swc');
-            $query->where('swc.code=:code');
+            $query->from('#__setup_currencies', 'sc');
+            $query->where('sc.code=:code');
             $query->setParameter('code', $default_currency);
             $record = $query->loadObject();
         }
@@ -173,10 +179,10 @@ class PaymentsModel extends BaseModel {
 
 
         $query = new Query();
-        $query->select('fg.*');
-        $query->from('#__payments_gateways', 'fg');
-        $query->where('fg.published=1');
-        $query->andWhere('fg.id=:id');
+        $query->select('pg.*');
+        $query->from('#__payments_gateways', 'pg');
+        $query->where('pg.published=1');
+        $query->andWhere('pg.id=:id');
         $query->setParameter('id', $gateway_id);
 
         $record = $query->loadObject();
@@ -192,14 +198,15 @@ class PaymentsModel extends BaseModel {
 
         $factory = new KazistFactory();
 
+        $deposit_gateway_name = $factory->getSetting('payments_gateway_deposit_gateway');
 
         $query = new Query();
-        $query->select('fg.*, mm.file as image_file');
-        $query->from('#__payments_gateways', 'fg');
-        $query->leftJoin('fg', '#__media_media', 'mm', 'mm.id = fg.image');
-        $query->where('fg.can_payment=1');
-        $query->andWhere('fg.published=1');
-        $query->orderBy('fg.ordering', 'ASC');
+        $query->select('pg.*, mm.file as image_file');
+        $query->from('#__payments_gateways', 'pg');
+        $query->leftJoin('pg', '#__media_media', 'mm', 'mm.id = pg.image');
+        $query->where('pg.can_payment=1');
+        $query->andWhere('pg.published=1');
+        $query->orderBy('pg.ordering', 'ASC');
 
         $records = $query->loadObjectList();
 
@@ -220,6 +227,10 @@ class PaymentsModel extends BaseModel {
 
                 if (isset($records[$key])) {
                     $records[$key] = $this->processPaymentGatewayAdvance($payment_id, $record);
+                }
+
+                if ($deposit_gateway_name == $record->id) {
+                    $this->deposit_gateway = $record;
                 }
             }
 
@@ -312,13 +323,15 @@ class PaymentsModel extends BaseModel {
 
         $this->json = json_encode($gateway_obj);
 
-        $main_amount_obj->title = ucfirst($type) . ' Amount';
-        $main_amount_obj->is_visible = true;
-        $main_amount_obj->amount = $main_amount;
-        $main_amount_obj->highlighted = true;
-        $main_array[] = $main_amount_obj;
+        if ($main_amount <> $total_amount) {
+            $main_amount_obj->title = 'Sub Total';
+            $main_amount_obj->is_visible = true;
+            $main_amount_obj->amount = $main_amount;
+            $main_amount_obj->highlighted = true;
+            $main_array[] = $main_amount_obj;
+        }
 
-        $total_amount_obj->title = 'Total Amount';
+        $total_amount_obj->title = 'Total';
         $total_amount_obj->is_visible = true;
         $total_amount_obj->amount = $total_amount;
         $total_amount_obj->highlighted = true;
@@ -361,21 +374,21 @@ class PaymentsModel extends BaseModel {
         $country_id = $user->country_id;
 
         $query = new Query();
-        $query->select('fr.*');
-        $query->from('#__payments_rates', 'fr');
-        $query->leftJoin('fr', '#__payments_gateways_withdrawrates', 'fgp', 'fr.id = fgp.rate_id');
-        $query->where('fgp.gateway_id=:gateway_id');
+        $query->select('pr.*');
+        $query->from('#__payments_rates', 'pr');
+        $query->leftJoin('pr', '#__payments_gateways_withdrawrates', 'pgw', 'pr.id = pgw.rate_id');
+        $query->where('pgw.gateway_id=:gateway_id');
         $query->setParameter('gateway_id', $gateway_id);
 
         if ($country_id) {
-            $query->andWhere('(fr.country_id=:country_id OR fr.country_id=0 OR fr.country_id IS NULL)');
+            $query->andWhere('(pr.country_id=:country_id OR pr.country_id=0 OR pr.country_id IS NULL)');
             $query->setParameter('country_id', $country_id);
         } else {
-            $query->andWhere('(fr.country_id=\'\' OR fr.country_id IS NULL OR fr.country_id = 0)');
+            $query->andWhere('(pr.country_id=\'\' OR pr.country_id IS NULL OR pr.country_id = 0)');
         }
 
-        $query->andWhere('(:amount BETWEEN fr.start_amount AND fr.end_amount OR fr.end_amount=0 OR fr.end_amount IS NULL )');
-        $query->andWhere('fr.published=1');
+        $query->andWhere('(:amount BETWEEN pr.start_amount AND pr.end_amount OR pr.end_amount=0 OR pr.end_amount IS NULL )');
+        $query->andWhere('pr.published=1');
         $query->setParameter('amount', $amount);
 
         $records = $query->loadObjectList();
@@ -394,20 +407,20 @@ class PaymentsModel extends BaseModel {
         $country_id = $user->country_id;
 
         $query = new Query();
-        $query->select('fr.*');
-        $query->from('#__payments_rates', 'fr');
-        $query->leftJoin('fr', '#__payments_gateways_transferrates', 'fgp', 'fr.id = fgp.rate_id');
-        $query->where('fgp.gateway_id=:gateway_id');
+        $query->select('pr.*');
+        $query->from('#__payments_rates', 'pr');
+        $query->leftJoin('fr', '#__payments_gateways_transferrates', 'pgt', 'fr.id = pgt.rate_id');
+        $query->where('pgt.gateway_id=:gateway_id');
         $query->setParameter('gateway_id', $gateway_id);
         if ($country_id) {
-            $query->andWhere('(fr.country_id=:country_id OR fr.country_id=0 OR fr.country_id IS NULL)');
+            $query->andWhere('(pr.country_id=:country_id OR pr.country_id=0 OR pr.country_id IS NULL)');
             $query->setParameter('country_id', $country_id);
         } else {
-            $query->andWhere('(fr.country_id=\'\' OR fr.country_id IS NULL)');
+            $query->andWhere('(pr.country_id=\'\' OR pr.country_id IS NULL)');
         }
-        $query->andWhere('(:amount BETWEEN fr.start_amount AND fr.end_amount OR fr.end_amount=0 OR fr.end_amount IS NULL )');
+        $query->andWhere('(:amount BETWEEN pr.start_amount AND pr.end_amount OR pr.end_amount=0 OR pr.end_amount IS NULL )');
         $query->setParameter('amount', $amount);
-        $query->andWhere('fr.published=1');
+        $query->andWhere('pr.published=1');
 
         $records = $query->loadObjectList();
 
@@ -424,20 +437,20 @@ class PaymentsModel extends BaseModel {
         $country_id = $user->country_id;
 
         $query = new Query();
-        $query->select('fr.*');
-        $query->from('#__payments_rates', 'fr');
-        $query->leftJoin('fr', '#__payments_gateways_paymentrates', 'fgp', 'fr.id = fgp.rate_id');
-        $query->where('fgp.gateway_id=:gateway_id');
+        $query->select('pr.*');
+        $query->from('#__payments_rates', 'pr');
+        $query->leftJoin('pr', '#__payments_gateways_paymentrates', 'pgp', 'pr.id = pgp.rate_id');
+        $query->where('pgp.gateway_id=:gateway_id');
         $query->setParameter('gateway_id', $gateway_id);
         if ($country_id) {
-            $query->andWhere('(fr.country_id=:country_id OR fr.country_id=0 OR fr.country_id IS NULL)');
+            $query->andWhere('(pr.country_id=:country_id OR pr.country_id=0 OR pr.country_id IS NULL)');
             $query->setParameter('country_id', $country_id);
         } else {
-            $query->andWhere('(fr.country_id=\'\' OR fr.country_id IS NULL)');
+            $query->andWhere('(pr.country_id=\'\' OR pr.country_id IS NULL)');
         }
-        $query->andWhere('((:amount BETWEEN fr.start_amount AND fr.end_amount) OR fr.end_amount=0 OR fr.end_amount IS NULL )');
+        $query->andWhere('((:amount BETWEEN pr.start_amount AND pr.end_amount) OR pr.end_amount=0 OR pr.end_amount IS NULL )');
         $query->setParameter('amount', (int) $amount);
-        $query->andWhere('fr.published=1');
+        $query->andWhere('pr.published=1');
 
         $records = $query->loadObjectList();
 
@@ -449,10 +462,10 @@ class PaymentsModel extends BaseModel {
 
 
         $query = new Query();
-        $query->select('fgp.*');
-        $query->from('#__payments_gateways_parameters', 'fgp');
-        $query->where('fgp.gateway_id=:gateway_id');
-        $query->andWhere('fgp.is_private=0');
+        $query->select('pgp.*');
+        $query->from('#__payments_gateways_parameters', 'pgp');
+        $query->where('pgp.gateway_id=:gateway_id');
+        $query->andWhere('pgp.is_private=0');
         $query->setParameter('gateway_id', $gateway_id);
 
         $records = $query->loadObjectList();
@@ -466,9 +479,9 @@ class PaymentsModel extends BaseModel {
 
 
         $query = new Query();
-        $query->select('fg.*');
-        $query->from('#__payments_gateways', 'fg');
-        $query->where('fg.short_name=:short_name');
+        $query->select('pg.*');
+        $query->from('#__payments_gateways', 'pg');
+        $query->where('pg.short_name=:short_name');
         $query->setParameter('short_name', $short_name);
 
         $record = $query->loadObject();
@@ -480,10 +493,10 @@ class PaymentsModel extends BaseModel {
 
 
         $query = new Query();
-        $query->select('fgp.value');
-        $query->from('#__payments_gateways_parameters', 'fgp');
-        $query->where('fgp.gateway_id=:gateway_id');
-        $query->andWhere('fgp.name=:parameter');
+        $query->select('pgp.value');
+        $query->from('#__payments_gateways_parameters', 'pgp');
+        $query->where('pgp.gateway_id=:gateway_id');
+        $query->andWhere('pgp.name=:parameter');
         $query->setParameter('gateway_id', $gateway_id);
         $query->setParameter('parameter', $parameter);
 
@@ -504,8 +517,8 @@ class PaymentsModel extends BaseModel {
 
             $query = new Query();
             $query->select('COUNT(*) as total');
-            $query->from('#__payments_gateways_allowedin', 'fba');
-            $query->where('fba.gateway_id=:gateway_id');
+            $query->from('#__payments_gateways_allowedin', 'pba');
+            $query->where('pba.gateway_id=:gateway_id');
             $query->setParameter('gateway_id', $gateway_id);
 
             $result = $query->loadResult();
@@ -527,10 +540,10 @@ class PaymentsModel extends BaseModel {
         if ($user->country_id) {
 
             $query = new Query();
-            $query->select('fba.*');
-            $query->from('#__payments_gateways_allowedin', 'fba');
-            $query->where('fba.gateway_id=:gateway_id');
-            $query->andWhere('fba.country_id=:country_id');
+            $query->select('pba.*');
+            $query->from('#__payments_gateways_allowedin', 'pba');
+            $query->where('pba.gateway_id=:gateway_id');
+            $query->andWhere('pba.country_id=:country_id');
             $query->setParameter('gateway_id', $gateway_id);
             $query->setParameter('country_id', $user->country_id);
 
@@ -552,10 +565,10 @@ class PaymentsModel extends BaseModel {
         if ($user->country_id) {
 
             $query = new Query();
-            $query->select('fbd.*');
-            $query->from('#__payments_gateways_disallowedin', 'fbd');
-            $query->where('fbd.gateway_id=:gateway_id');
-            $query->andWhere('fbd.country_id=:country_id');
+            $query->select('pbd.*');
+            $query->from('#__payments_gateways_disallowedin', 'pbd');
+            $query->where('pbd.gateway_id=:gateway_id');
+            $query->andWhere('pbd.country_id=:country_id');
             $query->setParameter('gateway_id', $gateway_id);
             $query->setParameter('country_id', $user->country_id);
 
@@ -591,6 +604,36 @@ class PaymentsModel extends BaseModel {
         return $record;
     }
 
+    public function addPaymentItems($payment_id) {
+
+        $factory = new KazistFactory();
+
+        $total_amount = 0;
+        $description = '';
+
+        if (!empty($this->items)) {
+
+            $factory->deleteRecords('#__payments_payments_items', array('id=:id'), array('id' => $payment_id));
+
+            foreach ($this->items as $key => $item) {
+
+                $total_amount += $item['unit_price'];
+                $description .= $item['description'] . ' | ';
+
+                $item['payment_id'] = $payment_id;
+
+                $factory->saveRecord('#__payments_payments_items', $item);
+            }
+
+            $payment_data = new \stdClass();
+            $payment_data->id = $payment_id;
+            $payment_data->amount = $total_amount;
+            $payment_data->description = $description;
+
+            $factory->saveRecord('#__payments_payments', $payment_data);
+        }
+    }
+
     public function getPaymentById($payment_id = '') {
 
         $system = new System();
@@ -598,11 +641,11 @@ class PaymentsModel extends BaseModel {
 
 
         $query = new Query();
-        $query->select('fp.*');
-        $query->from('#__payments_payments', 'fp');
+        $query->select('pp.*');
+        $query->from('#__payments_payments', 'pp');
 
         if ($payment_id) {
-            $query->where('fp.id=:id');
+            $query->where('pp.id=:id');
             $query->setParameter('id', $payment_id);
         } else {
             $query->where('1=-1');
@@ -610,6 +653,8 @@ class PaymentsModel extends BaseModel {
 
 
         $record = $query->loadObject();
+
+        $record->items = $factory->getRecords('#__payments_payments_items', 'ppi', array('ppi.payment_id=:payment_id'), array('payment_id' => $record->id));
 
         return $record;
     }
@@ -623,19 +668,19 @@ class PaymentsModel extends BaseModel {
         $amount = ($this->amount) ? $this->amount : $this->request->query->get('amount');
 
         $query = new Query();
-        $query->select('fp.*');
-        $query->from('#__payments_payments', 'fp');
+        $query->select('pp.*');
+        $query->from('#__payments_payments', 'pp');
         $query->where('1=1');
 
         if ($subset_id && $item_id) {
 
-            $query->andWhere('fp.subset_id=:subset_id');
-            $query->andWhere('fp.item_id=:item_id');
-            //$query->andWhere('fp.amount=:amount');
+            $query->andWhere('pp.subset_id=:subset_id');
+            $query->andWhere('pp.item_id=:item_id');
+            //$query->andWhere('pp.amount=:amount');
             $query->setParameter('subset_id', $subset_id);
             $query->setParameter('item_id', $item_id);
             // $query->setParameter('amount', (int) $amount);
-            $query->andWhere('(fp.completed=0 OR fp.completed IS NULL)');
+            $query->andWhere('(pp.completed=0 OR pp.completed IS NULL)');
         } else {
             $query->andWhere('1=-1');
         }
@@ -655,6 +700,10 @@ class PaymentsModel extends BaseModel {
         $user = $factory->getUser();
 
         $data_obj->id = $payment_id;
+
+        if ($payment_id) {
+            $data_obj->receipt_no = $uniq_id;
+        }
 
         if ($this->pay_subset_id || $this->request->query->get('pay_subset_id')) {
             $data_obj->subset_id = ($this->pay_subset_id) ? $this->pay_subset_id : $this->request->query->get('pay_subset_id', '1');
@@ -678,11 +727,14 @@ class PaymentsModel extends BaseModel {
 
         if ($this->amount || $this->request->query->get('amount')) {
             $data_obj->amount = ($this->amount) ? $this->amount : $this->request->query->get('amount');
-            $data_obj->receipt_no = $uniq_id;
         }
 
         if ($this->user_id || $this->request->query->get('user_id') || !$payment->user_id) {
             $data_obj->user_id = ($this->user_id) ? $this->user_id : $user->id;
+        }
+
+        if ($this->payment_source || $this->request->query->get('payment_source') || !$payment->payment_source) {
+            $data_obj->payment_source = ($this->payment_source) ? $this->payment_source : $this->request->query->get('payment_source');
         }
 
         if (is_object($payment)) {
@@ -692,6 +744,8 @@ class PaymentsModel extends BaseModel {
         // print_r($data_obj); exit;
 
         $id = $factory->saveRecord('#__payments_payments', $data_obj);
+
+        $this->addPaymentItems($id);
 
         return $id;
     }
@@ -820,13 +874,13 @@ class PaymentsModel extends BaseModel {
         } elseif ($required_amount > $paid_amount) {
 
             $factory->enqueueMessage('Amount Paid (of ' . $paid_amount . ') is less than Amount Required (of ' . $required_amount . ').', 'info');
-            $factory->enqueueMessage('Amount(' . $paid_amount . ') Was credited to your account. Top up Your account and  use pay with bonus for payment.', 'info');
+            $factory->enqueueMessage('Amount(' . $paid_amount . ') Was credited to your account. Top up Your account and  use pay with wallet for payment.', 'info');
         } elseif ($paid_amount > $required_amount) {
 
             $over_payment = $paid_amount - $required_amount;
 
             $factory->enqueueMessage('Amount Paid (of ' . $paid_amount . ') is more than Amount Required (of ' . $required_amount . ').', 'info');
-            $factory->enqueueMessage('Amount(' . $over_payment . ') Was credited to your account. Top up Your account and  use pay with bonus for payment.', 'info');
+            $factory->enqueueMessage('Amount(' . $over_payment . ') Was credited to your account. Top up Your account and  use pay with wallet for payment.', 'info');
         }
 
 
@@ -846,6 +900,7 @@ class PaymentsModel extends BaseModel {
         $data_obj = new \stdClass();
         $data_obj->user_id = $user->id;
         $data_obj->behalf_user_id = $payment->user_id;
+        $data_obj->item_id = $payment->item_id;
         $data_obj->payment_id = $payment->id;
         $data_obj->description = 'Deposit for; ' . $payment->description;
         $data_obj->credit = $paid_amount;
@@ -863,6 +918,7 @@ class PaymentsModel extends BaseModel {
 
         $deductions = json_decode($payment->deductions, true);
 
+
         if (!empty($deductions['transactions'])) {
             foreach ($deductions['transactions'] as $rate) {
 
@@ -876,6 +932,7 @@ class PaymentsModel extends BaseModel {
                 $data_obj->debit = $rate['amount'];
                 $data_obj->type = 'other-payment-charges';
                 $data_obj->source = 'payment';
+
                 $factory->saveRecord('#__payments_transactions', $data_obj);
             }
         }
@@ -927,8 +984,8 @@ class PaymentsModel extends BaseModel {
 
         $factory = new KazistFactory();
 
-        $query = $factory->getQueryBuilder('#__payments_gateways', 'fg');
-        $query->andWhere('fg.published=1');
+        $query = $factory->getQueryBuilder('#__payments_gateways', 'pg');
+        $query->andWhere('pg.published=1');
         $gateways = $query->loadObjectList();
 
         if (!empty($gateways)) {

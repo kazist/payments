@@ -1,14 +1,18 @@
 {
     "fields": [
         {
-            "dropdown_filter": "true",
+            "dropdown_filter": "0",
+            "nullable": "1",
             "name": "id",
             "html_type": "text",
             "mysql_type": "int",
+            "view_side": "",
+            "index": "",
             "id_name": "",
             "class_name": "",
             "default_value": "",
             "size": "",
+            "readonly": "",
             "format_value": "",
             "parameters": {
                 "general": [],
@@ -22,14 +26,103 @@
             }
         },
         {
-            "dropdown_filter": "true",
-            "name": "title",
+            "dropdown_filter": "0",
+            "nullable": "0",
+            "name": "payment_id",
+            "html_type": "select",
+            "mysql_type": "int",
+            "view_side": "",
+            "index": "",
+            "id_name": "",
+            "class_name": "",
+            "default_value": "",
+            "size": "",
+            "readonly": "0",
+            "format_value": "",
+            "parameters": {
+                "general": [],
+                "source": {
+                    "data_source": "db_table",
+                    "join_field": "id",
+                    "display_field": [
+                        "receipt_no"
+                    ],
+                    "join_table_name": "payments_payments"
+                },
+                "save": {
+                    "view_side": "both",
+                    "index": ""
+                },
+                "media": [],
+                "payment": []
+            }
+        },
+        {
+            "dropdown_filter": "0",
+            "nullable": "0",
+            "name": "item_id",
+            "html_type": "text",
+            "mysql_type": "int",
+            "view_side": "",
+            "index": "",
+            "id_name": "",
+            "class_name": "",
+            "default_value": "",
+            "size": "",
+            "readonly": "0",
+            "format_value": "",
+            "parameters": {
+                "general": [],
+                "source": [],
+                "save": {
+                    "view_side": "both",
+                    "index": ""
+                },
+                "media": [],
+                "payment": []
+            }
+        },
+        {
+            "name": "user_id",
+            "html_type": "autocomplete",
+            "mysql_type": "int",
+            "view_side": "",
+            "index": "",
+            "size": "",
+            "readonly": "0",
+            "default_value": "",
+            "format_value": "",
+            "parameters": {
+                "general": [],
+                "source": {
+                    "data_source": "db_table",
+                    "join_field": "id",
+                    "display_field": [
+                        "name"
+                    ],
+                    "join_table_name": "users_users"
+                },
+                "save": {
+                    "view_side": "both",
+                    "index": ""
+                },
+                "media": [],
+                "payment": []
+            }
+        },
+        {
+            "dropdown_filter": "0",
+            "nullable": "1",
+            "name": "payment_source",
             "html_type": "text",
             "mysql_type": "varchar",
+            "view_side": "",
+            "index": "",
             "id_name": "",
             "class_name": "",
             "default_value": "",
             "size": "",
+            "readonly": "0",
             "format_value": "",
             "parameters": {
                 "general": [],
@@ -43,14 +136,118 @@
             }
         },
         {
-            "dropdown_filter": "true",
+            "dropdown_filter": "0",
+            "nullable": "1",
+            "name": "description",
+            "html_type": "text",
+            "mysql_type": "text",
+            "view_side": "",
+            "index": "",
+            "id_name": "",
+            "class_name": "",
+            "default_value": "",
+            "size": "",
+            "readonly": "0",
+            "format_value": "",
+            "parameters": {
+                "general": [],
+                "source": [],
+                "save": {
+                    "view_side": "both",
+                    "index": ""
+                },
+                "media": [],
+                "payment": []
+            }
+        },
+        {
+            "dropdown_filter": "0",
+            "nullable": "0",
+            "name": "amount",
+            "html_type": "text",
+            "mysql_type": "decimal",
+            "view_side": "",
+            "index": "",
+            "id_name": "",
+            "class_name": "",
+            "default_value": "",
+            "size": "",
+            "readonly": "0",
+            "format_value": "",
+            "parameters": {
+                "general": [],
+                "source": [],
+                "save": {
+                    "view_side": "both",
+                    "index": ""
+                },
+                "media": [],
+                "payment": []
+            }
+        },
+        {
+            "dropdown_filter": "0",
+            "nullable": "1",
+            "name": "quantity",
+            "html_type": "text",
+            "mysql_type": "int",
+            "view_side": "",
+            "index": "",
+            "id_name": "",
+            "class_name": "",
+            "default_value": "",
+            "size": "",
+            "readonly": "0",
+            "format_value": "",
+            "parameters": {
+                "general": [],
+                "source": [],
+                "save": {
+                    "view_side": "both",
+                    "index": ""
+                },
+                "media": [],
+                "payment": []
+            }
+        },
+        {
+            "dropdown_filter": "0",
+            "nullable": "1",
+            "name": "unit_price",
+            "html_type": "text",
+            "mysql_type": "decimal",
+            "view_side": "",
+            "index": "",
+            "id_name": "",
+            "class_name": "",
+            "default_value": "",
+            "size": "",
+            "readonly": "0",
+            "format_value": "",
+            "parameters": {
+                "general": [],
+                "source": [],
+                "save": {
+                    "view_side": "both",
+                    "index": ""
+                },
+                "media": [],
+                "payment": []
+            }
+        },
+        {
+            "dropdown_filter": "0",
+            "nullable": "1",
             "name": "created_by",
             "html_type": "text",
             "mysql_type": "int",
+            "view_side": "",
+            "index": "",
             "id_name": "",
             "class_name": "",
             "default_value": "",
             "size": "",
+            "readonly": "",
             "format_value": "",
             "parameters": {
                 "general": [],
@@ -64,14 +261,18 @@
             }
         },
         {
-            "dropdown_filter": "true",
+            "dropdown_filter": "0",
+            "nullable": "1",
             "name": "date_created",
             "html_type": "text",
             "mysql_type": "datetime",
+            "view_side": "",
+            "index": "",
             "id_name": "",
             "class_name": "",
             "default_value": "",
             "size": "",
+            "readonly": "",
             "format_value": "",
             "parameters": {
                 "general": [],
@@ -85,14 +286,18 @@
             }
         },
         {
-            "dropdown_filter": "true",
+            "dropdown_filter": "0",
+            "nullable": "1",
             "name": "modified_by",
             "html_type": "text",
             "mysql_type": "int",
+            "view_side": "",
+            "index": "",
             "id_name": "",
             "class_name": "",
             "default_value": "",
             "size": "",
+            "readonly": "",
             "format_value": "",
             "parameters": {
                 "general": [],
@@ -106,14 +311,18 @@
             }
         },
         {
-            "dropdown_filter": "true",
+            "dropdown_filter": "0",
+            "nullable": "1",
             "name": "date_modified",
             "html_type": "text",
             "mysql_type": "datetime",
+            "view_side": "",
+            "index": "",
             "id_name": "",
             "class_name": "",
             "default_value": "",
             "size": "",
+            "readonly": "",
             "format_value": "",
             "parameters": {
                 "general": [],
@@ -127,51 +336,58 @@
             }
         }
     ],
-    "views": {
-        "table": {
-            "fields": [
-                "id",
-                "title",
-                "created_by",
-                "date_created"
-            ]
-        },
-        "edit": {
-            "structure": {
-                "rows": [
-                    {
-                        "columns": [
-                            {
-                                "items": [
-                                    {
-                                        "group": {
-                                            "name": "Items Detail",
-                                            "fields": [
-                                                "id",
-                                                "title",
-                                                "created_by",
-                                                "date_created"
-                                            ]
-                                        }
-                                    }
-                                ]
-                            }
-                        ]
-                    }
-                ]
-            },
-            "ommitted": [
-                "modified_by",
-                "date_modified"
-            ]
-        }
-    },
     "primarykey": "id",
+    "table_name": "payments_payments_items",
+    "table_alias": "ppi",
     "foreignkey": "",
     "renamedfields": "",
+    "main_fields": [
+        "payment_id"
+    ],
     "main_view": "table",
-    "has_view": 1,
-    "tie_field": 0,
-    "subset_name": "Items",
-    "table_name": "payments_payments_items"
+    "has_view": "0",
+    "tie_field": "0",
+    "email_on_new": "0",
+    "email_on_edit": "0",
+    "email_on_delete": "0",
+    "subset_name": "items",
+    "right_field": "",
+    "query": {
+        "from": {
+            "table": "Payments\\Payments\\Items\\Code\\Tables\\Items",
+            "alias": "ppi",
+            "name": "#__payments_payments_items"
+        },
+        "select": [
+            "ppi.id",
+            "ppi.payment_id",
+            "pp.receipt_no AS payment_id_receipt_no",
+            "ppi.item_id",
+            "ppi.user_id",
+            "uu.name AS user_id_name",
+            "ppi.payment_source",
+            "ppi.description",
+            "ppi.amount",
+            "ppi.quantity",
+            "ppi.unit_price",
+            "ppi.created_by",
+            "ppi.date_created",
+            "ppi.modified_by",
+            "ppi.date_modified"
+        ],
+        "leftjoin": [
+            {
+                "table": "Payments\\Payments\\Code\\Tables\\Payments",
+                "alias": "pp",
+                "name": "#__payments_payments",
+                "on": "ppi.payment_id = pp.id"
+            },
+            {
+                "table": "Users\\Users\\Code\\Tables\\Users",
+                "alias": "uu",
+                "name": "#__users_users",
+                "on": "ppi.user_id = uu.id"
+            }
+        ]
+    }
 }

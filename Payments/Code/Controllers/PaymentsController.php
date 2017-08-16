@@ -92,11 +92,12 @@ class PaymentsController extends BaseController {
         $gateways_arr = json_decode(json_encode($gateways), true);
         $converter_arr = json_decode(json_encode($converter), true);
         
+        $data_arr['deposit_gateway'] = $this->model->deposit_gateway;
         $data_arr['gateways'] = $gateways_arr;
         $data_arr['payment'] = $payment;
         $data_arr['user'] = $user;
         $data_arr['converter'] = $converter_arr;
-
+        
         $this->html = $this->render('Payments:Payments:Code:views:pay.index.twig', $data_arr);
 
         $response = $this->response($this->html);

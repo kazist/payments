@@ -3,11 +3,11 @@
     "title": "Transactions List",
     "explanation": "Transactions List",
     "description": "Transactions List",
-    "version": 29,
+    "version": 30,
     "has_view": "1",
     "tie_field": "0",
     "email_on_new": "0",
     "email_on_edit": "0",
     "email_on_delete": "0",
-    "date_file_modified": "2016-05-18 13:23:16"
+    "date_file_modified": "2017-08-14 20:10:09"
 }

@@ -111,15 +111,11 @@
         }
     },
     "rights": {
-        "tab": [
-        ],
-        "group": [
-        ],
-        "field": [
-        ]
+        "tab": [],
+        "group": [],
+        "field": []
     },
-    "customhtmls": [
-    ],
+    "customhtmls": [],
     "fields": [
         {
             "dropdown_filter": "0",
@@ -136,17 +132,13 @@
             "readonly": "",
             "format_value": "",
             "parameters": {
-                "general": [
-                ],
-                "source": [
-                ],
+                "general": [],
+                "source": [],
                 "save": {
                     "index": ""
                 },
-                "media": [
-                ],
-                "payment": [
-                ]
+                "media": [],
+                "payment": []
             }
         },
         {
@@ -164,8 +156,7 @@
             "readonly": "0",
             "format_value": "",
             "parameters": {
-                "general": [
-                ],
+                "general": [],
                 "source": {
                     "data_source": "db_table",
                     "join_field": "id",
@@ -177,10 +168,8 @@
                 "save": {
                     "index": ""
                 },
-                "media": [
-                ],
-                "payment": [
-                ]
+                "media": [],
+                "payment": []
             }
         },
         {
@@ -198,17 +187,13 @@
             "readonly": "1",
             "format_value": "",
             "parameters": {
-                "general": [
-                ],
-                "source": [
-                ],
+                "general": [],
+                "source": [],
                 "save": {
                     "index": ""
                 },
-                "media": [
-                ],
-                "payment": [
-                ]
+                "media": [],
+                "payment": []
             }
         },
         {
@@ -226,8 +211,7 @@
             "readonly": "1",
             "format_value": "",
             "parameters": {
-                "general": [
-                ],
+                "general": [],
                 "source": {
                     "data_source": "db_table",
                     "join_field": "id",
@@ -239,10 +223,8 @@
                 "save": {
                     "index": ""
                 },
-                "media": [
-                ],
-                "payment": [
-                ]
+                "media": [],
+                "payment": []
             }
         },
         {
@@ -260,17 +242,13 @@
             "readonly": "0",
             "format_value": "",
             "parameters": {
-                "general": [
-                ],
-                "source": [
-                ],
+                "general": [],
+                "source": [],
                 "save": {
                     "index": ""
                 },
-                "media": [
-                ],
-                "payment": [
-                ]
+                "media": [],
+                "payment": []
             }
         },
         {
@@ -288,8 +266,7 @@
             "readonly": "0",
             "format_value": "",
             "parameters": {
-                "general": [
-                ],
+                "general": [],
                 "source": {
                     "data_source": "db_table",
                     "join_field": "id",
@@ -301,10 +278,8 @@
                 "save": {
                     "index": ""
                 },
-                "media": [
-                ],
-                "payment": [
-                ]
+                "media": [],
+                "payment": []
             }
         },
         {
@@ -326,15 +301,12 @@
                     "col": "",
                     "row": ""
                 },
-                "source": [
-                ],
+                "source": [],
                 "save": {
                     "index": ""
                 },
-                "media": [
-                ],
-                "payment": [
-                ]
+                "media": [],
+                "payment": []
             }
         },
         {
@@ -342,7 +314,7 @@
             "nullable": "1",
             "name": "credit",
             "html_type": "text",
-            "mysql_type": "int",
+            "mysql_type": "decimal",
             "view_side": "both",
             "index": "",
             "id_name": "",
@@ -352,17 +324,13 @@
             "readonly": "0",
             "format_value": "",
             "parameters": {
-                "general": [
-                ],
-                "source": [
-                ],
+                "general": [],
+                "source": [],
                 "save": {
                     "index": ""
                 },
-                "media": [
-                ],
-                "payment": [
-                ]
+                "media": [],
+                "payment": []
             }
         },
         {
@@ -370,7 +338,7 @@
             "nullable": "1",
             "name": "debit",
             "html_type": "text",
-            "mysql_type": "int",
+            "mysql_type": "decimal",
             "view_side": "both",
             "index": "",
             "id_name": "",
@@ -380,17 +348,13 @@
             "readonly": "0",
             "format_value": "",
             "parameters": {
-                "general": [
-                ],
-                "source": [
-                ],
+                "general": [],
+                "source": [],
                 "save": {
                     "index": ""
                 },
-                "media": [
-                ],
-                "payment": [
-                ]
+                "media": [],
+                "payment": []
             }
         },
         {
@@ -408,17 +372,13 @@
             "readonly": "0",
             "format_value": "",
             "parameters": {
-                "general": [
-                ],
-                "source": [
-                ],
+                "general": [],
+                "source": [],
                 "save": {
                     "index": ""
                 },
-                "media": [
-                ],
-                "payment": [
-                ]
+                "media": [],
+                "payment": []
             }
         },
         {
@@ -436,17 +396,13 @@
             "readonly": "0",
             "format_value": "",
             "parameters": {
-                "general": [
-                ],
-                "source": [
-                ],
+                "general": [],
+                "source": [],
                 "save": {
                     "index": ""
                 },
-                "media": [
-                ],
-                "payment": [
-                ]
+                "media": [],
+                "payment": []
             }
         },
         {
@@ -464,17 +420,13 @@
             "readonly": "0",
             "format_value": "",
             "parameters": {
-                "general": [
-                ],
-                "source": [
-                ],
+                "general": [],
+                "source": [],
                 "save": {
                     "index": ""
                 },
-                "media": [
-                ],
-                "payment": [
-                ]
+                "media": [],
+                "payment": []
             }
         },
         {
@@ -492,8 +444,7 @@
             "readonly": "0",
             "format_value": "",
             "parameters": {
-                "general": [
-                ],
+                "general": [],
                 "source": {
                     "data_source": "db_table",
                     "join_field": "id",
@@ -505,10 +456,8 @@
                 "save": {
                     "index": ""
                 },
-                "media": [
-                ],
-                "payment": [
-                ]
+                "media": [],
+                "payment": []
             }
         },
         {
@@ -526,18 +475,14 @@
             "readonly": "0",
             "format_value": "",
             "parameters": {
-                "general": [
-                ],
-                "source": [
-                ],
+                "general": [],
+                "source": [],
                 "save": {
                     "view_side": "both",
                     "index": ""
                 },
-                "media": [
-                ],
-                "payment": [
-                ]
+                "media": [],
+                "payment": []
             }
         },
         {
@@ -555,18 +500,14 @@
             "readonly": "0",
             "format_value": "",
             "parameters": {
-                "general": [
-                ],
-                "source": [
-                ],
+                "general": [],
+                "source": [],
                 "save": {
                     "view_side": "both",
                     "index": ""
                 },
-                "media": [
-                ],
-                "payment": [
-                ]
+                "media": [],
+                "payment": []
             }
         },
         {
@@ -584,8 +525,7 @@
             "readonly": "0",
             "format_value": "",
             "parameters": {
-                "general": [
-                ],
+                "general": [],
                 "source": {
                     "data_source": "db_table",
                     "join_field": "id",
@@ -597,10 +537,8 @@
                 "save": {
                     "index": ""
                 },
-                "media": [
-                ],
-                "payment": [
-                ]
+                "media": [],
+                "payment": []
             }
         },
         {
@@ -618,17 +556,13 @@
             "readonly": "",
             "format_value": "",
             "parameters": {
-                "general": [
-                ],
-                "source": [
-                ],
+                "general": [],
+                "source": [],
                 "save": {
                     "index": ""
                 },
-                "media": [
-                ],
-                "payment": [
-                ]
+                "media": [],
+                "payment": []
             }
         },
         {
@@ -646,8 +580,7 @@
             "readonly": "0",
             "format_value": "",
             "parameters": {
-                "general": [
-                ],
+                "general": [],
                 "source": {
                     "data_source": "db_table",
                     "join_field": "id",
@@ -659,10 +592,8 @@
                 "save": {
                     "index": ""
                 },
-                "media": [
-                ],
-                "payment": [
-                ]
+                "media": [],
+                "payment": []
             }
         },
         {
@@ -680,23 +611,19 @@
             "readonly": "",
             "format_value": "",
             "parameters": {
-                "general": [
-                ],
-                "source": [
-                ],
+                "general": [],
+                "source": [],
                 "save": {
                     "index": ""
                 },
-                "media": [
-                ],
-                "payment": [
-                ]
+                "media": [],
+                "payment": []
             }
         }
     ],
     "primarykey": "id",
     "table_name": "payments_transactions",
-    "table_alias": "ft",
+    "table_alias": "pt",
     "foreignkey": "",
     "renamedfields": "",
     "main_fields": [
@@ -714,72 +641,72 @@
     "query": {
         "from": {
             "table": "Payments\\Transactions\\Code\\Tables\\Transactions",
-            "alias": "ft",
+            "alias": "pt",
             "name": "#__payments_transactions"
         },
         "select": [
-            "ft.id",
-            "ft.user_id",
+            "pt.id",
+            "pt.user_id",
             "uu.name AS user_id_name",
-            "ft.item_id",
-            "ft.payment_id",
-            "fp.code AS payment_id_code",
-            "ft.source",
-            "ft.rate_id",
-            "fr.title AS rate_id_title",
-            "ft.description",
-            "ft.credit",
-            "ft.debit",
-            "ft.type",
-            "ft.level",
-            "ft.is_capped",
-            "ft.behalf_user_id",
-            "uu_9079.name AS behalf_user_id_name",
-            "ft.token",
-            "ft.is_processed",
-            "ft.created_by",
-            "uu_5281.name AS created_by_name",
-            "ft.date_created",
-            "ft.modified_by",
-            "uu_9119.name AS modified_by_name",
-            "ft.date_modified"
+            "pt.item_id",
+            "pt.payment_id",
+            "pp.code AS payment_id_code",
+            "pt.source",
+            "pt.rate_id",
+            "pr.title AS rate_id_title",
+            "pt.description",
+            "pt.credit",
+            "pt.debit",
+            "pt.type",
+            "pt.level",
+            "pt.is_capped",
+            "pt.behalf_user_id",
+            "uu_4528.name AS behalf_user_id_name",
+            "pt.token",
+            "pt.is_processed",
+            "pt.created_by",
+            "uu_3757.name AS created_by_name",
+            "pt.date_created",
+            "pt.modified_by",
+            "uu_8009.name AS modified_by_name",
+            "pt.date_modified"
         ],
         "leftjoin": [
             {
                 "table": "Users\\Users\\Code\\Tables\\Users",
                 "alias": "uu",
                 "name": "#__users_users",
-                "on": "ft.user_id = uu.id"
+                "on": "pt.user_id = uu.id"
             },
             {
                 "table": "Payments\\Payments\\Code\\Tables\\Payments",
-                "alias": "fp",
+                "alias": "pp",
                 "name": "#__payments_payments",
-                "on": "ft.payment_id = fp.id"
+                "on": "pt.payment_id = pp.id"
             },
             {
                 "table": "Payments\\Rates\\Code\\Tables\\Rates",
-                "alias": "fr",
+                "alias": "pr",
                 "name": "#__payments_rates",
-                "on": "ft.rate_id = fr.id"
+                "on": "pt.rate_id = pr.id"
             },
             {
                 "table": "Users\\Users\\Code\\Tables\\Users",
-                "alias": "uu_9079",
+                "alias": "uu_4528",
                 "name": "#__users_users",
-                "on": "ft.behalf_user_id = uu_9079.id"
+                "on": "pt.behalf_user_id = uu_4528.id"
             },
             {
                 "table": "Users\\Users\\Code\\Tables\\Users",
-                "alias": "uu_5281",
+                "alias": "uu_3757",
                 "name": "#__users_users",
-                "on": "ft.created_by = uu_5281.id"
+                "on": "pt.created_by = uu_3757.id"
             },
             {
                 "table": "Users\\Users\\Code\\Tables\\Users",
-                "alias": "uu_9119",
+                "alias": "uu_8009",
                 "name": "#__users_users",
-                "on": "ft.modified_by = uu_9119.id"
+                "on": "pt.modified_by = uu_8009.id"
             }
         ]
     }

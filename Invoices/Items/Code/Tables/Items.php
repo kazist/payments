@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Items
  *
- * @ORM\Table(name="payments_invoices_items", indexes={@ORM\Index(name="invoice_id_index", columns={"invoice_id"})})
+ * @ORM\Table(name="payments_invoices_items", indexes={@ORM\Index(name="invoice_id_index", columns={"invoice_id"}), @ORM\Index(name="user_id_index", columns={"user_id"})})
  * @ORM\Entity
  * @ORM\HasLifecycleCallbacks
  */
@@ -25,28 +25,56 @@ class Items extends \Kazist\Table\BaseTable
     /**
      * @var integer
      *
-     * @ORM\Column(name="invoice_id", type="integer", length=11)
+     * @ORM\Column(name="invoice_id", type="integer", length=11, nullable=false)
      */
     protected $invoice_id;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="description", type="string", length=255)
+     * @ORM\Column(name="payment_source", type="string", length=255, nullable=true)
+     */
+    protected $payment_source;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="description", type="string", length=255, nullable=true)
      */
     protected $description;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="quantity", type="integer", length=11)
+     * @ORM\Column(name="item_id", type="integer", length=11, nullable=true)
+     */
+    protected $item_id;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="user_id", type="integer", length=11)
+     */
+    protected $user_id;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="quantity", type="integer", length=11, nullable=true)
      */
     protected $quantity;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="unit_price", type="integer", length=11)
+     * @ORM\Column(name="amount", type="integer", length=11, nullable=true)
+     */
+    protected $amount;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="unit_price", type="decimal", precision=11, scale=2, nullable=true)
      */
     protected $unit_price;
 
@@ -114,6 +142,30 @@ class Items extends \Kazist\Table\BaseTable
     }
 
     /**
+     * Set paymentSource
+     *
+     * @param string $paymentSource
+     *
+     * @return Items
+     */
+    public function setPaymentSource($paymentSource)
+    {
+        $this->payment_source = $paymentSource;
+
+        return $this;
+    }
+
+    /**
+     * Get paymentSource
+     *
+     * @return string
+     */
+    public function getPaymentSource()
+    {
+        return $this->payment_source;
+    }
+
+    /**
      * Set description
      *
      * @param string $description
@@ -135,6 +187,54 @@ class Items extends \Kazist\Table\BaseTable
     public function getDescription()
     {
         return $this->description;
+    }
+
+    /**
+     * Set itemId
+     *
+     * @param integer $itemId
+     *
+     * @return Items
+     */
+    public function setItemId($itemId)
+    {
+        $this->item_id = $itemId;
+
+        return $this;
+    }
+
+    /**
+     * Get itemId
+     *
+     * @return integer
+     */
+    public function getItemId()
+    {
+        return $this->item_id;
+    }
+
+    /**
+     * Set userId
+     *
+     * @param integer $userId
+     *
+     * @return Items
+     */
+    public function setUserId($userId)
+    {
+        $this->user_id = $userId;
+
+        return $this;
+    }
+
+    /**
+     * Get userId
+     *
+     * @return integer
+     */
+    public function getUserId()
+    {
+        return $this->user_id;
     }
 
     /**
@@ -162,9 +262,33 @@ class Items extends \Kazist\Table\BaseTable
     }
 
     /**
+     * Set amount
+     *
+     * @param integer $amount
+     *
+     * @return Items
+     */
+    public function setAmount($amount)
+    {
+        $this->amount = $amount;
+
+        return $this;
+    }
+
+    /**
+     * Get amount
+     *
+     * @return integer
+     */
+    public function getAmount()
+    {
+        return $this->amount;
+    }
+
+    /**
      * Set unitPrice
      *
-     * @param integer $unitPrice
+     * @param string $unitPrice
      *
      * @return Items
      */
@@ -178,7 +302,7 @@ class Items extends \Kazist\Table\BaseTable
     /**
      * Get unitPrice
      *
-     * @return integer
+     * @return string
      */
     public function getUnitPrice()
     {

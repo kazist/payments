@@ -1,0 +1,224 @@
+{
+    "frontend": [{
+            "title": "Deposit List",
+            "description": "Management of Deposits.",
+            "controller": "Payments\\Deposits\\Code\\Controllers\\DepositsController::indexAction",
+            "permissions": "can_view, can_viewown",
+            "unique_name": "payments.deposits",
+            "route": "payments/deposits",
+            "arguments": "",
+            "keywords": "deposits, list",
+            "priority": "0.5",
+            "changefreq": "weekly",
+            "login_required": 1,
+            "roles": {
+                "SUPER_ADMIN": ["can_viewown"],
+                "ADMIN": ["can_viewown"],
+                "MODERATOR": ["can_viewown"],
+                "USER": ["can_viewown"]
+            }
+        }, {
+            "title": "Add Deposit  ",
+            "description": "Add Deposit .",
+            "controller": "Payments\\Deposits\\Code\\Controllers\\DepositsController::addAction",
+            "unique_name": "payments.deposits.add",
+            "route": "payments/deposits/add",
+            "permissions": "can_add",
+            "arguments": {},
+            "keywords": "deposits, add",
+            "priority": "0.5",
+            "changefreq": "weekly",
+            "login_required": 1,
+            "roles": {
+                "SUPER_ADMIN": ["can_add"],
+                "ADMIN": ["can_add"],
+                "MODERATOR": ["can_add"],
+                "USER": ["can_add"]
+            }
+        }, {
+            "title": "Edit Deposit {{ item.name }}",
+            "description": "Edit Deposit {{ item.name }}.",
+            "controller": "Payments\\Deposits\\Code\\Controllers\\DepositsController::editAction",
+            "unique_name": "payments.deposits.edit",
+            "route": "payments/deposits/edit/{id}",
+            "permissions": "can_add, can_write, can_writeown",
+            "arguments": {
+                "id": null
+            },
+            "keywords": "deposits, list, {{ item.name }}",
+            "priority": "0.5",
+            "changefreq": "weekly",
+            "login_required": 1,
+            "roles": {
+                "SUPER_ADMIN": ["can_add", "can_writeown"],
+                "ADMIN": ["can_add", "can_writeown"],
+                "MODERATOR": ["can_add", "can_writeown"],
+                "USER": ["can_add", "can_writeown"]
+            }
+        }, {
+            "title": "Deposit Detail: {{ item.name }}",
+            "description": "Deposit Detail: {{ item.name }}",
+            "controller": "Payments\\Deposits\\Code\\Controllers\\DepositsController::detailAction",
+            "unique_name": "payments.deposits.detail",
+            "route": "payments/deposits/detail/{id}",
+            "permissions": "can_view, can_viewown",
+            "arguments": {
+                "id": null
+            },
+            "keywords": "deposits, list, {{ item.name }}",
+            "priority": "0.5",
+            "changefreq": "weekly",
+            "login_required": 1,
+            "roles": {
+                "SUPER_ADMIN": ["can_viewown"],
+                "ADMIN": ["can_viewown"],
+                "MODERATOR": ["can_viewown"],
+                "USER": ["can_viewown"]
+            }
+
+        }, {
+            "title": "Deposit Save: {{ item.name }}",
+            "description": "Deposit Save: {{ item.name }}",
+            "controller": "Payments\\Deposits\\Code\\Controllers\\DepositsController::saveAction",
+            "unique_name": "payments.deposits.save",
+            "route": "payments/deposits/save",
+            "permissions": "can_add, can_write, can_writeown",
+            "arguments": {
+                "id": null
+            },
+            "keywords": "deposits, save, {{ item.name }}",
+            "priority": "0.5",
+            "changefreq": "weekly",
+            "login_required": 1,
+            "roles": {
+                "SUPER_ADMIN": ["can_add"],
+                "ADMIN": ["can_add"],
+                "MODERATOR": ["can_add"],
+                "USER": ["can_add"]
+            }
+
+
+        }]
+    ,
+    "backend": [{
+            "title": "General Tasks",
+            "description": "General Tasks.",
+            "controller": "Payments\\Deposits\\Code\\Controllers\\Admin\\DepositsController::taskAction",
+            "unique_name": "admin.payments.deposits.task",
+            "route": "admin/payments/deposits/task",
+            "permissions": "can_add, can_write, can_writeown",
+            "arguments": "",
+            "keywords": "deposits, task",
+            "priority": "0.5",
+            "changefreq": "weekly",
+            "login_required": 1,
+            "roles": {
+                "SUPER_ADMIN": ["can_add", "can_write", "can_writeown"],
+                "ADMIN": ["can_add", "can_write", "can_writeown"]
+            }
+        }, {
+            "title": "Deposit List",
+            "description": "Management of Deposits.",
+            "controller": "Payments\\Deposits\\Code\\Controllers\\Admin\\DepositsController::indexAction",
+            "permissions": "can_view, can_viewown",
+            "unique_name": "admin.payments.deposits",
+            "route": "admin/payments/deposits",
+            "arguments": "",
+            "keywords": "deposits, list",
+            "priority": "0.5",
+            "changefreq": "weekly",
+            "login_required": 1,
+            "roles": {
+                "SUPER_ADMIN": ["can_view", "can_viewown"],
+                "ADMIN": ["can_view", "can_viewown"]
+            }
+        }, {
+            "title": "Add Deposit  ",
+            "description": "Add Deposit  .",
+            "controller": "Payments\\Deposits\\Code\\Controllers\\Admin\\DepositsController::addAction",
+            "unique_name": "admin.payments.deposits.add",
+            "route": "admin/payments/deposits/add",
+            "permissions": "can_add",
+            "arguments": {},
+            "keywords": "withdraw, add",
+            "priority": "0.5",
+            "changefreq": "weekly",
+            "login_required": 1,
+            "roles": {
+                "SUPER_ADMIN": ["can_add"],
+                "ADMIN": ["can_add"]
+            }
+        }, {
+            "title": "Edit Deposit {{ item.name }}",
+            "description": "Edit Deposit {{ item.name }}.",
+            "controller": "Payments\\Deposits\\Code\\Controllers\\Admin\\DepositsController::editAction",
+            "unique_name": "admin.payments.deposits.edit",
+            "route": "admin/payments/deposits/edit/{id}",
+            "permissions": "can_add, can_write, can_writeown",
+            "arguments": {
+                "id": null
+            },
+            "keywords": "deposits, list, {{ item.name }}",
+            "priority": "0.5",
+            "changefreq": "weekly",
+            "login_required": 1,
+            "roles": {
+                "SUPER_ADMIN": ["can_add", "can_write", "can_writeown"],
+                "ADMIN": ["can_add", "can_write", "can_writeown"]
+            }
+        }, {
+            "title": "Deposit Detail: {{ item.name }}",
+            "description": "Deposit Detail: {{ item.name }}",
+            "controller": "Payments\\Deposits\\Code\\Controllers\\Admin\\DepositsController::detailAction",
+            "unique_name": "admin.payments.deposits.detail",
+            "route": "admin/payments/deposits/detail/{id}",
+            "permissions": "can_view, can_viewown",
+            "arguments": {
+                "id": null
+            },
+            "keywords": "deposits, list, {{ item.name }}",
+            "priority": "0.5",
+            "changefreq": "weekly",
+            "login_required": 1,
+            "roles": {
+                "SUPER_ADMIN": ["can_view", "can_viewown"],
+                "ADMIN": ["can_view", "can_viewown"]
+            }
+        }, {
+            "title": "Deposit Delete: {{ item.name }}",
+            "description": "Deposit Delete: {{ item.name }}",
+            "controller": "Payments\\Deposits\\Code\\Controllers\\Admin\\DepositsController::deleteAction",
+            "unique_name": "admin.payments.deposits.delete",
+            "route": "admin/payments/deposits/delete/{id}",
+            "permissions": "can_delete, can_deleteown",
+            "arguments": {
+                "id": null
+            },
+            "keywords": "deposits, delete, {{ item.name }}",
+            "priority": "0.5",
+            "changefreq": "weekly",
+            "login_required": 1,
+            "roles": {
+                "SUPER_ADMIN": ["can_delete", "can_deleteown"],
+                "ADMIN": ["can_delete", "can_deleteown"]
+            }
+        }, {
+            "title": "Deposit Save: {{ item.name }}",
+            "description": "Deposit Save: {{ item.name }}",
+            "controller": "Payments\\Deposits\\Code\\Controllers\\Admin\\DepositsController::saveAction",
+            "unique_name": "admin.payments.deposits.save",
+            "route": "admin/payments/deposits/save",
+            "permissions": "can_add, can_write, can_writeown",
+            "arguments": {
+                "id": null
+            },
+            "keywords": "deposits, save, {{ item.name }}",
+            "priority": "0.5",
+            "changefreq": "weekly",
+            "login_required": 1,
+            "roles": {
+                "SUPER_ADMIN": ["can_add", "can_write", "can_writeown"],
+                "ADMIN": ["can_add", "can_write", "can_writeown"]
+            }
+        }]
+} 	

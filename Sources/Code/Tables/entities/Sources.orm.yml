@@ -11,8 +11,8 @@ Payments\Sources\Code\Tables\Sources:
       type: string
       length: 255
       nullable: false
-    sources:
-      name: sources
+    source:
+      name: source
       type: string
       length: 255
       nullable: false

@@ -36,14 +36,16 @@ Payments\Transactions\Code\Tables\Transactions:
       type: text
       nullable: false
     credit:
+      scale: 2
+      precision: 11
       name: credit
-      type: integer
-      length: 11
+      type: decimal
       nullable: true
     debit:
+      scale: 2
+      precision: 11
       name: debit
-      type: integer
-      length: 11
+      type: decimal
       nullable: true
     type:
       name: type

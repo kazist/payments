@@ -1,0 +1,27 @@
+{
+    "layout": [{
+            "tracking_id": "1",
+            "unique_name": "payments.deposits.paymentsuccessful",
+            "subject": "Payment Process Completed Successfully",
+            "short_body": "Dear {{ subscriber.name }}, Payment Process Completed Successfully",
+            "body": "Client {{ subscriber.name }},<br><br>Your payment for Subscription was completed successful.<br><br>Thank you upgrading you can start to build you team and use our website as an upgraded member.<br><br> If you need any help, please let us know so that we can assist you.<br><br>Thanks,"
+        }, {
+            "tracking_id": "2",
+            "unique_name": "payments.deposits.paymentfail",
+            "subject": "Payment Process Failed",
+            "short_body": "Dear {{ subscriber.name }}, Payment Process Failed",
+            "body": "Client {{ subscriber.name }},<br><br>Your payment for Subscription did not process. This is sometimes due to payment of less amount, fraudalent Payment, credit card decline, change in expiration date or system issue.<br><br>First, please reply back to confirm that you received this notice and that you are working to resolve the issue.<br><br>Also Contact Administrator to check the issue once more.<br><br> If you need any help, please let us know so that we can assist you.<br><br>Thanks,"
+        }, {
+            "tracking_id": "3",
+            "unique_name": "payments.deposits.paymentcancel",
+            "subject": "Payment Process Canceled",
+            "short_body": "Dear {{ subscriber.name }}, Payment Process Canceled",
+            "body": "Client {{ subscriber.name }},<br><br>Your payment for Subscription did not process. The process was canceled.<br><br>Please Verify if You it was initiated by you.<br><br>Also Contact Administrator to check the issue once more.<br><br> If you need any help, please let us know so that we can assist you.<br><br>Thanks,"
+        }, {
+            "tracking_id": "4",
+            "unique_name": "payments.deposits.paymentcomplete",
+            "subject": "Payment Process Completed",
+            "short_body": "Dear {{ subscriber.name }}, Payment Process Completed",
+            "body": "Client {{ subscriber.name }},<br><br>Your payment for Subscription was completed successful.<br><br>Thank you upgrading you can start to build you team and use our website as an upgraded member.<br><br> If you need any help, please let us know so that we can assist you.<br><br>Thanks,"
+        }]
+}

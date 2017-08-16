@@ -16,11 +16,6 @@ Payments\Payments\Code\Tables\Payments:
       type: integer
       length: 11
       nullable: false
-    subset_id:
-      name: subset_id
-      type: integer
-      length: 11
-      nullable: false
     item_id:
       name: item_id
       type: integer
@@ -38,6 +33,11 @@ Payments\Payments\Code\Tables\Payments:
       nullable: true
     type:
       name: type
+      type: string
+      length: 255
+      nullable: true
+    payment_source:
+      name: payment_source
       type: string
       length: 255
       nullable: true
@@ -111,8 +111,6 @@ Payments\Payments\Code\Tables\Payments:
       columns: [gateway_id]
     user_id_index:
       columns: [user_id]
-    subset_id_index:
-      columns: [subset_id]
     created_by_index:
       columns: [created_by]
     modified_by_index:

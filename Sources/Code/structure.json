@@ -18,13 +18,15 @@
                                             "hide_on_new": null,
                                             "fields": [
                                                 "title",
-                                                "sources"
+                                                "source"
                                             ]
                                         }
                                     }
                                 ]
                             },
                             {
+                                "name": "",
+                                "class_name": "col-sm-4",
                                 "items": [
                                     {
                                         "group": {
@@ -65,16 +67,12 @@
         },
         "table": {
             "fields": [
-                "id",
                 "title",
-                "created_by",
-                "date_created"
+                "published"
             ],
             "has_label": [
-                "id",
                 "title",
-                "created_by",
-                "date_created"
+                "published"
             ]
         }
     },
@@ -138,7 +136,7 @@
         {
             "dropdown_filter": "0",
             "nullable": "0",
-            "name": "sources",
+            "name": "source",
             "html_type": "text",
             "mysql_type": "varchar",
             "view_side": "",
@@ -311,7 +309,7 @@
         "select": [
             "ps.id",
             "ps.title",
-            "ps.sources",
+            "ps.source",
             "ps.published",
             "ps.created_by",
             "ps.date_created",

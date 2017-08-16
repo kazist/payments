@@ -1,0 +1,123 @@
+<?php
+
+/*
+ * This file is part of Kazist Framework.
+ * (c) Dedan Irungu <irungudedan@gmail.com>
+ *  For the full copyright and license information, please view the LICENSE file that was distributed with this source code.
+ * 
+ */
+
+namespace Payments\Deposits\Code\Models;
+
+/**
+ * Description of DepositsModel
+ *
+ * @author sbc
+ */
+use Kazist\Model\BaseModel;
+use Kazist\KazistFactory;
+
+class DepositsModel extends BaseModel {
+
+    public function appendSearchQuery($query) {
+
+        $factory = new KazistFactory();
+        $user = $factory->getUser();
+        $document = $this->container->get('document');
+        $search = $document->search;
+
+        $query = parent:: appendSearchQuery($query);
+
+        if (WEB_IS_ADMIN) {
+            $user_id = $this->request->get('user_id');
+        } else {
+            $user_id = $user->id;
+        }
+
+        $query->leftJoin('ssd', '#__payments_gateways', 'fg', 'fg.id=fp.gateway_id');
+        $query->addSelect('fp.amount_required, fp.amount_paid, fp.receipt_no, fp.code');
+        $query->addSelect('fg.short_name as gateway_id_short_name');
+
+        if ($search['gateway_id'] <> '') {
+            $query->where('fp.gateway_id = ' . (int) $search['gateway_id']);
+        }
+
+        if ($user_id) {
+            $query->andwhere('ssd.user_id=' . (int) $user_id);
+            $query->andwhere('ssd.completed=1');
+            $query->andwhere('ssd.successful=1');
+        }
+
+        return $query;
+    }
+
+    public function processPayment() {
+
+        $factory = new KazistFactory();
+        $user = $factory->getUser();
+
+        $document = $this->container->get('document');
+        $default_gateway = $factory->getSetting('subscription_subscription_default_gateway');
+
+        $form = $this->request->get('form');
+
+        if ($form['amount']) {
+
+            $deposit = $this->getDeposit($user->id, $form);
+
+            $redirect = $this->generateUrl('finance.payments.newpayment', array(
+                'path' => 'payments.deposits',
+                'gateway_id' => $default_gateway,
+                'pay_subset_id' => $document->subset_id,
+                'item_id' => $deposit->id,
+                'amount' => $form['amount'],
+                'description' => 'Partial Payments.'
+            ));
+        } else {
+            $factory->enqueueMessage('Amount is not set.', 'error');
+            $redirect = $this->generateUrl('payments.deposit');
+        }
+
+        return $redirect;
+    }
+
+    public function getDeposit($user_id, $form) {
+
+        $factory = new KazistFactory();
+
+        $data = new \stdClass();
+
+        $data->payment_id = 0;
+        $data->user_id = $user_id;
+        $data->amount = $form['amount'];
+
+        $record = $factory->getRecord('payments_deposits', 'ssd', array('ssd.user_id=:user_id', 'ssd.completed=0 OR ssd.completed IS NULL'), array('user_id' => $user_id));
+
+        if (empty($record)) {
+            $factory->saveRecordByEntity('payments_deposits', $data);
+            $record = $factory->getRecord('payments_deposits', 'ssd', array('ssd.user_id=:user_id', 'ssd.completed=0 OR ssd.completed IS NULL'), array('user_id' => $user_id));
+        }
+
+        return $record;
+    }
+
+    public function getGatewaysInput() {
+
+        $tmp_array = array();
+
+        $factory = new KazistFactory();
+
+        $query = $factory->getQueryBuilder('#__payments_gateways', 'pg');
+        $query->andWhere('pg.published=1');
+        $gateways = $query->loadObjectList();
+
+        if (!empty($gateways)) {
+            foreach ($gateways as $key => $gateway) {
+                $tmp_array[] = array('value' => $gateway->id, 'text' => $gateway->short_name);
+            }
+        }
+
+        return $tmp_array;
+    }
+
+}

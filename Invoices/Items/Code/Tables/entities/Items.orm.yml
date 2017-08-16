@@ -10,18 +10,42 @@ Payments\Invoices\Items\Code\Tables\Items:
       name: invoice_id
       type: integer
       length: 11
+      nullable: false
+    payment_source:
+      name: payment_source
+      type: string
+      length: 255
+      nullable: true
     description:
       name: description
       type: string
       length: 255
+      nullable: true
+    item_id:
+      name: item_id
+      type: integer
+      length: 11
+      nullable: true
+    user_id:
+      name: user_id
+      type: integer
+      length: 11
     quantity:
       name: quantity
       type: integer
       length: 11
-    unit_price:
-      name: unit_price
+      nullable: true
+    amount:
+      name: amount
       type: integer
       length: 11
+      nullable: true
+    unit_price:
+      scale: 2
+      precision: 11
+      name: unit_price
+      type: decimal
+      nullable: true
     created_by:
       name: created_by
       type: integer
@@ -43,6 +67,8 @@ Payments\Invoices\Items\Code\Tables\Items:
   indexes:
     invoice_id_index:
       columns: [invoice_id]
+    user_id_index:
+      columns: [user_id]
   lifecycleCallbacks:
     prePersist:
       - onPrePersist

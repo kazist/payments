@@ -1,0 +1,44 @@
+
+
+
+<!-- /.row -->
+<div class="row">
+    <!-- accepted payments column -->
+    <div class="col-xs-12">
+        <div class="tab-v2">
+            <ul class="nav nav-tabs">
+                {% if gateways|length > 0 %}
+                    {% for key,gateway in gateways %}
+
+                        {% set path_set = addTwigPath( "applications." ~ gateway.form_path) %}
+
+                        {% include "pay.gateways.tabs.twig" ignore missing %} 
+
+                    {% endfor %}
+                {% endif %}
+            </ul>
+            <div class="tab-content">
+                {% if gateways|length > 0 %}
+                    {% for key,gateway in gateways %}
+
+
+                        {% set new_gateway =
+                    {
+                       'total_amount':(gateway.total_amount * converter.buying|default(1)),
+                       'currency':converter.code
+                    }
+                        %}
+
+                        {% set gateway = gateway|merge(new_gateway) %}
+
+                        {% include "pay.gateways.tabscontent.twig" ignore missing %} 
+
+                    {% endfor %}
+                {% endif %}
+
+            </div>
+        </div>
+    </div>
+</div>
+
+

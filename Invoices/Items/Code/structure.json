@@ -26,14 +26,18 @@
             }
         },
         {
+            "dropdown_filter": "0",
+            "nullable": "0",
             "name": "invoice_id",
             "html_type": "autocomplete",
             "mysql_type": "int",
             "view_side": "",
             "index": "",
+            "id_name": "",
+            "class_name": "",
+            "default_value": "",
             "size": "",
             "readonly": "0",
-            "default_value": "",
             "format_value": "",
             "parameters": {
                 "general": [],
@@ -52,14 +56,43 @@
             }
         },
         {
+            "dropdown_filter": "0",
+            "nullable": "1",
+            "name": "payment_source",
+            "html_type": "text",
+            "mysql_type": "varchar",
+            "view_side": "",
+            "index": "",
+            "id_name": "",
+            "class_name": "",
+            "default_value": "",
+            "size": "",
+            "readonly": "0",
+            "format_value": "",
+            "parameters": {
+                "general": [],
+                "source": [],
+                "save": {
+                    "view_side": "both",
+                    "index": ""
+                },
+                "media": [],
+                "payment": []
+            }
+        },
+        {
+            "dropdown_filter": "0",
+            "nullable": "1",
             "name": "description",
             "html_type": "textarea",
             "mysql_type": "varchar",
             "view_side": "",
             "index": "",
+            "id_name": "",
+            "class_name": "",
+            "default_value": "",
             "size": "",
             "readonly": "0",
-            "default_value": "",
             "format_value": "",
             "parameters": {
                 "general": {
@@ -76,14 +109,18 @@
             }
         },
         {
-            "name": "quantity",
+            "dropdown_filter": "0",
+            "nullable": "1",
+            "name": "item_id",
             "html_type": "text",
             "mysql_type": "int",
             "view_side": "",
             "index": "",
+            "id_name": "",
+            "class_name": "",
+            "default_value": "",
             "size": "",
             "readonly": "0",
-            "default_value": "",
             "format_value": "",
             "parameters": {
                 "general": [],
@@ -97,14 +134,96 @@
             }
         },
         {
-            "name": "unit_price",
-            "html_type": "text",
+            "name": "user_id",
+            "html_type": "autocomplete",
             "mysql_type": "int",
             "view_side": "",
             "index": "",
             "size": "",
             "readonly": "0",
             "default_value": "",
+            "format_value": "",
+            "parameters": {
+                "general": [],
+                "source": {
+                    "data_source": "db_table",
+                    "join_field": "id",
+                    "display_field": [
+                        "name"
+                    ],
+                    "join_table_name": "users_users"
+                },
+                "save": {
+                    "view_side": "both",
+                    "index": ""
+                },
+                "media": [],
+                "payment": []
+            }
+        },
+        {
+            "dropdown_filter": "0",
+            "nullable": "1",
+            "name": "quantity",
+            "html_type": "text",
+            "mysql_type": "int",
+            "view_side": "",
+            "index": "",
+            "id_name": "",
+            "class_name": "",
+            "default_value": "",
+            "size": "",
+            "readonly": "0",
+            "format_value": "",
+            "parameters": {
+                "general": [],
+                "source": [],
+                "save": {
+                    "view_side": "both",
+                    "index": ""
+                },
+                "media": [],
+                "payment": []
+            }
+        },
+        {
+            "dropdown_filter": "0",
+            "nullable": "1",
+            "name": "amount",
+            "html_type": "text",
+            "mysql_type": "int",
+            "view_side": "",
+            "index": "",
+            "id_name": "",
+            "class_name": "",
+            "default_value": "",
+            "size": "",
+            "readonly": "0",
+            "format_value": "",
+            "parameters": {
+                "general": [],
+                "source": [],
+                "save": {
+                    "view_side": "both",
+                    "index": ""
+                },
+                "media": [],
+                "payment": []
+            }
+        },
+        {
+            "dropdown_filter": "0",
+            "nullable": "1",
+            "name": "unit_price",
+            "html_type": "text",
+            "mysql_type": "decimal",
+            "view_side": "",
+            "index": "",
+            "id_name": "",
+            "class_name": "",
+            "default_value": "",
+            "size": "",
+            "readonly": "0",
             "format_value": "",
             "parameters": {
                 "general": [],
@@ -224,7 +343,8 @@
     "foreignkey": "",
     "renamedfields": "",
     "main_fields": [
-        "id"
+        "invoice_id",
+        "payment_source"
     ],
     "main_view": "table",
     "has_view": "0",
@@ -243,8 +363,13 @@
         "select": [
             "pii.id",
             "pii.invoice_id",
+            "pii.payment_source",
             "pii.description",
+            "pii.item_id",
+            "pii.user_id",
+            "uu.name AS user_id_name",
             "pii.quantity",
+            "pii.amount",
             "pii.unit_price",
             "pii.created_by",
             "pii.date_created",
@@ -257,6 +382,12 @@
                 "alias": "",
                 "name": "#__",
                 "on": "pii.invoice_id = .null"
+            },
+            {
+                "table": "Users\\Users\\Code\\Tables\\Users",
+                "alias": "uu",
+                "name": "#__users_users",
+                "on": "pii.user_id = uu.id"
             }
         ]
     }

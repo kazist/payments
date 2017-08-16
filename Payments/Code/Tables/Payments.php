@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Payments
  *
- * @ORM\Table(name="payments_payments", indexes={@ORM\Index(name="gateway_id_index", columns={"gateway_id"}), @ORM\Index(name="user_id_index", columns={"user_id"}), @ORM\Index(name="subset_id_index", columns={"subset_id"}), @ORM\Index(name="created_by_index", columns={"created_by"}), @ORM\Index(name="modified_by_index", columns={"modified_by"})})
+ * @ORM\Table(name="payments_payments", indexes={@ORM\Index(name="gateway_id_index", columns={"gateway_id"}), @ORM\Index(name="user_id_index", columns={"user_id"}), @ORM\Index(name="created_by_index", columns={"created_by"}), @ORM\Index(name="modified_by_index", columns={"modified_by"})})
  * @ORM\Entity
  * @ORM\HasLifecycleCallbacks
  */
@@ -39,13 +39,6 @@ class Payments extends \Kazist\Table\BaseTable
     /**
      * @var integer
      *
-     * @ORM\Column(name="subset_id", type="integer", length=11, nullable=false)
-     */
-    protected $subset_id;
-
-    /**
-     * @var integer
-     *
      * @ORM\Column(name="item_id", type="integer", length=11, nullable=true)
      */
     protected $item_id;
@@ -70,6 +63,13 @@ class Payments extends \Kazist\Table\BaseTable
      * @ORM\Column(name="type", type="string", length=255, nullable=true)
      */
     protected $type;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="payment_source", type="string", length=255, nullable=true)
+     */
+    protected $payment_source;
 
     /**
      * @var string
@@ -173,7 +173,7 @@ class Payments extends \Kazist\Table\BaseTable
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -181,9 +181,10 @@ class Payments extends \Kazist\Table\BaseTable
     }
 
     /**
-     * Set gateway_id
+     * Set gatewayId
      *
      * @param integer $gatewayId
+     *
      * @return Payments
      */
     public function setGatewayId($gatewayId)
@@ -194,9 +195,9 @@ class Payments extends \Kazist\Table\BaseTable
     }
 
     /**
-     * Get gateway_id
+     * Get gatewayId
      *
-     * @return integer 
+     * @return integer
      */
     public function getGatewayId()
     {
@@ -204,9 +205,10 @@ class Payments extends \Kazist\Table\BaseTable
     }
 
     /**
-     * Set user_id
+     * Set userId
      *
      * @param integer $userId
+     *
      * @return Payments
      */
     public function setUserId($userId)
@@ -217,9 +219,9 @@ class Payments extends \Kazist\Table\BaseTable
     }
 
     /**
-     * Get user_id
+     * Get userId
      *
-     * @return integer 
+     * @return integer
      */
     public function getUserId()
     {
@@ -227,32 +229,10 @@ class Payments extends \Kazist\Table\BaseTable
     }
 
     /**
-     * Set subset_id
-     *
-     * @param integer $subsetId
-     * @return Payments
-     */
-    public function setSubsetId($subsetId)
-    {
-        $this->subset_id = $subsetId;
-
-        return $this;
-    }
-
-    /**
-     * Get subset_id
-     *
-     * @return integer 
-     */
-    public function getSubsetId()
-    {
-        return $this->subset_id;
-    }
-
-    /**
-     * Set item_id
+     * Set itemId
      *
      * @param integer $itemId
+     *
      * @return Payments
      */
     public function setItemId($itemId)
@@ -263,9 +243,9 @@ class Payments extends \Kazist\Table\BaseTable
     }
 
     /**
-     * Get item_id
+     * Get itemId
      *
-     * @return integer 
+     * @return integer
      */
     public function getItemId()
     {
@@ -273,9 +253,10 @@ class Payments extends \Kazist\Table\BaseTable
     }
 
     /**
-     * Set receipt_no
+     * Set receiptNo
      *
      * @param string $receiptNo
+     *
      * @return Payments
      */
     public function setReceiptNo($receiptNo)
@@ -286,9 +267,9 @@ class Payments extends \Kazist\Table\BaseTable
     }
 
     /**
-     * Get receipt_no
+     * Get receiptNo
      *
-     * @return string 
+     * @return string
      */
     public function getReceiptNo()
     {
@@ -299,6 +280,7 @@ class Payments extends \Kazist\Table\BaseTable
      * Set code
      *
      * @param string $code
+     *
      * @return Payments
      */
     public function setCode($code)
@@ -311,7 +293,7 @@ class Payments extends \Kazist\Table\BaseTable
     /**
      * Get code
      *
-     * @return string 
+     * @return string
      */
     public function getCode()
     {
@@ -322,6 +304,7 @@ class Payments extends \Kazist\Table\BaseTable
      * Set type
      *
      * @param string $type
+     *
      * @return Payments
      */
     public function setType($type)
@@ -334,7 +317,7 @@ class Payments extends \Kazist\Table\BaseTable
     /**
      * Get type
      *
-     * @return string 
+     * @return string
      */
     public function getType()
     {
@@ -342,9 +325,34 @@ class Payments extends \Kazist\Table\BaseTable
     }
 
     /**
+     * Set paymentSource
+     *
+     * @param string $paymentSource
+     *
+     * @return Payments
+     */
+    public function setPaymentSource($paymentSource)
+    {
+        $this->payment_source = $paymentSource;
+
+        return $this;
+    }
+
+    /**
+     * Get paymentSource
+     *
+     * @return string
+     */
+    public function getPaymentSource()
+    {
+        return $this->payment_source;
+    }
+
+    /**
      * Set description
      *
      * @param string $description
+     *
      * @return Payments
      */
     public function setDescription($description)
@@ -357,7 +365,7 @@ class Payments extends \Kazist\Table\BaseTable
     /**
      * Get description
      *
-     * @return string 
+     * @return string
      */
     public function getDescription()
     {
@@ -368,6 +376,7 @@ class Payments extends \Kazist\Table\BaseTable
      * Set amount
      *
      * @param string $amount
+     *
      * @return Payments
      */
     public function setAmount($amount)
@@ -380,7 +389,7 @@ class Payments extends \Kazist\Table\BaseTable
     /**
      * Get amount
      *
-     * @return string 
+     * @return string
      */
     public function getAmount()
     {
@@ -388,9 +397,10 @@ class Payments extends \Kazist\Table\BaseTable
     }
 
     /**
-     * Set amount_required
+     * Set amountRequired
      *
      * @param integer $amountRequired
+     *
      * @return Payments
      */
     public function setAmountRequired($amountRequired)
@@ -401,9 +411,9 @@ class Payments extends \Kazist\Table\BaseTable
     }
 
     /**
-     * Get amount_required
+     * Get amountRequired
      *
-     * @return integer 
+     * @return integer
      */
     public function getAmountRequired()
     {
@@ -411,9 +421,10 @@ class Payments extends \Kazist\Table\BaseTable
     }
 
     /**
-     * Set amount_paid
+     * Set amountPaid
      *
      * @param integer $amountPaid
+     *
      * @return Payments
      */
     public function setAmountPaid($amountPaid)
@@ -424,9 +435,9 @@ class Payments extends \Kazist\Table\BaseTable
     }
 
     /**
-     * Get amount_paid
+     * Get amountPaid
      *
-     * @return integer 
+     * @return integer
      */
     public function getAmountPaid()
     {
@@ -437,6 +448,7 @@ class Payments extends \Kazist\Table\BaseTable
      * Set quantity
      *
      * @param string $quantity
+     *
      * @return Payments
      */
     public function setQuantity($quantity)
@@ -449,7 +461,7 @@ class Payments extends \Kazist\Table\BaseTable
     /**
      * Get quantity
      *
-     * @return string 
+     * @return string
      */
     public function getQuantity()
     {
@@ -460,6 +472,7 @@ class Payments extends \Kazist\Table\BaseTable
      * Set params
      *
      * @param string $params
+     *
      * @return Payments
      */
     public function setParams($params)
@@ -472,7 +485,7 @@ class Payments extends \Kazist\Table\BaseTable
     /**
      * Get params
      *
-     * @return string 
+     * @return string
      */
     public function getParams()
     {
@@ -483,6 +496,7 @@ class Payments extends \Kazist\Table\BaseTable
      * Set deductions
      *
      * @param string $deductions
+     *
      * @return Payments
      */
     public function setDeductions($deductions)
@@ -495,7 +509,7 @@ class Payments extends \Kazist\Table\BaseTable
     /**
      * Get deductions
      *
-     * @return string 
+     * @return string
      */
     public function getDeductions()
     {
@@ -506,6 +520,7 @@ class Payments extends \Kazist\Table\BaseTable
      * Set completed
      *
      * @param integer $completed
+     *
      * @return Payments
      */
     public function setCompleted($completed)
@@ -518,7 +533,7 @@ class Payments extends \Kazist\Table\BaseTable
     /**
      * Get completed
      *
-     * @return integer 
+     * @return integer
      */
     public function getCompleted()
     {
@@ -529,6 +544,7 @@ class Payments extends \Kazist\Table\BaseTable
      * Set successful
      *
      * @param integer $successful
+     *
      * @return Payments
      */
     public function setSuccessful($successful)
@@ -541,7 +557,7 @@ class Payments extends \Kazist\Table\BaseTable
     /**
      * Get successful
      *
-     * @return integer 
+     * @return integer
      */
     public function getSuccessful()
     {
@@ -549,9 +565,10 @@ class Payments extends \Kazist\Table\BaseTable
     }
 
     /**
-     * Set is_canceled
+     * Set isCanceled
      *
      * @param integer $isCanceled
+     *
      * @return Payments
      */
     public function setIsCanceled($isCanceled)
@@ -562,9 +579,9 @@ class Payments extends \Kazist\Table\BaseTable
     }
 
     /**
-     * Get is_canceled
+     * Get isCanceled
      *
-     * @return integer 
+     * @return integer
      */
     public function getIsCanceled()
     {
@@ -572,9 +589,9 @@ class Payments extends \Kazist\Table\BaseTable
     }
 
     /**
-     * Get created_by
+     * Get createdBy
      *
-     * @return integer 
+     * @return integer
      */
     public function getCreatedBy()
     {
@@ -582,9 +599,9 @@ class Payments extends \Kazist\Table\BaseTable
     }
 
     /**
-     * Get date_created
+     * Get dateCreated
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getDateCreated()
     {
@@ -592,9 +609,9 @@ class Payments extends \Kazist\Table\BaseTable
     }
 
     /**
-     * Get modified_by
+     * Get modifiedBy
      *
-     * @return integer 
+     * @return integer
      */
     public function getModifiedBy()
     {
@@ -602,9 +619,9 @@ class Payments extends \Kazist\Table\BaseTable
     }
 
     /**
-     * Get date_modified
+     * Get dateModified
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getDateModified()
     {
@@ -618,3 +635,4 @@ class Payments extends \Kazist\Table\BaseTable
         // Add your code here
     }
 }
+

@@ -66,5 +66,9 @@
     "PaymentsPaymentsItems": {
         "namespace": "Payments\\Payments\\Items",
         "controller": "ItemsController"
+    },
+    "PaymentsDeposits": {
+        "namespace": "Payments\\Deposits",
+        "controller": "DepositsController"
     }
 }

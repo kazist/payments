@@ -11,8 +11,8 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity
  * @ORM\HasLifecycleCallbacks
  */
-class Transactions extends \Kazist\Table\BaseTable {
-
+class Transactions extends \Kazist\Table\BaseTable
+{
     /**
      * @var integer
      *
@@ -65,16 +65,16 @@ class Transactions extends \Kazist\Table\BaseTable {
     protected $description;
 
     /**
-     * @var integer
+     * @var string
      *
-     * @ORM\Column(name="credit", type="integer", length=11, nullable=true)
+     * @ORM\Column(name="credit", type="decimal", precision=11, scale=2, nullable=true)
      */
     protected $credit;
 
     /**
-     * @var integer
+     * @var string
      *
-     * @ORM\Column(name="debit", type="integer", length=11, nullable=true)
+     * @ORM\Column(name="debit", type="decimal", precision=11, scale=2, nullable=true)
      */
     protected $debit;
 
@@ -148,75 +148,86 @@ class Transactions extends \Kazist\Table\BaseTable {
      */
     protected $date_modified;
 
+
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
-    public function getId() {
+    public function getId()
+    {
         return $this->id;
     }
 
     /**
-     * Set user_id
+     * Set userId
      *
      * @param integer $userId
+     *
      * @return Transactions
      */
-    public function setUserId($userId) {
+    public function setUserId($userId)
+    {
         $this->user_id = $userId;
 
         return $this;
     }
 
     /**
-     * Get user_id
+     * Get userId
      *
-     * @return integer 
+     * @return integer
      */
-    public function getUserId() {
+    public function getUserId()
+    {
         return $this->user_id;
     }
 
     /**
-     * Set item_id
+     * Set itemId
      *
      * @param integer $itemId
+     *
      * @return Transactions
      */
-    public function setItemId($itemId) {
+    public function setItemId($itemId)
+    {
         $this->item_id = $itemId;
 
         return $this;
     }
 
     /**
-     * Get item_id
+     * Get itemId
      *
-     * @return integer 
+     * @return integer
      */
-    public function getItemId() {
+    public function getItemId()
+    {
         return $this->item_id;
     }
 
     /**
-     * Set payment_id
+     * Set paymentId
      *
      * @param integer $paymentId
+     *
      * @return Transactions
      */
-    public function setPaymentId($paymentId) {
+    public function setPaymentId($paymentId)
+    {
         $this->payment_id = $paymentId;
 
         return $this;
     }
 
     /**
-     * Get payment_id
+     * Get paymentId
      *
-     * @return integer 
+     * @return integer
      */
-    public function getPaymentId() {
+    public function getPaymentId()
+    {
         return $this->payment_id;
     }
 
@@ -224,9 +235,11 @@ class Transactions extends \Kazist\Table\BaseTable {
      * Set source
      *
      * @param string $source
+     *
      * @return Transactions
      */
-    public function setSource($source) {
+    public function setSource($source)
+    {
         $this->source = $source;
 
         return $this;
@@ -235,30 +248,34 @@ class Transactions extends \Kazist\Table\BaseTable {
     /**
      * Get source
      *
-     * @return string 
+     * @return string
      */
-    public function getSource() {
+    public function getSource()
+    {
         return $this->source;
     }
 
     /**
-     * Set rate_id
+     * Set rateId
      *
      * @param integer $rateId
+     *
      * @return Transactions
      */
-    public function setRateId($rateId) {
+    public function setRateId($rateId)
+    {
         $this->rate_id = $rateId;
 
         return $this;
     }
 
     /**
-     * Get rate_id
+     * Get rateId
      *
-     * @return integer 
+     * @return integer
      */
-    public function getRateId() {
+    public function getRateId()
+    {
         return $this->rate_id;
     }
 
@@ -266,9 +283,11 @@ class Transactions extends \Kazist\Table\BaseTable {
      * Set description
      *
      * @param string $description
+     *
      * @return Transactions
      */
-    public function setDescription($description) {
+    public function setDescription($description)
+    {
         $this->description = $description;
 
         return $this;
@@ -277,19 +296,22 @@ class Transactions extends \Kazist\Table\BaseTable {
     /**
      * Get description
      *
-     * @return string 
+     * @return string
      */
-    public function getDescription() {
+    public function getDescription()
+    {
         return $this->description;
     }
 
     /**
      * Set credit
      *
-     * @param integer $credit
+     * @param string $credit
+     *
      * @return Transactions
      */
-    public function setCredit($credit) {
+    public function setCredit($credit)
+    {
         $this->credit = $credit;
 
         return $this;
@@ -298,19 +320,22 @@ class Transactions extends \Kazist\Table\BaseTable {
     /**
      * Get credit
      *
-     * @return integer 
+     * @return string
      */
-    public function getCredit() {
+    public function getCredit()
+    {
         return $this->credit;
     }
 
     /**
      * Set debit
      *
-     * @param integer $debit
+     * @param string $debit
+     *
      * @return Transactions
      */
-    public function setDebit($debit) {
+    public function setDebit($debit)
+    {
         $this->debit = $debit;
 
         return $this;
@@ -319,9 +344,10 @@ class Transactions extends \Kazist\Table\BaseTable {
     /**
      * Get debit
      *
-     * @return integer 
+     * @return string
      */
-    public function getDebit() {
+    public function getDebit()
+    {
         return $this->debit;
     }
 
@@ -329,9 +355,11 @@ class Transactions extends \Kazist\Table\BaseTable {
      * Set type
      *
      * @param string $type
+     *
      * @return Transactions
      */
-    public function setType($type) {
+    public function setType($type)
+    {
         $this->type = $type;
 
         return $this;
@@ -340,9 +368,10 @@ class Transactions extends \Kazist\Table\BaseTable {
     /**
      * Get type
      *
-     * @return string 
+     * @return string
      */
-    public function getType() {
+    public function getType()
+    {
         return $this->type;
     }
 
@@ -350,9 +379,11 @@ class Transactions extends \Kazist\Table\BaseTable {
      * Set level
      *
      * @param string $level
+     *
      * @return Transactions
      */
-    public function setLevel($level) {
+    public function setLevel($level)
+    {
         $this->level = $level;
 
         return $this;
@@ -361,51 +392,58 @@ class Transactions extends \Kazist\Table\BaseTable {
     /**
      * Get level
      *
-     * @return string 
+     * @return string
      */
-    public function getLevel() {
+    public function getLevel()
+    {
         return $this->level;
     }
 
     /**
-     * Set is_capped
+     * Set isCapped
      *
      * @param integer $isCapped
+     *
      * @return Transactions
      */
-    public function setIsCapped($isCapped) {
+    public function setIsCapped($isCapped)
+    {
         $this->is_capped = $isCapped;
 
         return $this;
     }
 
     /**
-     * Get is_capped
+     * Get isCapped
      *
-     * @return integer 
+     * @return integer
      */
-    public function getIsCapped() {
+    public function getIsCapped()
+    {
         return $this->is_capped;
     }
 
     /**
-     * Set behalf_user_id
+     * Set behalfUserId
      *
      * @param integer $behalfUserId
+     *
      * @return Transactions
      */
-    public function setBehalfUserId($behalfUserId) {
+    public function setBehalfUserId($behalfUserId)
+    {
         $this->behalf_user_id = $behalfUserId;
 
         return $this;
     }
 
     /**
-     * Get behalf_user_id
+     * Get behalfUserId
      *
-     * @return integer 
+     * @return integer
      */
-    public function getBehalfUserId() {
+    public function getBehalfUserId()
+    {
         return $this->behalf_user_id;
     }
 
@@ -413,9 +451,11 @@ class Transactions extends \Kazist\Table\BaseTable {
      * Set token
      *
      * @param string $token
+     *
      * @return Transactions
      */
-    public function setToken($token) {
+    public function setToken($token)
+    {
         $this->token = $token;
 
         return $this;
@@ -424,74 +464,82 @@ class Transactions extends \Kazist\Table\BaseTable {
     /**
      * Get token
      *
-     * @return string 
+     * @return string
      */
-    public function getToken() {
+    public function getToken()
+    {
         return $this->token;
     }
 
     /**
-     * Set is_processed
+     * Set isProcessed
      *
      * @param integer $isProcessed
+     *
      * @return Transactions
      */
-    public function setIsProcessed($isProcessed) {
+    public function setIsProcessed($isProcessed)
+    {
         $this->is_processed = $isProcessed;
 
         return $this;
     }
 
     /**
-     * Get is_processed
+     * Get isProcessed
      *
-     * @return integer 
+     * @return integer
      */
-    public function getIsProcessed() {
+    public function getIsProcessed()
+    {
         return $this->is_processed;
     }
 
     /**
-     * Get created_by
+     * Get createdBy
      *
-     * @return integer 
+     * @return integer
      */
-    public function getCreatedBy() {
+    public function getCreatedBy()
+    {
         return $this->created_by;
     }
 
     /**
-     * Get date_created
+     * Get dateCreated
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
-    public function getDateCreated() {
+    public function getDateCreated()
+    {
         return $this->date_created;
     }
 
     /**
-     * Get modified_by
+     * Get modifiedBy
      *
-     * @return integer 
+     * @return integer
      */
-    public function getModifiedBy() {
+    public function getModifiedBy()
+    {
         return $this->modified_by;
     }
 
     /**
-     * Get date_modified
+     * Get dateModified
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
-    public function getDateModified() {
+    public function getDateModified()
+    {
         return $this->date_modified;
     }
-
     /**
      * @ORM\PreUpdate
      */
-    public function onPreUpdate() {
+    public function onPreUpdate()
+    {
         // Add your code here
     }
-
 }
+

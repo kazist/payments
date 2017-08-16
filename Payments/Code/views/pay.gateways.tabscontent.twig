@@ -1,0 +1,42 @@
+{% if gateway.id == deposit_gateway.id or get_setting('payments_paying_methods') != 'wallets' or payment.payment_source == 'payments.deposits' %}
+
+{% if not key or (gateway.id == deposit_gateway.id and get_setting('payments_paying_methods') == 'wallets') %}
+    {% set class_active = 'active in' %}  
+{% else %}
+    {% set class_active = '' %}
+{% endif %}
+
+<div id="{{ gateway.short_name }}" class="tab-pane fade gateway-content {{ gateway.short_name }}-gateway-content {{ class_active }}">
+
+    <form class="form-horizontal" action="{{ generate_url('payments.payments.ajaxsavejson') }}" method="POST">
+
+        <input class="payment_url" type="hidden" name="payment_url" value="{{ include(template_from_string(gateway.url|default(' '))) }}">
+
+        {% set payment_form= payment_macro.form(gateway, payment, user, converter) %}
+        {% set payment_invoice= payment_macro.invoice(gateway, payment, converter) %}
+
+        {{ forms.input('_token' ) }} 
+
+        <div class="row">
+            <!-- accepted payments column -->
+            <div class="col-sm-7">
+                {% if gateway.payment_instruction != '' %}
+                    <div class="gateway-instruction">
+                        {{ include(template_from_string(gateway.payment_instruction)) }}
+                    </div>
+                {% endif %}
+            </div>
+            <!-- /.col -->
+            <div class="col-sm-5 hidden-xs">
+
+                {{ payment_invoice }}
+
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+
+    </form>
+</div>
+
+{% endif %}

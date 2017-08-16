@@ -7,35 +7,13 @@
     "path": "applications/Payments",
     "is_core": "1",
     "menulist": [{
-            "title": "Tokens",
-            "alias": "admin_payments_tokens",
-            "url": "admin/payments/tokens",
-            "icon": "fa fa-code",
-            "children": []
-        }, {
+           
             "title": "Transactions",
             "alias": "admin_payments_transactions",
             "url": "admin/payments/transactions",
             "icon": "fa fa-money",
             "children": []
-        }, {
-            "title": "Transfers",
-            "alias": "admin_payments_transfers",
-            "url": "admin/payments/transfers",
-            "icon": "fa fa-paper-plane",
-            "children": []
-        }, {
-            "title": "Withdraws",
-            "alias": "admin_payments_withdraws",
-            "url": "admin/payments/withdraws",
-            "icon": "fa fa-hand-o-down",
-            "children": []
-        }, {
-            "title": "Masspay",
-            "alias": "admin_payments_masspay",
-            "url": "admin/payments/masspay",
-            "icon": "fa fa-telegram",
-            "children": []
+      
         }, {
             "title": "Rates",
             "alias": "admin_payments_rates",

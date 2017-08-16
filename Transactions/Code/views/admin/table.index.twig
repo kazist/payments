@@ -12,8 +12,14 @@
                 <tr>
                     <th>Id</th>
                     <th align="left">Description</th>
-                    <th>Type</th>
-                    <th>Level</th>
+                    <th>
+                        Type
+                    </th>
+                    {% if get_setting('payments_use_transactions_levels') %}
+                        <th>
+                            Level
+                        </th>
+                    {% endif %}
                     <th>From</th>
                     <th>To</th>
                     <th>Date</th>
@@ -29,8 +35,14 @@
                         <tr >
                             <td>{{ item.id }}</td>
                             <td>{{ item.description }}</td>
-                            <td>{{ item.type }}</td>
-                            <td>{{ item.level }}</td>
+                            <td>
+                                {{ item.type }}
+                            </td>
+                            {% if get_setting('payments_use_transactions_levels') %}
+                                <td>
+                                    {{ item.level }}
+                                </td>
+                            {% endif %}
                             <td>{{ item.trans_name }} ({{ item.trans_username }})</td>
                             <td>{{ item.own_name }} ({{ item.own_username }})</td>
                             <td>{{ item.date_created ? item.date_created|date('d M Y H:i:s') }}</td>

@@ -44,31 +44,31 @@ class TransactionsModel extends BaseModel {
 
         $query = parent:: appendSearchQuery($query);
 
-        $query->leftJoin('ft', '#__users_users', 'ft_uu', 'ft_uu.id = ft.behalf_user_id');
-        $query->leftJoin('ft', '#__users_users', 'ft_own', 'ft_own.id = ft.user_id');
+        $query->leftJoin('pt', '#__users_users', 'pt_uu', 'pt_uu.id = pt.behalf_user_id');
+        $query->leftJoin('pt', '#__users_users', 'pt_own', 'pt_own.id = pt.user_id');
 
         if ($user_id) {
-            $query->andWhere('ft.user_id=:user_id');
+            $query->andWhere('pt.user_id=:user_id');
             $query->setParameter('user_id', $user_id);
         }
 
         if ($search['from']) {
-            $query->andWhere('ft.behalf_user_id=:behalf_user_id');
+            $query->andWhere('pt.behalf_user_id=:behalf_user_id');
             $query->setParameter('behalf_user_id', $this->getUserIdByUsername($search['from']));
         }
 
         if ($search['to']) {
-            $query->andWhere('ft.user_id=:user_id');
+            $query->andWhere('pt.user_id=:user_id');
             $query->setParameter('user_id', $this->getUserIdByUsername($search['to']));
         }
 
         if ($view_name == 'commission') {
-            $query->andWhere('ft.source=:source');
+            $query->andWhere('pt.source=:source');
             $query->setParameter('source', 'subscription');
         }
 
-        $query->addSelect('ft_uu.username AS trans_username, ft_uu.name AS trans_name, ft_uu.email AS trans_email');
-        $query->addSelect('ft_own.username AS own_username, ft_own.name AS own_name, ft_own.email AS own_email');
+        $query->addSelect('pt_uu.username AS trans_username, pt_uu.name AS trans_name, pt_uu.email AS trans_email');
+        $query->addSelect('pt_own.username AS own_username, pt_own.name AS own_name, pt_own.email AS own_email');
 
         return $query;
     }
@@ -94,7 +94,7 @@ class TransactionsModel extends BaseModel {
 
         $check_arr = array('item_id' => $id, 'source' => $type);
 
-        $records = $factory->getRecords('#__payments_transactions', 'ft', array('item_id=:item_id', 'source=:source'), $check_arr);
+        $records = $factory->getRecords('#__payments_transactions', 'pt', array('item_id=:item_id', 'source=:source'), $check_arr);
 
         if (!empty($records)) {
             foreach ($records as $record) {
@@ -162,11 +162,11 @@ class TransactionsModel extends BaseModel {
         $factory = new KazistFactory();
         $user = $factory->getUser();
 
-        $query = $this->getQueryBuilder('#__payments_transactions', 'ft');
-        $query->select('DISTINCT ft.type');
-        $query->andWhere('ft.user_id =' . (int) $user->id);
+        $query = $this->getQueryBuilder('#__payments_transactions', 'pt');
+        $query->select('DISTINCT pt.type');
+        $query->andWhere('pt.user_id =' . (int) $user->id);
         if ($view_name == 'commission') {
-            $query->andWhere('ft.source=:source');
+            $query->andWhere('pt.source=:source');
             $query->setParameter('source', 'subscription');
         }
 

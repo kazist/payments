@@ -32,9 +32,9 @@ class Sources extends \Kazist\Table\BaseTable
     /**
      * @var string
      *
-     * @ORM\Column(name="sources", type="string", length=255, nullable=false)
+     * @ORM\Column(name="source", type="string", length=255, nullable=false)
      */
-    protected $sources;
+    protected $source;
 
     /**
      * @var integer
@@ -107,27 +107,27 @@ class Sources extends \Kazist\Table\BaseTable
     }
 
     /**
-     * Set sources
+     * Set source
      *
-     * @param string $sources
+     * @param string $source
      *
      * @return Sources
      */
-    public function setSources($sources)
+    public function setSource($source)
     {
-        $this->sources = $sources;
+        $this->source = $source;
 
         return $this;
     }
 
     /**
-     * Get sources
+     * Get source
      *
      * @return string
      */
-    public function getSources()
+    public function getSource()
     {
-        return $this->sources;
+        return $this->source;
     }
 
     /**

@@ -100,14 +100,16 @@ class GatewaysModel extends BaseModel {
         if (!empty($allowed_in)) {
             foreach ($allowed_in as $country_id) {
 
-                $data_obj = new \stdClass();
-                $data_obj->country_id = $country_id;
-                $data_obj->gateway_id = $gateway_id;
+                if ($country_id && $gateway_id) {
+                    $data_obj = new \stdClass();
+                    $data_obj->country_id = $country_id;
+                    $data_obj->gateway_id = $gateway_id;
 
-                $where_arr = array('country_id=:country_id', 'gateway_id=:gateway_id');
-                $parameter_arr = (array) $data_obj;
+                    $where_arr = array('country_id=:country_id', 'gateway_id=:gateway_id');
+                    $parameter_arr = (array) $data_obj;
 
-                $existing_arr[] = $factory->saveRecord('#__payments_gateways_allowedin', $data_obj, $where_arr, $parameter_arr);
+                    $existing_arr[] = $factory->saveRecord('#__payments_gateways_allowedin', $data_obj, $where_arr, $parameter_arr);
+                }
             }
         }
 
@@ -140,14 +142,16 @@ class GatewaysModel extends BaseModel {
         if (!empty($disallowed_in)) {
             foreach ($disallowed_in as $country_id) {
 
-                $data_obj = new \stdClass();
-                $data_obj->country_id = $country_id;
-                $data_obj->gateway_id = $gateway_id;
+                if ($country_id && $gateway_id) {
+                    $data_obj = new \stdClass();
+                    $data_obj->country_id = $country_id;
+                    $data_obj->gateway_id = $gateway_id;
 
-                $where_arr = array('country_id=:country_id', 'gateway_id=:gateway_id');
-                $parameter_arr = (array) $data_obj;
+                    $where_arr = array('country_id=:country_id', 'gateway_id=:gateway_id');
+                    $parameter_arr = (array) $data_obj;
 
-                $existing_arr[] = $factory->saveRecord('#__payments_gateways_disallowedin', $data_obj, $where_arr, $parameter_arr);
+                    $existing_arr[] = $factory->saveRecord('#__payments_gateways_disallowedin', $data_obj, $where_arr, $parameter_arr);
+                }
             }
         }
 
@@ -179,14 +183,16 @@ class GatewaysModel extends BaseModel {
         if (!empty($payment_rates)) {
             foreach ($payment_rates as $payment_rate) {
 
-                $data_obj = new \stdClass();
-                $data_obj->gateway_id = $gateway_id;
-                $data_obj->rate_id = (string) $payment_rate;
+                if ($gateway_id) {
+                    $data_obj = new \stdClass();
+                    $data_obj->gateway_id = $gateway_id;
+                    $data_obj->rate_id = (string) $payment_rate;
 
-                $where_arr = array('rate_id=:rate_id', 'gateway_id=:gateway_id');
-                $parameter_arr = (array) $data_obj;
+                    $where_arr = array('rate_id=:rate_id', 'gateway_id=:gateway_id');
+                    $parameter_arr = (array) $data_obj;
 
-                $existing_arr[] = $factory->saveRecord('#__payments_gateways_paymentrates', $data_obj, $where_arr, $parameter_arr);
+                    $existing_arr[] = $factory->saveRecord('#__payments_gateways_paymentrates', $data_obj, $where_arr, $parameter_arr);
+                }
             }
         }
 
@@ -219,15 +225,16 @@ class GatewaysModel extends BaseModel {
 
         if (!empty($transfer_rates)) {
             foreach ($transfer_rates as $transfer_rate) {
+                if ($gateway_id) {
+                    $data_obj = new \stdClass();
+                    $data_obj->gateway_id = $gateway_id;
+                    $data_obj->rate_id = $transfer_rate;
 
-                $data_obj = new \stdClass();
-                $data_obj->gateway_id = $gateway_id;
-                $data_obj->rate_id = $transfer_rate;
+                    $where_arr = array('rate_id=:rate_id', 'gateway_id=:gateway_id');
+                    $parameter_arr = (array) $data_obj;
 
-                $where_arr = array('rate_id=:rate_id', 'gateway_id=:gateway_id');
-                $parameter_arr = (array) $data_obj;
-
-                $existing_arr[] = $factory->saveRecord('#__payments_gateways_transferrates', $data_obj, $where_arr, $parameter_arr);
+                    $existing_arr[] = $factory->saveRecord('#__payments_gateways_transferrates', $data_obj, $where_arr, $parameter_arr);
+                }
             }
         }
 
@@ -260,15 +267,16 @@ class GatewaysModel extends BaseModel {
 
         if (!empty($withdraw_rates)) {
             foreach ($withdraw_rates as $withdraw_rate) {
+                if ($gateway_id) {
+                    $data_obj = new \stdClass();
+                    $data_obj->gateway_id = $gateway_id;
+                    $data_obj->rate_id = $withdraw_rate;
 
-                $data_obj = new \stdClass();
-                $data_obj->gateway_id = $gateway_id;
-                $data_obj->rate_id = $withdraw_rate;
+                    $where_arr = array('rate_id=:rate_id', 'gateway_id=:gateway_id');
+                    $parameter_arr = (array) $data_obj;
 
-                $where_arr = array('rate_id=:rate_id', 'gateway_id=:gateway_id');
-                $parameter_arr = (array) $data_obj;
-
-                $existing_arr[] = $factory->saveRecord('#__payments_gateways_withdrawrates', $data_obj, $where_arr, $parameter_arr);
+                    $existing_arr[] = $factory->saveRecord('#__payments_gateways_withdrawrates', $data_obj, $where_arr, $parameter_arr);
+                }
             }
         }
 
