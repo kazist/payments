@@ -44,7 +44,7 @@
                 {% if items|length>0 %}
 
                     {% for item in items %}
-                        <tr >
+                        <tr>
                             <td>{{ item.gateway_id_short_name }}</td>
                             <td>{{ item.payment_id_code }}</td>
                             <td>{{ item.date_created ? item.date_created|date('d M Y H:i:s') }}</td>
