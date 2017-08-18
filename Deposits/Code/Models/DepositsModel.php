@@ -34,7 +34,7 @@ class DepositsModel extends BaseModel {
             $user_id = $user->id;
         }
 
-        $query->leftJoin('ssd', '#__payments_gateways', 'pg', 'pg.id=pp.gateway_id');
+        $query->leftJoin('pd', '#__payments_gateways', 'pg', 'pg.id=pp.gateway_id');
         $query->addSelect('pp.amount_required, pp.amount_paid, pp.receipt_no, pp.code');
         $query->addSelect('pg.short_name as gateway_id_short_name');
 
@@ -43,9 +43,9 @@ class DepositsModel extends BaseModel {
         }
 
         if ($user_id) {
-            $query->andwhere('ssd.user_id=' . (int) $user_id);
-            $query->andwhere('ssd.completed=1');
-            $query->andwhere('ssd.successful=1');
+            $query->andwhere('pd.user_id=' . (int) $user_id);
+            $query->andwhere('pd.completed=1');
+            $query->andwhere('pd.successful=1');
         }
 
         return $query;
@@ -91,11 +91,11 @@ class DepositsModel extends BaseModel {
         $data->user_id = $user_id;
         $data->amount = $form['amount'];
 
-        $record = $factory->getRecord('payments_deposits', 'ssd', array('ssd.user_id=:user_id', 'ssd.completed=0 OR ssd.completed IS NULL'), array('user_id' => $user_id));
+        $record = $factory->getRecord('payments_deposits', 'pd', array('pd.user_id=:user_id', 'pd.completed=0 OR pd.completed IS NULL'), array('user_id' => $user_id));
 
         if (empty($record)) {
             $factory->saveRecordByEntity('payments_deposits', $data);
-            $record = $factory->getRecord('payments_deposits', 'ssd', array('ssd.user_id=:user_id', 'ssd.completed=0 OR ssd.completed IS NULL'), array('user_id' => $user_id));
+            $record = $factory->getRecord('payments_deposits', 'pd', array('pd.user_id=:user_id', 'pd.completed=0 OR pd.completed IS NULL'), array('user_id' => $user_id));
         }
 
         return $record;

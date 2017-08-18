@@ -21,6 +21,16 @@ Payments\Deposits\Code\Tables\Deposits:
       type: integer
       length: 11
       nullable: true
+    completed:
+      name: completed
+      type: integer
+      length: 11
+      nullable: true
+    successful:
+      name: successful
+      type: integer
+      length: 11
+      nullable: true
     amount:
       name: amount
       type: integer

@@ -46,6 +46,20 @@ class Deposits extends \Kazist\Table\BaseTable
     /**
      * @var integer
      *
+     * @ORM\Column(name="completed", type="integer", length=11, nullable=true)
+     */
+    protected $completed;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="successful", type="integer", length=11, nullable=true)
+     */
+    protected $successful;
+
+    /**
+     * @var integer
+     *
      * @ORM\Column(name="amount", type="integer", length=11, nullable=true)
      */
     protected $amount;
@@ -159,6 +173,54 @@ class Deposits extends \Kazist\Table\BaseTable
     public function getPaymentId()
     {
         return $this->payment_id;
+    }
+
+    /**
+     * Set completed
+     *
+     * @param integer $completed
+     *
+     * @return Deposits
+     */
+    public function setCompleted($completed)
+    {
+        $this->completed = $completed;
+
+        return $this;
+    }
+
+    /**
+     * Get completed
+     *
+     * @return integer
+     */
+    public function getCompleted()
+    {
+        return $this->completed;
+    }
+
+    /**
+     * Set successful
+     *
+     * @param integer $successful
+     *
+     * @return Deposits
+     */
+    public function setSuccessful($successful)
+    {
+        $this->successful = $successful;
+
+        return $this;
+    }
+
+    /**
+     * Get successful
+     *
+     * @return integer
+     */
+    public function getSuccessful()
+    {
+        return $this->successful;
     }
 
     /**
