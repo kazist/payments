@@ -91,14 +91,20 @@ class PaymentsModel extends BaseModel {
         return $user->id;
     }
 
-    public function getUser() {
+    public function getUser($user_id) {
 
         $factory = new KazistFactory();
-        $user = $factory->getUser();
+
+        if ($user_id) {
+            $user = $factory->getRecord('#__users_users', 'uu', array('uu.id=:id'), array('id' => $user_id));
+        } else {
+            $user = $factory->getUser();
+        }
 
         $user->money_in = $this->getUserMoney($user->id, 'credit');
         $user->money_out = $this->getUserMoney($user->id, 'debit');
         $user->total = $user->money_in - $user->money_out;
+
 
         return $user;
     }
@@ -409,7 +415,7 @@ class PaymentsModel extends BaseModel {
         $query = new Query();
         $query->select('pr.*');
         $query->from('#__payments_rates', 'pr');
-        $query->leftJoin('fr', '#__payments_gateways_transferrates', 'pgt', 'fr.id = pgt.rate_id');
+        $query->leftJoin('pr', '#__payments_gateways_transferrates', 'pgt', 'pr.id = pgt.rate_id');
         $query->where('pgt.gateway_id=:gateway_id');
         $query->setParameter('gateway_id', $gateway_id);
         if ($country_id) {

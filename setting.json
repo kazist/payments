@@ -1,0 +1,79 @@
+{
+    "title": "Payments",
+    "alias": "payments",
+    "groups": [{
+            "title": "Payments Settings",
+            "settings": [{
+                    "name": "payments_paying_methods",
+                    "label": "Payment Procedure",
+                    "default": "direct",
+                    "tooltip": "Set the system payment process for all purchased items <b>eg Direct or Wallet </b>",
+                    "type": "select",
+                    "source": {
+                        "custom": [{
+                                "value": "both",
+                                "text": "Pay for Items Wallets/Directly"
+                            }, {
+                                "value": "direct",
+                                "text": "Pay for Items Directly."
+                            }, {
+                                "value": "wallets",
+                                "text": "Pay for Items Wallets."
+                            }]
+                    }
+                }, {
+                    "name": "payments_page_show_invoice_info",
+                    "label": "Show Invoice on payment",
+                    "default": "1",
+                    "tooltip": "Show Invoice on payment <b>eg address from, address to, invoice id etc</b>",
+                    "type": "yesno"
+                }, {
+                    "name": "payments_use_transactions_levels",
+                    "label": "Use Levels on Trasactions",
+                    "default": "0",
+                    "tooltip": "Enable Levels to Payment Transactions ",
+                    "type": "yesno"
+                }, {
+                    "name": "payments_gateway_default_gateway",
+                    "label": "Default Gateway",
+                    "default": "",
+                    "tooltip": "Set default Gateway for performing payments <b>Preferably Wallet</b> ",
+                    "type": "select",
+                    "source": {
+                        "custom": [{
+                                "value": "1",
+                                "text": "Default Gateway"
+                            }],
+                        "table": {
+                            "name": "#__payments_gateways",
+                            "order": ["long_name ASC"],
+                            "value": "id",
+                            "text": "long_name"
+                        }
+                    }
+                }, {
+                    "name": "payments_gateway_deposit_gateway",
+                    "label": "Deposit Gateway",
+                    "default": "",
+                    "type": "select",
+                    "source": {
+                        "custom": [{
+                                "value": "1",
+                                "text": "Deposit Gateway"
+                            }],
+                        "table": {
+                            "name": "#__payments_gateways",
+                            "order": ["long_name ASC"],
+                            "value": "id",
+                            "text": "long_name"
+                        }
+                    }
+                }, {
+                    "name": "payments_deposits_minimum_amount",
+                    "label": "Minimum Amount",
+                    "default": "10",
+                    "tooltip": "Set the minimum deposit amount that is allowed on the system",
+                    "type": "text"
+                }]
+        }]
+}
