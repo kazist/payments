@@ -11,18 +11,5 @@
         "year": "*",
         "next_run_time": "",
         "published": 1
-    }, {
-        "tracking_id": "2",
-        "controller": "Payments\\Masspay\\Code\\Controllers\\MasspayController",
-        "function": "generatemasspayAction",
-        "unique_name": "payments.masspay.generatemasspay",
-        "minute": "59",
-        "hour": "23",
-        "day_of_month": "*",
-        "month": "*",
-        "day_of_week": "0,7",
-        "year": "*",
-        "next_run_time": "",
-        "published": 1
     }]
 

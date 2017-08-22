@@ -41,7 +41,7 @@ class RatesController extends BaseController {
         $this->model = new RatesModel();
         $this->model->generateRatesFile();
 
-        return $this->redirectToRoute('admin.payments.transactions');
+        return $this->json($data);
     }
 
 }
