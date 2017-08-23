@@ -6,16 +6,60 @@ Payments\Invoices\Code\Tables\Invoices:
       type: integer
       generator: { strategy: AUTO }
   fields:
-    title:
-      name: title
-      type: string
-      length: 255
-      nullable: false
     invoice_no:
       name: invoice_no
       type: string
       length: 255
       nullable: false
+    gateway_id:
+      name: gateway_id
+      type: integer
+      length: 11
+      nullable: true
+    user_id:
+      name: user_id
+      type: integer
+      length: 11
+      nullable: false
+    item_id:
+      name: item_id
+      type: integer
+      length: 11
+      nullable: true
+    payment_source:
+      name: payment_source
+      type: string
+      length: 255
+      nullable: true
+    description:
+      name: description
+      type: text
+      nullable: true
+    amount:
+      name: amount
+      type: string
+      length: 255
+      nullable: true
+    quantity:
+      name: quantity
+      type: string
+      length: 255
+      nullable: true
+    completed:
+      name: completed
+      type: integer
+      length: 11
+      nullable: true
+    successful:
+      name: successful
+      type: integer
+      length: 11
+      nullable: true
+    is_canceled:
+      name: is_canceled
+      type: integer
+      length: 11
+      nullable: true
     expiry_date:
       name: expiry_date
       type: datetime
@@ -38,6 +82,11 @@ Payments\Invoices\Code\Tables\Invoices:
       name: date_modified
       type: datetime
       nullable: true
+  indexes:
+    gateway_id_index:
+      columns: [gateway_id]
+    user_id_index:
+      columns: [user_id]
   lifecycleCallbacks:
     prePersist:
       - onPrePersist

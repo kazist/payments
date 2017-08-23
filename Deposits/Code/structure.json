@@ -271,7 +271,7 @@
             "nullable": "1",
             "name": "amount",
             "html_type": "text",
-            "mysql_type": "int",
+            "mysql_type": "decimal",
             "view_side": "",
             "index": "",
             "id_name": "",

@@ -58,9 +58,9 @@ class Deposits extends \Kazist\Table\BaseTable
     protected $successful;
 
     /**
-     * @var integer
+     * @var string
      *
-     * @ORM\Column(name="amount", type="integer", length=11, nullable=true)
+     * @ORM\Column(name="amount", type="decimal", precision=11, scale=2, nullable=true)
      */
     protected $amount;
 
@@ -226,7 +226,7 @@ class Deposits extends \Kazist\Table\BaseTable
     /**
      * Set amount
      *
-     * @param integer $amount
+     * @param string $amount
      *
      * @return Deposits
      */
@@ -240,7 +240,7 @@ class Deposits extends \Kazist\Table\BaseTable
     /**
      * Get amount
      *
-     * @return integer
+     * @return string
      */
     public function getAmount()
     {

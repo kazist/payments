@@ -1,0 +1,8 @@
+[{
+        "tracking_id": "1",
+        "class": "Payments\\Deposits\\Code\\Listeners\\PaymentListener",
+        "title": "Deposits Event Listener",
+        "ordering": "2",
+        "description": "Listen For Payments Events"
+    }]
+

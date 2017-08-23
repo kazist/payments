@@ -46,13 +46,10 @@
                     {% for item in items %}
                         <tr>
                             <td>{{ item.gateway_id_short_name }}</td>
-                            <td>{{ item.payment_id_code }}</td>
+                            <td>{{ item.code }}</td>
                             <td>{{ item.date_created ? item.date_created|date('d M Y H:i:s') }}</td>
                             <td align="center">
                                 {{ item.amount|number_format(2) }}<br>
-                                <small>Required Amt: {{ item.amount_required|number_format(2) }} </small><br>
-                                <small>Paid Amt: {{ item.amount_paid|number_format(2) }} </small><br>
-
                             </td>
                         </tr>
                     {% endfor %}

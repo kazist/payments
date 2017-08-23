@@ -54,7 +54,7 @@ class PaymentsModel extends BaseModel {
 
         $query = parent:: appendSearchQuery($query);
 
-        if (!$ingore_search_query) {
+        if (!$this->ingore_search_query) {
             if (WEB_IS_ADMIN) {
 
                 $user_id = $this->request->query->get('user_id');

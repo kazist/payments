@@ -43,9 +43,11 @@
                 "general": [],
                 "source": {
                     "data_source": "db_table",
-                    "join_field": "null",
-                    "display_field": [],
-                    "join_table_name": ""
+                    "join_field": "id",
+                    "display_field": [
+                        "invoice_no"
+                    ],
+                    "join_table_name": "payments_invoices"
                 },
                 "save": {
                     "view_side": "both",
@@ -134,14 +136,18 @@
             }
         },
         {
+            "dropdown_filter": "0",
+            "nullable": "0",
             "name": "user_id",
             "html_type": "autocomplete",
             "mysql_type": "int",
             "view_side": "",
             "index": "",
+            "id_name": "",
+            "class_name": "",
+            "default_value": "",
             "size": "",
             "readonly": "0",
-            "default_value": "",
             "format_value": "",
             "parameters": {
                 "general": [],
@@ -343,7 +349,6 @@
     "foreignkey": "",
     "renamedfields": "",
     "main_fields": [
-        "invoice_id",
         "payment_source"
     ],
     "main_view": "table",
@@ -363,6 +368,7 @@
         "select": [
             "pii.id",
             "pii.invoice_id",
+            "pi.invoice_no AS invoice_id_invoice_no",
             "pii.payment_source",
             "pii.description",
             "pii.item_id",
@@ -378,10 +384,10 @@
         ],
         "leftjoin": [
             {
-                "table": "\\Code\\Tables\\",
-                "alias": "",
-                "name": "#__",
-                "on": "pii.invoice_id = .null"
+                "table": "Payments\\Invoices\\Code\\Tables\\Invoices",
+                "alias": "pi",
+                "name": "#__payments_invoices",
+                "on": "pii.invoice_id = pi.id"
             },
             {
                 "table": "Users\\Users\\Code\\Tables\\Users",

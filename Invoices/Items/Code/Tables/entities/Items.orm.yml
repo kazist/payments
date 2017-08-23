@@ -30,6 +30,7 @@ Payments\Invoices\Items\Code\Tables\Items:
       name: user_id
       type: integer
       length: 11
+      nullable: false
     quantity:
       name: quantity
       type: integer

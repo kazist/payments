@@ -32,9 +32,10 @@ Payments\Deposits\Code\Tables\Deposits:
       length: 11
       nullable: true
     amount:
+      scale: 2
+      precision: 11
       name: amount
-      type: integer
-      length: 11
+      type: decimal
       nullable: true
     created_by:
       name: created_by

@@ -6,7 +6,7 @@
 {{ set_assets('applications/Hosting/assets/js/domain-wizard.js') }}
 
 {% set user = document.user %}
-{% set description = 'Deposit money to you account. \n On ' ~ 'now'|date('d/m/Y H:i:s') %}
+{% set description = 'Deposit money to you account.' %}
 
 <h1 class="component-header">
     Deposit Money
@@ -32,7 +32,6 @@
             <div>
                 <div class="col-sm-6">
                     {{ forms.input('amount', 'text', item.title, 'Amount') }}
-                    {{ forms.input('description', 'textarea', description, 'Description') }}
                 </div>
 
                 <div class="clearfix"></div>

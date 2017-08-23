@@ -36,12 +36,18 @@ class PaymentListener implements EventSubscriberInterface {
         $this->container = $sc;
 
         $payment = $event->getPayment();
-        $subset = $event->getSubset();
+        $paymentModel = new PaymentModel();
 
-        if ($subset->path == 'payments/deposits') {
-
-            $paymentModel = new PaymentModel();
-            $paymentModel->paymentSuccessful($payment);
+        if (!empty($payment->items)) {
+            foreach ($payment->items as $item) {
+                if ($item->payment_source == 'payments.deposits') {
+                    $paymentModel->paymentSuccessful($item);
+                }
+            }
+        } else {
+            if ($payment->payment_source == 'payments.deposits') {
+                $paymentModel->paymentSuccessful($payment);
+            }
         }
     }
 
@@ -50,12 +56,18 @@ class PaymentListener implements EventSubscriberInterface {
         $this->container = $sc;
 
         $payment = $event->getPayment();
-        $subset = $event->getSubset();
+        $paymentModel = new PaymentModel();
 
-        if ($subset->path == 'payments/deposits') {
-
-            $paymentModel = new PaymentModel();
-            $paymentModel->paymentSuccessful($payment);
+        if (!empty($payment->items)) {
+            foreach ($payment->items as $item) {
+                if ($item->payment_source == 'payments.deposits') {
+                    $paymentModel->paymentSuccessful($item);
+                }
+            }
+        } else {
+            if ($payment->payment_source == 'payments.deposits') {
+                $paymentModel->paymentSuccessful($payment);
+            }
         }
     }
 
@@ -64,12 +76,18 @@ class PaymentListener implements EventSubscriberInterface {
         $this->container = $sc;
 
         $payment = $event->getPayment();
-        $subset = $event->getSubset();
+        $paymentModel = new PaymentModel();
 
-        if ($subset->path == 'payments/deposits') {
-
-            $paymentModel = new PaymentModel();
-            $paymentModel->paymentFail($payment);
+        if (!empty($payment->items)) {
+            foreach ($payment->items as $item) {
+                if ($item->payment_source == 'payments.deposits') {
+                    $paymentModel->paymentFail($item);
+                }
+            }
+        } else {
+            if ($payment->payment_source == 'payments.deposits') {
+                $paymentModel->paymentFail($payment);
+            }
         }
     }
 
@@ -78,12 +96,18 @@ class PaymentListener implements EventSubscriberInterface {
         $this->container = $sc;
 
         $payment = $event->getPayment();
-        $subset = $event->getSubset();
+        $paymentModel = new PaymentModel();
 
-        if ($subset->path == 'payments/deposits') {
-
-            $paymentModel = new PaymentModel();
-            $paymentModel->paymentFail($payment);
+        if (!empty($payment->items)) {
+            foreach ($payment->items as $item) {
+                if ($item->payment_source == 'payments.deposits') {
+                    $paymentModel->paymentFail($item);
+                }
+            }
+        } else {
+            if ($payment->payment_source == 'payments.deposits') {
+                $paymentModel->paymentFail($payment);
+            }
         }
     }
 
@@ -97,11 +121,18 @@ class PaymentListener implements EventSubscriberInterface {
         $this->container = $sc;
 
         $payment = $event->getPayment();
-        $subset = $event->getSubset();
+        $paymentModel = new PaymentModel();
 
-        if ($subset->path == 'payments/deposits') {
-            $paymentModel = new PaymentModel();
-            $paymentModel->paymentComplete($payment);
+        if (!empty($payment->items)) {
+            foreach ($payment->items as $item) {
+                if ($item->payment_source == 'payments.deposits') {
+                    $paymentModel->paymentComplete($item);
+                }
+            }
+        } else {
+            if ($payment->payment_source == 'payments.deposits') {
+                $paymentModel->paymentComplete($payment);
+            }
         }
     }
 
@@ -111,12 +142,18 @@ class PaymentListener implements EventSubscriberInterface {
         $this->container = $sc;
 
         $payment = $event->getPayment();
-        $subset = $event->getSubset();
+        $paymentModel = new PaymentModel();
 
-        if ($subset->path == 'payments/deposits') {
-
-            $paymentModel = new PaymentModel();
-            $paymentModel->paymentCancel($payment);
+        if (!empty($payment->items)) {
+            foreach ($payment->items as $item) {
+                if ($item->payment_source == 'payments.deposits') {
+                    $paymentModel->paymentCancel($item);
+                }
+            }
+        } else {
+            if ($payment->payment_source == 'payments.deposits') {
+                $paymentModel->paymentCancel($payment);
+            }
         }
     }
 

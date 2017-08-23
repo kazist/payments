@@ -53,7 +53,7 @@ class Items extends \Kazist\Table\BaseTable
     /**
      * @var integer
      *
-     * @ORM\Column(name="user_id", type="integer", length=11)
+     * @ORM\Column(name="user_id", type="integer", length=11, nullable=false)
      */
     protected $user_id;
 

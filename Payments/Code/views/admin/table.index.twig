@@ -13,8 +13,8 @@
                     <th>Transaction Code</th>
                     <th>Receipt No</th>
                     <th> Method</th>
-                    <th>Status</th>
                     <th>Cancelled</th>
+                    <th>Status</th>
                     <th>Amount</th>
                     <th>Date</th>
                 </tr>
@@ -65,7 +65,7 @@
                                     <label class="label label-default">Failed</label>
                                 {% endif %} 
                             </td>
-                            <td align="right">{{ item.amount ? item.amount|number_format(2) }}</td>
+                            <td align="right">{{ item.amount_paid ? item.amount_paid|number_format(2) }}</td>
                             <td>{{ item.date_created ? item.date_created|date('d M Y H:i:s') }}</td>
                         </tr>
                     {% endfor %}

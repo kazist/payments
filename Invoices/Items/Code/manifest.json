@@ -3,11 +3,11 @@
     "title": "Invoices Items",
     "explanation": "  Invoices Items",
     "description": "  Invoices Items",
-    "version": 8,
+    "version": 9,
     "has_view": "0",
     "tie_field": "0",
     "email_on_new": "0",
     "email_on_edit": "0",
     "email_on_delete": "0",
-    "date_file_modified": "2017-08-15 21:37:40"
+    "date_file_modified": "2017-08-23 07:48:16"
 }

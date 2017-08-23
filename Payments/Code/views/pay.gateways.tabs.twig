@@ -1,27 +1,31 @@
 {% if gateway.id == deposit_gateway.id or get_setting('payments_paying_methods') != 'wallets' or payment.payment_source == 'payments.deposits' %}
 
 {% if not key or (gateway.id == deposit_gateway.id and get_setting('payments_paying_methods') == 'wallets') %}
-    {% set class_active = 'active' %}  
+{% set class_active = 'active' %}  
 {% else %}
     {% set class_active = '' %}
-{% endif %}
-    
-<li class="{{ class_active }}">
+    {% endif %}
 
-    <a class="payment-gateway-link" href="#{{ gateway.short_name }}" data-toggle="tab" aria-expanded="false" title="{{ gateway.long_name }}" gateway="{{ gateway.short_name }}">
-        <label>
-            <input class="payment-gateway-radio" type="checkbox" name="gateway" gateway="{{ gateway.short_name }}" {% if not key %}checked="checked"{% endif %}>
+        {% if payment.payment_source == 'payments.deposits' and  gateway.short_name == 'wallet'  %}
 
-            {% if gateway.image %}
-                <img src="{{ resized_image(gateway.image_file, null, 25, 'fit') }}">
-            {% else %}
-                {{ gateway.long_name }}
-            {% endif %}
-            {% if gateway.short_name == 'wallet' %}
-                (${{ user.total }})
-            {% endif %}
-        </label>
-    </a>
-</li>
+        {% else %} 
+            <li class="{{ class_active }}">
 
-{% endif %}
+                <a class="payment-gateway-link" href="#{{ gateway.short_name }}" data-toggle="tab" aria-expanded="false" title="{{ gateway.long_name }}" gateway="{{ gateway.short_name }}">
+                    <label>
+                        <input class="payment-gateway-radio" type="checkbox" name="gateway" gateway="{{ gateway.short_name }}" {% if not key %}checked="checked"{% endif %}>
+
+                        {% if gateway.image %}
+                            <img src="{{ resized_image(gateway.image_file, null, 25, 'fit') }}">
+                        {% else %}
+                            {{ gateway.long_name }}
+                        {% endif %}
+                        {% if gateway.short_name == 'wallet' %}
+                            (${{ user.total }})
+                        {% endif %}
+                    </label>
+                </a>
+            </li>
+
+        {% endif %}
+        {% endif %}
