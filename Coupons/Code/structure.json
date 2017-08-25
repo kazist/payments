@@ -17,12 +17,22 @@
                                             "user_right": null,
                                             "hide_on_new": null,
                                             "fields": [
-                                                "coupon",
-                                                "used",
-                                                "date_used",
-                                                "used_by",
-                                                "amount",
-                                                "used_once"
+                                                "code",
+                                                "value",
+                                                "description"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "group": {
+                                            "name": "Date Range to Start & End",
+                                            "unique_name": "date_range_to_start_&_end",
+                                            "has_title": 1,
+                                            "user_right": 0,
+                                            "hide_on_new": 0,
+                                            "fields": [
+                                                "start_date",
+                                                "end_date"
                                             ]
                                         }
                                     }
@@ -34,11 +44,38 @@
                                 "items": [
                                     {
                                         "group": {
+                                            "name": "Publishing Detail",
+                                            "unique_name": "publishing_detail",
+                                            "has_title": 1,
+                                            "user_right": 0,
+                                            "hide_on_new": 0,
+                                            "fields": [
+                                                "is_percent",
+                                                "published",
+                                                "applied"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "group": {
+                                            "name": "Amount Start & End Range",
+                                            "unique_name": "amount_start_&_end_range",
+                                            "has_title": 1,
+                                            "user_right": 0,
+                                            "hide_on_new": 0,
+                                            "fields": [
+                                                "start_amount",
+                                                "end_amount"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "group": {
                                             "name": "Modification Detail",
                                             "unique_name": "modification_detail",
                                             "has_title": 1,
-                                            "user_right": 1,
-                                            "hide_on_new": 1,
+                                            "user_right": 0,
+                                            "hide_on_new": 0,
                                             "fields": [
                                                 "date_modified",
                                                 "modified_by",
@@ -59,38 +96,35 @@
         },
         "table": {
             "fields": [
-                "coupon",
-                "used",
-                "date_used",
-                "used_by",
-                "amount",
-                "used_once"
+                "code",
+                "value",
+                "start_date",
+                "end_date",
+                "applied",
+                "is_percent",
+                "published"
             ],
             "has_label": [
-                "coupon",
-                "used",
-                "date_used",
-                "used_by",
-                "amount",
-                "used_once"
+                "code",
+                "value",
+                "start_date",
+                "end_date",
+                "applied",
+                "is_percent",
+                "published"
             ]
         }
     },
     "rights": {
-        "tab": [
-        ],
-        "group": [
-            "modification_detail"
-        ],
-        "field": [
-        ]
+        "tab": [],
+        "group": [],
+        "field": []
     },
-    "customhtmls": [
-    ],
+    "customhtmls": [],
     "fields": [
         {
             "dropdown_filter": "0",
-            "nullable": "0",
+            "nullable": "1",
             "name": "id",
             "html_type": "text",
             "mysql_type": "int",
@@ -103,23 +137,72 @@
             "readonly": "",
             "format_value": "",
             "parameters": {
-                "general": [
-                ],
-                "source": [
-                ],
+                "general": [],
+                "source": [],
                 "save": {
                     "index": ""
                 },
-                "media": [
-                ],
-                "payment": [
-                ]
+                "media": [],
+                "payment": []
+            }
+        },
+        {
+            "dropdown_filter": "0",
+            "nullable": "0",
+            "name": "code",
+            "html_type": "text",
+            "mysql_type": "varchar",
+            "view_side": "",
+            "index": "",
+            "id_name": "",
+            "class_name": "",
+            "default_value": "",
+            "size": "",
+            "readonly": "0",
+            "format_value": "",
+            "parameters": {
+                "general": [],
+                "source": [],
+                "save": {
+                    "view_side": "both",
+                    "index": ""
+                },
+                "media": [],
+                "payment": []
+            }
+        },
+        {
+            "dropdown_filter": "0",
+            "nullable": "1",
+            "name": "description",
+            "html_type": "textarea",
+            "mysql_type": "varchar",
+            "view_side": "",
+            "index": "",
+            "id_name": "",
+            "class_name": "",
+            "default_value": "",
+            "size": "",
+            "readonly": "0",
+            "format_value": "",
+            "parameters": {
+                "general": {
+                    "col": "",
+                    "row": ""
+                },
+                "source": [],
+                "save": {
+                    "view_side": "both",
+                    "index": ""
+                },
+                "media": [],
+                "payment": []
             }
         },
         {
             "dropdown_filter": "1",
-            "nullable": "0",
-            "name": "coupon",
+            "nullable": "1",
+            "name": "value",
             "html_type": "text",
             "mysql_type": "varchar",
             "view_side": "both",
@@ -131,113 +214,19 @@
             "readonly": "0",
             "format_value": "",
             "parameters": {
-                "general": [
-                ],
-                "source": [
-                ],
+                "general": [],
+                "source": [],
                 "save": {
                     "index": ""
                 },
-                "media": [
-                ],
-                "payment": [
-                ]
+                "media": [],
+                "payment": []
             }
         },
         {
-            "dropdown_filter": "1",
-            "nullable": "0",
-            "name": "used",
-            "html_type": "yesno",
-            "mysql_type": "int",
-            "view_side": "both",
-            "index": "",
-            "id_name": "",
-            "class_name": "",
-            "default_value": "",
-            "size": "",
-            "readonly": "0",
-            "format_value": "",
-            "parameters": {
-                "general": [
-                ],
-                "source": [
-                ],
-                "save": {
-                    "index": ""
-                },
-                "media": [
-                ],
-                "payment": [
-                ]
-            }
-        },
-        {
-            "dropdown_filter": "1",
-            "nullable": "0",
-            "name": "date_used",
-            "html_type": "datetime",
-            "mysql_type": "datetime",
-            "view_side": "both",
-            "index": "",
-            "id_name": "",
-            "class_name": "",
-            "default_value": "",
-            "size": "",
-            "readonly": "0",
-            "format_value": "",
-            "parameters": {
-                "general": [
-                ],
-                "source": [
-                ],
-                "save": {
-                    "index": ""
-                },
-                "media": [
-                ],
-                "payment": [
-                ]
-            }
-        },
-        {
-            "dropdown_filter": "1",
-            "nullable": "0",
-            "name": "used_by",
-            "html_type": "autocomplete",
-            "mysql_type": "int",
-            "view_side": "both",
-            "index": "",
-            "id_name": "",
-            "class_name": "",
-            "default_value": "",
-            "size": "",
-            "readonly": "0",
-            "format_value": "",
-            "parameters": {
-                "general": [
-                ],
-                "source": {
-                    "data_source": "db_table",
-                    "join_field": "id",
-                    "display_field": [
-                        "name"
-                    ],
-                    "join_table_name": "users_users"
-                },
-                "save": {
-                    "index": ""
-                },
-                "media": [
-                ],
-                "payment": [
-                ]
-            }
-        },
-        {
-            "dropdown_filter": "1",
-            "nullable": "0",
-            "name": "amount",
+            "dropdown_filter": "0",
+            "nullable": "1",
+            "name": "start_amount",
             "html_type": "text",
             "mysql_type": "int",
             "view_side": "both",
@@ -249,24 +238,20 @@
             "readonly": "0",
             "format_value": "",
             "parameters": {
-                "general": [
-                ],
-                "source": [
-                ],
+                "general": [],
+                "source": [],
                 "save": {
                     "index": ""
                 },
-                "media": [
-                ],
-                "payment": [
-                ]
+                "media": [],
+                "payment": []
             }
         },
         {
-            "dropdown_filter": "1",
-            "nullable": "0",
-            "name": "used_once",
-            "html_type": "yesno",
+            "dropdown_filter": "0",
+            "nullable": "1",
+            "name": "end_amount",
+            "html_type": "text",
             "mysql_type": "int",
             "view_side": "both",
             "index": "",
@@ -277,22 +262,159 @@
             "readonly": "0",
             "format_value": "",
             "parameters": {
-                "general": [
-                ],
-                "source": [
-                ],
+                "general": [],
+                "source": [],
                 "save": {
                     "index": ""
                 },
-                "media": [
-                ],
-                "payment": [
-                ]
+                "media": [],
+                "payment": []
             }
         },
         {
             "dropdown_filter": "0",
-            "nullable": "0",
+            "nullable": "1",
+            "name": "start_date",
+            "html_type": "datetime",
+            "mysql_type": "datetime",
+            "view_side": "",
+            "index": "",
+            "id_name": "",
+            "class_name": "",
+            "default_value": "",
+            "size": "",
+            "readonly": "0",
+            "format_value": "",
+            "parameters": {
+                "general": [],
+                "source": [],
+                "save": {
+                    "view_side": "both",
+                    "index": ""
+                },
+                "media": [],
+                "payment": []
+            }
+        },
+        {
+            "dropdown_filter": "0",
+            "nullable": "1",
+            "name": "end_date",
+            "html_type": "datetime",
+            "mysql_type": "datetime",
+            "view_side": "",
+            "index": "",
+            "id_name": "",
+            "class_name": "",
+            "default_value": "",
+            "size": "",
+            "readonly": "0",
+            "format_value": "",
+            "parameters": {
+                "general": [],
+                "source": [],
+                "save": {
+                    "view_side": "both",
+                    "index": ""
+                },
+                "media": [],
+                "payment": []
+            }
+        },
+        {
+            "dropdown_filter": "0",
+            "nullable": "1",
+            "name": "applied",
+            "html_type": "radio",
+            "mysql_type": "varchar",
+            "view_side": "",
+            "index": "",
+            "id_name": "",
+            "class_name": "",
+            "default_value": "",
+            "size": "",
+            "readonly": "0",
+            "format_value": "",
+            "parameters": {
+                "general": [],
+                "source": {
+                    "customs": [
+                        {
+                            "value": "all_new",
+                            "text": "All New"
+                        },
+                        {
+                            "value": "all_payment",
+                            "text": "All Payments"
+                        },
+                        {
+                            "value": "when_provide",
+                            "text": "When Provide"
+                        }
+                    ],
+                    "data_source": "custom"
+                },
+                "save": {
+                    "view_side": "both",
+                    "index": ""
+                },
+                "media": [],
+                "payment": []
+            }
+        },
+        {
+            "dropdown_filter": "0",
+            "nullable": "1",
+            "name": "is_percent",
+            "html_type": "yesno",
+            "mysql_type": "int",
+            "view_side": "",
+            "index": "",
+            "id_name": "",
+            "class_name": "",
+            "default_value": "",
+            "size": "",
+            "readonly": "0",
+            "format_value": "",
+            "parameters": {
+                "general": [],
+                "source": [],
+                "save": {
+                    "view_side": "both",
+                    "index": ""
+                },
+                "media": [],
+                "payment": []
+            }
+        },
+        {
+            "dropdown_filter": "0",
+            "nullable": "1",
+            "name": "published",
+            "html_type": "yesno",
+            "mysql_type": "int",
+            "view_side": "",
+            "index": "",
+            "id_name": "",
+            "class_name": "",
+            "default_value": "",
+            "size": "",
+            "readonly": "0",
+            "format_value": "",
+            "parameters": {
+                "general": [],
+                "source": [],
+                "save": {
+                    "view_side": "both",
+                    "index": ""
+                },
+                "media": [],
+                "payment": []
+            }
+        },
+        {
+            "dropdown_filter": "0",
+            "nullable": "1",
             "name": "created_by",
             "html_type": "autocomplete",
             "mysql_type": "int",
@@ -305,8 +427,7 @@
             "readonly": "0",
             "format_value": "",
             "parameters": {
-                "general": [
-                ],
+                "general": [],
                 "source": {
                     "data_source": "db_table",
                     "join_field": "id",
@@ -318,15 +439,13 @@
                 "save": {
                     "index": ""
                 },
-                "media": [
-                ],
-                "payment": [
-                ]
+                "media": [],
+                "payment": []
             }
         },
         {
             "dropdown_filter": "0",
-            "nullable": "0",
+            "nullable": "1",
             "name": "date_created",
             "html_type": "text",
             "mysql_type": "datetime",
@@ -339,22 +458,18 @@
             "readonly": "",
             "format_value": "",
             "parameters": {
-                "general": [
-                ],
-                "source": [
-                ],
+                "general": [],
+                "source": [],
                 "save": {
                     "index": ""
                 },
-                "media": [
-                ],
-                "payment": [
-                ]
+                "media": [],
+                "payment": []
             }
         },
         {
             "dropdown_filter": "0",
-            "nullable": "0",
+            "nullable": "1",
             "name": "modified_by",
             "html_type": "autocomplete",
             "mysql_type": "int",
@@ -367,8 +482,7 @@
             "readonly": "0",
             "format_value": "",
             "parameters": {
-                "general": [
-                ],
+                "general": [],
                 "source": {
                     "data_source": "db_table",
                     "join_field": "id",
@@ -380,15 +494,13 @@
                 "save": {
                     "index": ""
                 },
-                "media": [
-                ],
-                "payment": [
-                ]
+                "media": [],
+                "payment": []
             }
         },
         {
             "dropdown_filter": "0",
-            "nullable": "0",
+            "nullable": "1",
             "name": "date_modified",
             "html_type": "text",
             "mysql_type": "datetime",
@@ -401,17 +513,13 @@
             "readonly": "",
             "format_value": "",
             "parameters": {
-                "general": [
-                ],
-                "source": [
-                ],
+                "general": [],
+                "source": [],
                 "save": {
                     "index": ""
                 },
-                "media": [
-                ],
-                "payment": [
-                ]
+                "media": [],
+                "payment": []
             }
         }
     ],
@@ -421,7 +529,7 @@
     "foreignkey": "",
     "renamedfields": "",
     "main_fields": [
-        "coupon"
+        "code"
     ],
     "main_view": "table",
     "has_view": "1",
@@ -439,18 +547,21 @@
         },
         "select": [
             "pc.id",
-            "pc.coupon",
-            "pc.used",
-            "pc.date_used",
-            "pc.used_by",
-            "uu.name AS used_by_name",
-            "pc.amount",
-            "pc.used_once",
+            "pc.code",
+            "pc.description",
+            "pc.value",
+            "pc.start_amount",
+            "pc.end_amount",
+            "pc.start_date",
+            "pc.end_date",
+            "pc.applied",
+            "pc.is_percent",
+            "pc.published",
             "pc.created_by",
-            "uu_2821.name AS created_by_name",
+            "uu.name AS created_by_name",
             "pc.date_created",
             "pc.modified_by",
-            "uu_1222.name AS modified_by_name",
+            "uu_3742.name AS modified_by_name",
             "pc.date_modified"
         ],
         "leftjoin": [
@@ -458,19 +569,13 @@
                 "table": "Users\\Users\\Code\\Tables\\Users",
                 "alias": "uu",
                 "name": "#__users_users",
-                "on": "pc.used_by = uu.id"
+                "on": "pc.created_by = uu.id"
             },
             {
                 "table": "Users\\Users\\Code\\Tables\\Users",
-                "alias": "uu_2821",
+                "alias": "uu_3742",
                 "name": "#__users_users",
-                "on": "pc.created_by = uu_2821.id"
-            },
-            {
-                "table": "Users\\Users\\Code\\Tables\\Users",
-                "alias": "uu_1222",
-                "name": "#__users_users",
-                "on": "pc.modified_by = uu_1222.id"
+                "on": "pc.modified_by = uu_3742.id"
             }
         ]
     }

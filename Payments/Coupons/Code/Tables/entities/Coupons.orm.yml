@@ -1,0 +1,62 @@
+Payments\Payments\Coupons\Code\Tables\Coupons:
+  table: payments_payments_coupons
+  type: entity
+  id:
+    id:
+      type: integer
+      generator: { strategy: AUTO }
+  fields:
+    payment_id:
+      name: payment_id
+      type: integer
+      length: 11
+      nullable: false
+    item_id:
+      name: item_id
+      type: integer
+      length: 11
+      nullable: false
+    description:
+      name: description
+      type: text
+      nullable: true
+    amount:
+      scale: 2
+      precision: 11
+      name: amount
+      type: decimal
+      nullable: true
+    created_by:
+      name: created_by
+      type: integer
+      length: 11
+      nullable: false
+    date_created:
+      name: date_created
+      type: datetime
+      nullable: false
+    modified_by:
+      name: modified_by
+      type: integer
+      length: 11
+      nullable: false
+    date_modified:
+      name: date_modified
+      type: datetime
+      nullable: false
+    coupon_id:
+      name: coupon_id
+      type: integer
+      length: 11
+  indexes:
+    payment_id_index:
+      columns: [payment_id]
+    coupon_id_index:
+      columns: [coupon_id]
+  lifecycleCallbacks:
+    prePersist:
+      - onPrePersist
+      - onPrePersistCallbacks
+    preUpdate:
+      - onPreUpdate
+      - onPreUpdateCallbacks

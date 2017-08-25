@@ -76,7 +76,8 @@
                 ]
             },
             "ommitted": [
-                "id"
+                "id",
+                "is_new"
             ]
         },
         "table": {
@@ -571,8 +572,33 @@
             }
         },
         {
+            "dropdown_filter": "0",
+            "nullable": "1",
+            "name": "is_new",
+            "html_type": "yesno",
+            "mysql_type": "int",
+            "view_side": "",
+            "index": "",
+            "id_name": "",
+            "class_name": "",
+            "default_value": "",
+            "size": "",
+            "readonly": "0",
+            "format_value": "",
+            "parameters": {
+                "general": [],
+                "source": [],
+                "save": {
+                    "view_side": "both",
+                    "index": ""
+                },
+                "media": [],
+                "payment": []
+            }
+        },
+        {
             "dropdown_filter": "1",
-            "nullable": "0",
+            "nullable": "1",
             "name": "created_by",
             "html_type": "autocomplete",
             "mysql_type": "int",
@@ -603,7 +629,7 @@
         },
         {
             "dropdown_filter": "1",
-            "nullable": "0",
+            "nullable": "1",
             "name": "date_created",
             "html_type": "text",
             "mysql_type": "datetime",
@@ -627,7 +653,7 @@
         },
         {
             "dropdown_filter": "0",
-            "nullable": "0",
+            "nullable": "1",
             "name": "modified_by",
             "html_type": "autocomplete",
             "mysql_type": "int",
@@ -658,7 +684,7 @@
         },
         {
             "dropdown_filter": "0",
-            "nullable": "0",
+            "nullable": "1",
             "name": "date_modified",
             "html_type": "text",
             "mysql_type": "datetime",
@@ -687,6 +713,7 @@
     "foreignkey": "",
     "renamedfields": "",
     "main_fields": [
+        "receipt_no",
         "code"
     ],
     "main_view": "table",
@@ -725,11 +752,12 @@
             "pp.completed",
             "pp.successful",
             "pp.is_canceled",
+            "pp.is_new",
             "pp.created_by",
-            "uu_389.name AS created_by_name",
+            "uu_4745.name AS created_by_name",
             "pp.date_created",
             "pp.modified_by",
-            "uu_9740.name AS modified_by_name",
+            "uu_9794.name AS modified_by_name",
             "pp.date_modified"
         ],
         "leftjoin": [
@@ -747,15 +775,15 @@
             },
             {
                 "table": "Users\\Users\\Code\\Tables\\Users",
-                "alias": "uu_389",
+                "alias": "uu_4745",
                 "name": "#__users_users",
-                "on": "pp.created_by = uu_389.id"
+                "on": "pp.created_by = uu_4745.id"
             },
             {
                 "table": "Users\\Users\\Code\\Tables\\Users",
-                "alias": "uu_9740",
+                "alias": "uu_9794",
                 "name": "#__users_users",
-                "on": "pp.modified_by = uu_9740.id"
+                "on": "pp.modified_by = uu_9794.id"
             }
         ]
     }

@@ -80,7 +80,18 @@
                         </tr>
                     {% endif %}
 
-
+                    {% if payment.coupons|length>0 %}
+                        <tr>
+                            <th colspan="4"> Discount </th>
+                        </tr>
+                        <tr>
+                            {% for coupon in payment.coupons %}
+                                <td>&nbsp;</td>
+                                <td>{{ coupon.description }}</td>
+                                <td>-${{ (coupon.amount * converter.buying|default(1))|number_format(2) }}</td>
+                            </tr>
+                        {% endfor %}
+                    {% endif %}
                 </tbody>
             </table>
         </div>

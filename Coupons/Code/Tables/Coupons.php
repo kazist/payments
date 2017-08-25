@@ -7,12 +7,12 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Coupons
  *
- * @ORM\Table(name="payments_coupons", indexes={@ORM\Index(name="used_by_index", columns={"used_by"}), @ORM\Index(name="created_by_index", columns={"created_by"}), @ORM\Index(name="modified_by_index", columns={"modified_by"})})
+ * @ORM\Table(name="payments_coupons", indexes={@ORM\Index(name="created_by_index", columns={"created_by"}), @ORM\Index(name="modified_by_index", columns={"modified_by"})})
  * @ORM\Entity
  * @ORM\HasLifecycleCallbacks
  */
-class Coupons extends \Kazist\Table\BaseTable {
-
+class Coupons extends \Kazist\Table\BaseTable
+{
     /**
      * @var integer
      *
@@ -25,242 +25,397 @@ class Coupons extends \Kazist\Table\BaseTable {
     /**
      * @var string
      *
-     * @ORM\Column(name="coupon", type="string", length=255, nullable=false)
+     * @ORM\Column(name="code", type="string", length=255, nullable=false)
      */
-    protected $coupon;
+    protected $code;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="description", type="string", length=255, nullable=true)
+     */
+    protected $description;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="value", type="string", length=255, nullable=true)
+     */
+    protected $value;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="used", type="integer", length=11, nullable=false)
+     * @ORM\Column(name="start_amount", type="integer", length=11, nullable=true)
      */
-    protected $used;
+    protected $start_amount;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="end_amount", type="integer", length=11, nullable=true)
+     */
+    protected $end_amount;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date_used", type="datetime", nullable=false)
+     * @ORM\Column(name="start_date", type="datetime", nullable=true)
      */
-    protected $date_used;
+    protected $start_date;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="end_date", type="datetime", nullable=true)
+     */
+    protected $end_date;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="applied", type="string", length=255, nullable=true)
+     */
+    protected $applied;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="used_by", type="integer", length=11, nullable=false)
+     * @ORM\Column(name="is_percent", type="integer", length=11, nullable=true)
      */
-    protected $used_by;
+    protected $is_percent;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="amount", type="integer", length=11, nullable=false)
+     * @ORM\Column(name="published", type="integer", length=11, nullable=true)
      */
-    protected $amount;
+    protected $published;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="used_once", type="integer", length=11, nullable=false)
-     */
-    protected $used_once;
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="created_by", type="integer", length=11, nullable=false)
+     * @ORM\Column(name="created_by", type="integer", length=11, nullable=true)
      */
     protected $created_by;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date_created", type="datetime", nullable=false)
+     * @ORM\Column(name="date_created", type="datetime", nullable=true)
      */
     protected $date_created;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="modified_by", type="integer", length=11, nullable=false)
+     * @ORM\Column(name="modified_by", type="integer", length=11, nullable=true)
      */
     protected $modified_by;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date_modified", type="datetime", nullable=false)
+     * @ORM\Column(name="date_modified", type="datetime", nullable=true)
      */
     protected $date_modified;
+
 
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
-    public function getId() {
+    public function getId()
+    {
         return $this->id;
     }
 
     /**
-     * Set coupon
+     * Set code
      *
-     * @param string $coupon
+     * @param string $code
+     *
      * @return Coupons
      */
-    public function setCoupon($coupon) {
-        $this->coupon = $coupon;
+    public function setCode($code)
+    {
+        $this->code = $code;
 
         return $this;
     }
 
     /**
-     * Get coupon
+     * Get code
      *
-     * @return string 
+     * @return string
      */
-    public function getCoupon() {
-        return $this->coupon;
+    public function getCode()
+    {
+        return $this->code;
     }
 
     /**
-     * Set used
+     * Set description
      *
-     * @param integer $used
+     * @param string $description
+     *
      * @return Coupons
      */
-    public function setUsed($used) {
-        $this->used = $used;
+    public function setDescription($description)
+    {
+        $this->description = $description;
 
         return $this;
     }
 
     /**
-     * Get used
+     * Get description
      *
-     * @return integer 
+     * @return string
      */
-    public function getUsed() {
-        return $this->used;
+    public function getDescription()
+    {
+        return $this->description;
     }
 
     /**
-     * Set date_used
+     * Set value
      *
-     * @param \DateTime $dateUsed
+     * @param string $value
+     *
      * @return Coupons
      */
-    public function setDateUsed($dateUsed) {
-        $this->date_used = $dateUsed;
+    public function setValue($value)
+    {
+        $this->value = $value;
 
         return $this;
     }
 
     /**
-     * Get date_used
+     * Get value
      *
-     * @return \DateTime 
+     * @return string
      */
-    public function getDateUsed() {
-        return $this->date_used;
+    public function getValue()
+    {
+        return $this->value;
     }
 
     /**
-     * Set used_by
+     * Set startAmount
      *
-     * @param integer $usedBy
+     * @param integer $startAmount
+     *
      * @return Coupons
      */
-    public function setUsedBy($usedBy) {
-        $this->used_by = $usedBy;
+    public function setStartAmount($startAmount)
+    {
+        $this->start_amount = $startAmount;
 
         return $this;
     }
 
     /**
-     * Get used_by
+     * Get startAmount
      *
-     * @return integer 
+     * @return integer
      */
-    public function getUsedBy() {
-        return $this->used_by;
+    public function getStartAmount()
+    {
+        return $this->start_amount;
     }
 
     /**
-     * Set amount
+     * Set endAmount
      *
-     * @param integer $amount
+     * @param integer $endAmount
+     *
      * @return Coupons
      */
-    public function setAmount($amount) {
-        $this->amount = $amount;
+    public function setEndAmount($endAmount)
+    {
+        $this->end_amount = $endAmount;
 
         return $this;
     }
 
     /**
-     * Get amount
+     * Get endAmount
      *
-     * @return integer 
+     * @return integer
      */
-    public function getAmount() {
-        return $this->amount;
+    public function getEndAmount()
+    {
+        return $this->end_amount;
     }
 
     /**
-     * Set used_once
+     * Set startDate
      *
-     * @param integer $usedOnce
+     * @param \DateTime $startDate
+     *
      * @return Coupons
      */
-    public function setUsedOnce($usedOnce) {
-        $this->used_once = $usedOnce;
+    public function setStartDate($startDate)
+    {
+        $this->start_date = $startDate;
 
         return $this;
     }
 
     /**
-     * Get used_once
+     * Get startDate
      *
-     * @return integer 
+     * @return \DateTime
      */
-    public function getUsedOnce() {
-        return $this->used_once;
+    public function getStartDate()
+    {
+        return $this->start_date;
     }
 
     /**
-     * Get created_by
+     * Set endDate
      *
-     * @return integer 
+     * @param \DateTime $endDate
+     *
+     * @return Coupons
      */
-    public function getCreatedBy() {
+    public function setEndDate($endDate)
+    {
+        $this->end_date = $endDate;
+
+        return $this;
+    }
+
+    /**
+     * Get endDate
+     *
+     * @return \DateTime
+     */
+    public function getEndDate()
+    {
+        return $this->end_date;
+    }
+
+    /**
+     * Set applied
+     *
+     * @param string $applied
+     *
+     * @return Coupons
+     */
+    public function setApplied($applied)
+    {
+        $this->applied = $applied;
+
+        return $this;
+    }
+
+    /**
+     * Get applied
+     *
+     * @return string
+     */
+    public function getApplied()
+    {
+        return $this->applied;
+    }
+
+    /**
+     * Set isPercent
+     *
+     * @param integer $isPercent
+     *
+     * @return Coupons
+     */
+    public function setIsPercent($isPercent)
+    {
+        $this->is_percent = $isPercent;
+
+        return $this;
+    }
+
+    /**
+     * Get isPercent
+     *
+     * @return integer
+     */
+    public function getIsPercent()
+    {
+        return $this->is_percent;
+    }
+
+    /**
+     * Set published
+     *
+     * @param integer $published
+     *
+     * @return Coupons
+     */
+    public function setPublished($published)
+    {
+        $this->published = $published;
+
+        return $this;
+    }
+
+    /**
+     * Get published
+     *
+     * @return integer
+     */
+    public function getPublished()
+    {
+        return $this->published;
+    }
+
+    /**
+     * Get createdBy
+     *
+     * @return integer
+     */
+    public function getCreatedBy()
+    {
         return $this->created_by;
     }
 
     /**
-     * Get date_created
+     * Get dateCreated
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
-    public function getDateCreated() {
+    public function getDateCreated()
+    {
         return $this->date_created;
     }
 
     /**
-     * Get modified_by
+     * Get modifiedBy
      *
-     * @return integer 
+     * @return integer
      */
-    public function getModifiedBy() {
+    public function getModifiedBy()
+    {
         return $this->modified_by;
     }
 
     /**
-     * Get date_modified
+     * Get dateModified
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
-    public function getDateModified() {
+    public function getDateModified()
+    {
         return $this->date_modified;
     }
-
+    /**
+     * @ORM\PreUpdate
+     */
+    public function onPreUpdate()
+    {
+        // Add your code here
+    }
 }
+

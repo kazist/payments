@@ -266,6 +266,10 @@ class PaymentsModel extends BaseModel {
         $factory = new KazistFactory();
         $factory->loggingMessage('Amt=' . $payment->amount . ',  Payment=' . $payment_id . '  Gateway ' . $gateway_id);
 
+        foreach ($payment->coupons as $coupon) {
+            $payment->amount = $payment->amount - $coupon->amount;
+        }
+
         $gateway_rates = $this->getPaymentGatewayInvoiceRates($payment->amount, $gateway_id, 'payment');
 
         return $gateway_rates;
@@ -610,6 +614,52 @@ class PaymentsModel extends BaseModel {
         return $record;
     }
 
+    public function addPaymentCoupons($payment_id) {
+
+        $where_arr = array();
+
+        $factory = new KazistFactory();
+
+        $payment = $factory->getRecord('#__payments_payments', 'pp', array('pp.id=' . (int) $payment_id));
+
+        $query = $factory->getQueryBuilder('#__payments_coupons', 'pc');
+        $query->andWhere('pc.start_date < :current_date AND pc.end_date > :current_date');
+        $query->setParameter('current_date', date('Y-m-d H:i:s'));
+
+        $where_arr[] = 'pc.applied = \'all_payment\'';
+        if ($payment->is_new) {
+            $where_arr[] = 'pc.applied = \'all_new\'';
+        }
+
+        $query->andWhere(implode(' OR ', $where_arr));
+        $coupons = $query->loadObjectList();
+
+        if (!empty($coupons)) {
+            foreach ($coupons as $key => $coupon) {
+
+                $start_amount = (int) $coupon > start_amount;
+                $end_amount = (int) $coupon > end_amount;
+                $paid_amount = $coupon > amount;
+
+                if ($paid_amount < $start_amount || $paid_amount > $end_amount) {
+                    continue;
+                }
+                $amount = (!$coupon->is_percent) ? $coupon->value : $payment->amount * $coupon->value;
+
+
+                $data = new \stdClass();
+                $data->payment_id = $payment->id;
+                $data->coupon_id = $coupon->id;
+                $exist = clone $data;
+                $data->item_id = $payment->item_id;
+                $data->description = $coupon->description;
+                $data->amount = $amount;
+
+                $factory->saveRecord('#__payments_payments_coupons', $data, array('payment_id=:payment_id', 'coupon_id=:coupon_id'), $exist);
+            }
+        }
+    }
+
     public function addPaymentItems($payment_id) {
 
         $factory = new KazistFactory();
@@ -623,12 +673,14 @@ class PaymentsModel extends BaseModel {
 
             foreach ($this->items as $key => $item) {
 
-                $total_amount += $item['unit_price'];
-                $description .= $item['description'] . ' | ';
+                if ($item['item_id']) {
+                    $total_amount += $item['unit_price'];
+                    $description .= $item['description'] . ' | ';
 
-                $item['payment_id'] = $payment_id;
+                    $item['payment_id'] = $payment_id;
 
-                $factory->saveRecord('#__payments_payments_items', $item);
+                    $factory->saveRecord('#__payments_payments_items', $item);
+                }
             }
 
             $payment_data = new \stdClass();
@@ -661,6 +713,7 @@ class PaymentsModel extends BaseModel {
         $record = $query->loadObject();
 
         $record->items = $factory->getRecords('#__payments_payments_items', 'ppi', array('ppi.payment_id=:payment_id'), array('payment_id' => $record->id));
+        $record->coupons = $factory->getRecords('#__payments_payments_coupons', 'ppi', array('ppi.payment_id=:payment_id'), array('payment_id' => $record->id));
 
         return $record;
     }
@@ -715,6 +768,10 @@ class PaymentsModel extends BaseModel {
             $data_obj->subset_id = ($this->pay_subset_id) ? $this->pay_subset_id : $this->request->query->get('pay_subset_id', '1');
         }
 
+        if ($this->is_new || $this->request->query->get('is_new')) {
+            $data_obj->is_new = ($this->is_new) ? $this->is_new : $this->request->query->get('is_new');
+        }
+
         if ($this->gateway_id || $this->request->query->get('gateway_id')) {
             $data_obj->gateway_id = ($this->gateway_id) ? $this->gateway_id : $this->request->query->get('gateway_id');
         }
@@ -752,6 +809,7 @@ class PaymentsModel extends BaseModel {
         $id = $factory->saveRecord('#__payments_payments', $data_obj);
 
         $this->addPaymentItems($id);
+        $this->addPaymentCoupons($id);
 
         return $id;
     }

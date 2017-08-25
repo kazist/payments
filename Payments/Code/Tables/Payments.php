@@ -144,28 +144,35 @@ class Payments extends \Kazist\Table\BaseTable
     /**
      * @var integer
      *
-     * @ORM\Column(name="created_by", type="integer", length=11, nullable=false)
+     * @ORM\Column(name="is_new", type="integer", length=11, nullable=true)
+     */
+    protected $is_new;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="created_by", type="integer", length=11, nullable=true)
      */
     protected $created_by;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date_created", type="datetime", nullable=false)
+     * @ORM\Column(name="date_created", type="datetime", nullable=true)
      */
     protected $date_created;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="modified_by", type="integer", length=11, nullable=false)
+     * @ORM\Column(name="modified_by", type="integer", length=11, nullable=true)
      */
     protected $modified_by;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date_modified", type="datetime", nullable=false)
+     * @ORM\Column(name="date_modified", type="datetime", nullable=true)
      */
     protected $date_modified;
 
@@ -586,6 +593,30 @@ class Payments extends \Kazist\Table\BaseTable
     public function getIsCanceled()
     {
         return $this->is_canceled;
+    }
+
+    /**
+     * Set isNew
+     *
+     * @param integer $isNew
+     *
+     * @return Payments
+     */
+    public function setIsNew($isNew)
+    {
+        $this->is_new = $isNew;
+
+        return $this;
+    }
+
+    /**
+     * Get isNew
+     *
+     * @return integer
+     */
+    public function getIsNew()
+    {
+        return $this->is_new;
     }
 
     /**
