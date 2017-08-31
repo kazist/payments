@@ -4,6 +4,9 @@
     <h1 class="component-header"> Transactions </h1>
 {% endif %}
 
+
+{% import "form.macro.twig" as forms %}
+
 <form id="{{ main_form_id }}" action="{{ generate_url('admin.payments.transactions', {'user_id':user_id}) }}" method="post" >
 
     <div class="table-responsive">

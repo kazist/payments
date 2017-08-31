@@ -63,8 +63,8 @@ class TransactionsModel extends BaseModel {
         }
 
         if ($view_name == 'commission') {
-            $query->andWhere('pt.source=:source');
-            $query->setParameter('source', 'subscription');
+            $query->andWhere('pt.payment_source=:payment_source');
+            $query->setParameter('payment_source', 'affiliates.affiliates');
         }
 
         $query->addSelect('pt_uu.username AS trans_username, pt_uu.name AS trans_name, pt_uu.email AS trans_email');
@@ -166,8 +166,8 @@ class TransactionsModel extends BaseModel {
         $query->select('DISTINCT pt.type');
         $query->andWhere('pt.user_id =' . (int) $user->id);
         if ($view_name == 'commission') {
-            $query->andWhere('pt.source=:source');
-            $query->setParameter('source', 'subscription');
+            $query->andWhere('pt.payment_source=:payment_source');
+            $query->setParameter('payment_source', 'affiliates.affiliates');
         }
 
         $types = $query->loadObjectList();

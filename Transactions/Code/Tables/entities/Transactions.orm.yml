@@ -21,8 +21,8 @@ Payments\Transactions\Code\Tables\Transactions:
       type: integer
       length: 11
       nullable: true
-    source:
-      name: source
+    payment_source:
+      name: payment_source
       type: string
       length: 255
       nullable: true

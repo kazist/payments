@@ -82,7 +82,7 @@
             "ommitted": [
                 "id",
                 "item_id",
-                "source",
+                "payment_source",
                 "token",
                 "is_processed"
             ]
@@ -230,7 +230,7 @@
         {
             "dropdown_filter": "0",
             "nullable": "1",
-            "name": "source",
+            "name": "payment_source",
             "html_type": "text",
             "mysql_type": "varchar",
             "view_side": "both",
@@ -651,7 +651,7 @@
             "pt.item_id",
             "pt.payment_id",
             "pp.code AS payment_id_code",
-            "pt.source",
+            "pt.payment_source",
             "pt.rate_id",
             "pr.title AS rate_id_title",
             "pt.description",

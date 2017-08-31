@@ -70,12 +70,13 @@ class DepositsModel extends BaseModel {
                 'gateway_id' => $default_gateway,
                 'pay_subset_id' => $document->subset_id,
                 'item_id' => $deposit->id,
+                'type' => 'deposit',
                 'amount' => $form['amount'],
                 'description' => 'Partial Payments.'
             ));
         } else {
             $factory->enqueueMessage('Amount is not set.', 'error');
-            $redirect = $this->generateUrl('payments.deposit');
+            $redirect = $this->generateUrl('payments.deposits');
         }
 
         return $redirect;

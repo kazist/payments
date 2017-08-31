@@ -13,11 +13,12 @@
                                         "group": {
                                             "name": "Wallets Detail",
                                             "unique_name": "wallets_detail",
-                                            "has_title": null,
-                                            "user_right": null,
-                                            "hide_on_new": null,
+                                            "has_title": 1,
+                                            "user_right": 0,
+                                            "hide_on_new": 0,
                                             "fields": [
                                                 "title",
+                                                "payment_source",
                                                 "description"
                                             ]
                                         }
@@ -157,6 +158,38 @@
                     "row": ""
                 },
                 "source": [],
+                "save": {
+                    "view_side": "both",
+                    "index": ""
+                },
+                "media": [],
+                "payment": []
+            }
+        },
+        {
+            "dropdown_filter": "0",
+            "nullable": "0",
+            "name": "payment_source",
+            "html_type": "select",
+            "mysql_type": "varchar",
+            "view_side": "",
+            "index": "",
+            "id_name": "",
+            "class_name": "",
+            "default_value": "",
+            "size": "",
+            "readonly": "0",
+            "format_value": "",
+            "parameters": {
+                "general": [],
+                "source": {
+                    "data_source": "db_table",
+                    "join_field": "source",
+                    "display_field": [
+                        "source"
+                    ],
+                    "join_table_name": "payments_sources"
+                },
                 "save": {
                     "view_side": "both",
                     "index": ""
@@ -317,11 +350,21 @@
             "pw.id",
             "pw.title",
             "pw.description",
+            "pw.payment_source",
+            "ps.source AS payment_source_source",
             "pw.published",
             "pw.created_by",
             "pw.date_created",
             "pw.modified_by",
             "pw.date_modified"
+        ],
+        "leftjoin": [
+            {
+                "table": "Payments\\Sources\\Code\\Tables\\Sources",
+                "alias": "ps",
+                "name": "#__payments_sources",
+                "on": "pw.payment_source = ps.source"
+            }
         ]
     }
 }
