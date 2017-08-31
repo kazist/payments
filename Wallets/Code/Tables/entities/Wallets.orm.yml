@@ -15,6 +15,11 @@ Payments\Wallets\Code\Tables\Wallets:
       name: description
       type: text
       nullable: true
+    payment_source:
+      name: payment_source
+      type: string
+      length: 255
+      nullable: false
     published:
       name: published
       type: integer
@@ -38,6 +43,9 @@ Payments\Wallets\Code\Tables\Wallets:
       name: date_modified
       type: datetime
       nullable: true
+  indexes:
+    payment_source_index:
+      columns: [payment_source]
   lifecycleCallbacks:
     prePersist:
       - onPrePersist

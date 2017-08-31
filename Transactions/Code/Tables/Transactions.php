@@ -46,9 +46,9 @@ class Transactions extends \Kazist\Table\BaseTable
     /**
      * @var string
      *
-     * @ORM\Column(name="source", type="string", length=255, nullable=true)
+     * @ORM\Column(name="payment_source", type="string", length=255, nullable=true)
      */
-    protected $source;
+    protected $payment_source;
 
     /**
      * @var integer
@@ -232,27 +232,27 @@ class Transactions extends \Kazist\Table\BaseTable
     }
 
     /**
-     * Set source
+     * Set payment_source
      *
-     * @param string $source
+     * @param string $payment_source
      *
      * @return Transactions
      */
-    public function setSource($source)
+    public function setPaymentSource($payment_source)
     {
-        $this->source = $source;
+        $this->payment_source = $payment_source;
 
         return $this;
     }
 
     /**
-     * Get source
+     * Get payment_source
      *
      * @return string
      */
-    public function getSource()
+    public function getPaymentSource()
     {
-        return $this->source;
+        return $this->payment_source;
     }
 
     /**

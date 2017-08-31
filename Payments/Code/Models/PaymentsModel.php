@@ -105,7 +105,23 @@ class PaymentsModel extends BaseModel {
         $user->money_out = $this->getUserMoney($user->id, 'debit');
         $user->total = $user->money_in - $user->money_out;
 
+        $wallets = $factory->getRecords('#__payments_wallets', 'pw', array('pw.published=1'));
 
+        foreach ($wallets as $key => $wallet) {
+
+            $query = $factory->getQueryBuilder('#__payments_transactions', 'pt');
+            $query->select('COUNT(*) as amount');
+            $query->andWhere('pt.payment_source=:payment_source');
+            $query->setParameter('payment_source', $wallet->payment_source);
+            $query->andWhere('pt.user_id=:user_id');
+            $query->setParameter('user_id', $user->id);
+            $wallets_amount = $query->loadObject();
+ 
+            $wallets[$key]->amount = $wallets_amount->amount;
+        }
+
+        $user->wallets = $wallets;
+        
         return $user;
     }
 
@@ -966,10 +982,10 @@ class PaymentsModel extends BaseModel {
         $data_obj->behalf_user_id = $payment->user_id;
         $data_obj->item_id = $payment->item_id;
         $data_obj->payment_id = $payment->id;
-        $data_obj->description = 'Deposit for; ' . $payment->description;
+        $data_obj->description = $payment->description . ' [Txn:' . $payment->id . ']';
         $data_obj->credit = $paid_amount;
         $data_obj->type = 'payment';
-        $data_obj->source = 'payment';
+        $data_obj->payment_source = $payment->payment_source;
 
         $factory->saveRecord('#__payments_transactions', $data_obj);
 
@@ -995,7 +1011,7 @@ class PaymentsModel extends BaseModel {
                 $data_obj->description = $rate['title'] . ' [Txn:' . $payment->id . ']';
                 $data_obj->debit = $rate['amount'];
                 $data_obj->type = 'other-payment-charges';
-                $data_obj->source = 'payment';
+                $data_obj->payment_source = $payment->payment_source;
 
                 $factory->saveRecord('#__payments_transactions', $data_obj);
             }

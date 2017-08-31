@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Wallets
  *
- * @ORM\Table(name="payments_wallets")
+ * @ORM\Table(name="payments_wallets", indexes={@ORM\Index(name="payment_source_index", columns={"payment_source"})})
  * @ORM\Entity
  * @ORM\HasLifecycleCallbacks
  */
@@ -35,6 +35,13 @@ class Wallets extends \Kazist\Table\BaseTable
      * @ORM\Column(name="description", type="text", nullable=true)
      */
     protected $description;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="payment_source", type="string", length=255, nullable=false)
+     */
+    protected $payment_source;
 
     /**
      * @var integer
@@ -128,6 +135,30 @@ class Wallets extends \Kazist\Table\BaseTable
     public function getDescription()
     {
         return $this->description;
+    }
+
+    /**
+     * Set paymentSource
+     *
+     * @param string $paymentSource
+     *
+     * @return Wallets
+     */
+    public function setPaymentSource($paymentSource)
+    {
+        $this->payment_source = $paymentSource;
+
+        return $this;
+    }
+
+    /**
+     * Get paymentSource
+     *
+     * @return string
+     */
+    public function getPaymentSource()
+    {
+        return $this->payment_source;
     }
 
     /**

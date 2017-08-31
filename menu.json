@@ -39,10 +39,22 @@
             "icon": "fa fa-road",
             "children": []
         }, {
-            "title": "Payments",
+            "title": "Payments List",
             "alias": "admin_payments_payments",
             "url": "admin/payments/payments",
             "icon": "fa fa-shopping-cart",
+            "children": []
+        }, {
+            "title": "Deposits",
+            "alias": "admin_payments_deposits",
+            "url": "admin/payments/deposits",
+            "icon": "fa fa-download",
+            "children": []
+        }, {
+            "title": "Wallets",
+            "alias": "admin_payments_wallets",
+            "url": "admin/payments/wallets",
+            "icon": "fa fa-download",
             "children": []
         }]
 }
