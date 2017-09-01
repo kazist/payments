@@ -84,7 +84,7 @@
         },
         {
             "name": "user_id",
-            "html_type": "autocomplete",
+            "html_type": "recordpicker",
             "mysql_type": "int",
             "view_side": "",
             "index": "",
@@ -239,7 +239,7 @@
             "dropdown_filter": "0",
             "nullable": "1",
             "name": "created_by",
-            "html_type": "text",
+            "html_type": "recordpicker",
             "mysql_type": "int",
             "view_side": "",
             "index": "",
@@ -251,9 +251,15 @@
             "format_value": "",
             "parameters": {
                 "general": [],
-                "source": [],
+                "source": {
+                    "data_source": "db_table",
+                    "join_field": "id",
+                    "display_field": [
+                        "name"
+                    ],
+                    "join_table_name": "users_users"
+                },
                 "save": {
-                    "view_side": "both",
                     "index": ""
                 },
                 "media": [],
@@ -264,7 +270,7 @@
             "dropdown_filter": "0",
             "nullable": "1",
             "name": "date_created",
-            "html_type": "text",
+            "html_type": "datetime",
             "mysql_type": "datetime",
             "view_side": "",
             "index": "",
@@ -289,7 +295,7 @@
             "dropdown_filter": "0",
             "nullable": "1",
             "name": "modified_by",
-            "html_type": "text",
+            "html_type": "recordpicker",
             "mysql_type": "int",
             "view_side": "",
             "index": "",
@@ -301,9 +307,15 @@
             "format_value": "",
             "parameters": {
                 "general": [],
-                "source": [],
+                "source": {
+                    "data_source": "db_table",
+                    "join_field": "id",
+                    "display_field": [
+                        "name"
+                    ],
+                    "join_table_name": "users_users"
+                },
                 "save": {
-                    "view_side": "both",
                     "index": ""
                 },
                 "media": [],
@@ -314,7 +326,7 @@
             "dropdown_filter": "0",
             "nullable": "1",
             "name": "date_modified",
-            "html_type": "text",
+            "html_type": "datetime",
             "mysql_type": "datetime",
             "view_side": "",
             "index": "",
