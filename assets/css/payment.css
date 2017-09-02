@@ -43,6 +43,51 @@ and open the template in the editor.
     background: #B5D398 !important;
 }
 
+
+.payment-statistics .payment-statistic{
+    background: white;
+    border:1px solid #EFEFEF;
+    width:100%;
+    min-height: 90px;
+
+}
+.payment-statistic .statistic-icon{
+    height: 90px;
+    width: 90px;
+    display: block;
+    float: left;
+    text-align: center;
+    font-size: 45px;
+    line-height: 90px;
+}
+
+.payment-statistic .statistic-info{
+    margin-left:90px;
+    padding:5px;
+}
+
+.payment-statistic .statistic-info .statistic-info-head{
+    display: block;
+    text-transform: uppercase;
+    font-size: 14px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.payment-statistic .statistic-info .statistic-info-body{
+    font-size: 14px;
+    display: block;
+}
+
+.payment-statistic .statistic-info .statistic-info-number{
+    font-weight: bold;
+    font-size: 18px;
+    display: block;
+}
+
+
+
 @media (max-width: 768px) {
     .invoice .nav > li > a{
         padding: 5px;

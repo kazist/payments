@@ -2,14 +2,12 @@
 
 {% import "form.macro.twig" as forms %}
 
-{{ set_assets('applications/Hosting/assets/css/domain-wizard.css') }}
-{{ set_assets('applications/Hosting/assets/js/domain-wizard.js') }}
+{{ set_assets('applications/Payments/assets/css/payment.css') }}
 
-{% set user = document.user %}
 {% set description = 'Deposit money to you account.' %}
 
 <h1 class="component-header">
-    Deposit Money
+    Deposit Funds
 </h1>
 
 
@@ -18,29 +16,57 @@
     <section>
 
         <div class="col-sm-offset-1 col-sm-10">
-
-            <img class="img-responsive hidden-xs" src="{{ web_root }}assets/images/briefcase.png" align="left">
-
-            <h3 class="text-blue">Deposit money to your wallet to be used on making payments.</h3>
-
-            <i class="fa fa-arrow-right"></i> <span class="text-bold">This website requires user to deposit money first before performing any transactions.</span><br>
-            <i class="fa fa-arrow-right"></i> <span class="text-bold">All payment transaction are then completed using the money that users have deposited.</span><br>
-
-
-            <h5 class="text-blue text-uppercase">Deposit money Form</h5>
-
-            <div>
-                <div class="col-sm-6">
-                    {{ forms.input('amount', 'text', item.title, 'Amount') }}
-                </div>
-
-                <div class="clearfix"></div>
-                <div class="text-center">
-                    <a class="btn btn-danger btn-sm" href="{{ generate_url('payments.payments') }}" title='Cancel'>Cancel</a>
-                    <input class="btn btn-success btn-sm" name="id" type="submit" value="Save">
-                </div>
+            <div class="col-sm-4">
+                <img class="img-responsive hidden-xs" src="{{ web_root }}applications/Withdraws/assets/images/wallet.png" align="left">
             </div>
 
+            <div class="col-sm-8">
+                <h3 class="text-blue">Deposit money to your wallet to be used on making payments.</h3>
+
+                <div class="payment-statistics">
+
+                    <div class="col-sm-12">
+                        <div class="payment-statistic">
+                            <div class="statistic-icon bg-aqua">
+                                <i class="fa fa-money"></i>
+                            </div>
+                            <div class="statistic-info">
+                                <span class="statistic-info-head">Account Balance</span>
+
+                                <span class="statistic-info-number">
+                                    <h3>{{ user.total|number_format(2) }}</h3>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <p class="col-sm-12">
+                    <i>
+                        <i class="fa fa-quote-left"></i>
+                        {{ get_setting('payments_deposits_Instructions') }}
+                        <i class="fa fa-quote-right"></i>
+                    </i>
+                </p>
+
+                <div>
+                    <div class="col-sm-6">
+                        {{ forms.input('amount', 'text', item.title, 'Amount') }}
+                    </div>
+
+                    <div class="clearfix"></div>
+                    <div class="text-center">
+                        <a class="btn btn-danger btn-sm" href="{{ generate_url('payments.payments') }}" title='Cancel'>Cancel</a>
+
+                        <button class="btn btn-success btn-sm" name="id" type="submit">
+                            <i class="fa fa-send"></i>
+                            {{ 'Deposit Fund'|upper }}
+                        </button>
+
+                    </div>
+                </div>
+
+            </div>
         </div>
 
     </section>

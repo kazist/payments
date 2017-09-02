@@ -81,5 +81,14 @@
                     "tooltip": "Set the maximum deposit amount that is allowed on the system",
                     "type": "text"
                 }]
+        }, {
+            "title": "Instructions",
+            "settings": [{
+                    "name": "payments_deposits_Instructions",
+                    "label": "Deposit Fund Instructions",
+                    "default": " This website requires user to deposit money first before performing any transactions. All payment transaction are then completed using the money that users have deposited.",
+                    "tooltip": "Set Deposit Fund Instructions to be seen when depositing funds.",
+                    "type": "text"
+                }]
         }]
 }

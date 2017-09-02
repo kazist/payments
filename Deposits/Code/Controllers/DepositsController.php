@@ -24,6 +24,17 @@ use Payments\Payments\Code\Models\PaymentsModel;
 
 class DepositsController extends BaseController {
 
+    public function addAction($id = '') {
+
+        $payment = new PaymentsModel();
+
+        $user = $payment->getUser();
+
+        $this->data_arr['user'] = $user;
+
+        return parent::addAction($id);
+    }
+
     public function saveAction() {
 
         $email = new Email();
