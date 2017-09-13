@@ -544,7 +544,7 @@
             "class_name": "",
             "default_value": "",
             "size": "",
-            "readonly": "0",
+            "readonly": "1",
             "format_value": "",
             "parameters": {
                 "general": [],
@@ -1055,7 +1055,7 @@
             "view_side": "",
             "index": "",
             "size": "",
-            "readonly": "0",
+            "readonly": "1",
             "default_value": "",
             "format_value": "",
             "parameters": {
@@ -1129,7 +1129,7 @@
             "class_name": "",
             "default_value": "",
             "size": "",
-            "readonly": "0",
+            "readonly": "1",
             "format_value": "",
             "parameters": {
                 "general": [],
