@@ -50,7 +50,7 @@
                             <td>{{ item.code }}</td>
                             <td>{{ item.receipt_no }}</td>
                             <td>{{ item.gateway_id_short_name }}</td>
-                            <td>{{ item.date_created ? item.date_created|date('d M Y H:i:s') }}</td>
+                            <td>{{ item.date_created ? item.date_created|date('d M Y H:i:s',  document.timezone) }}</td>
                             <td align="right">{{ item.amount_paid ? item.amount_paid|number_format(2) }}</td>
                         </tr>
                     {% endfor %}

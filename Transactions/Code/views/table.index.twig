@@ -65,7 +65,7 @@
                             <td>{{ item.description }}</td>
                             <td>{{ item.type }}</td>
                             <td>{{ item.trans_username }}</td>
-                            <td>{{ item.date_created ? item.date_created|date('d M Y H:i:s') }}</td>
+                            <td>{{ item.date_created ? item.date_created|date('d M Y H:i:s',  document.timezone) }}</td>
                             <td align="right">{{ item.credit ? item.credit|number_format(2) }}</td>
                             <td align="right">{{ item.debit ? item.debit|number_format(2) }}</td>
                         </tr>

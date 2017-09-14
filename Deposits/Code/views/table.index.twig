@@ -47,7 +47,7 @@
                         <tr>
                             <td>{{ item.gateway_id_short_name }}</td>
                             <td>{{ item.code }}</td>
-                            <td>{{ item.date_created ? item.date_created|date('d M Y H:i:s') }}</td>
+                            <td>{{ item.date_created ? item.date_created|date('d M Y H:i:s',  document.timezone) }}</td>
                             <td align="center">
                                 {{ item.amount|number_format(2) }}<br>
                             </td>
