@@ -21,11 +21,6 @@ Payments\Deposits\Code\Tables\Deposits:
       type: integer
       length: 11
       nullable: true
-    gateway_id:
-      name: gateway_id
-      type: integer
-      length: 11
-      nullable: true
     completed:
       name: completed
       type: integer
@@ -65,8 +60,6 @@ Payments\Deposits\Code\Tables\Deposits:
       columns: [user_id]
     payment_id_index:
       columns: [payment_id]
-    gateway_id_index:
-      columns: [gateway_id]
     created_by_index:
       columns: [created_by]
     modified_by_index:
