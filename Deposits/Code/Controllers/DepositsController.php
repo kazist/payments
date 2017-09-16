@@ -44,7 +44,7 @@ class DepositsController extends BaseController {
         $user = $factory->getUser();
 
         $form = $this->request->get('form');
-        $form['description'] = 'Deposit $' . form['amount'] . ' to your account';
+        $form['description'] = 'Deposit $ ' . $form['amount'] . ' to your account';
 
         $default_gateway = $factory->getSetting('payments_gateway_default_gateway');
         $tmp_minimum_amount = $factory->getSetting('payments_deposits_minimum_amount');
@@ -53,10 +53,10 @@ class DepositsController extends BaseController {
         $maximum_amount = ($tmp_maximum_amount) ? $tmp_maximum_amount : 500;
 
         if ($form['amount'] > $maximum_amount) {
-            $factory->enqueueMessage('The deposited money is more than Maximum Amount set(' . $maximum_amount . ')', 'error');
+            $factory->enqueueMessage('The deposited money is more than Maximum Amount set($' . $maximum_amount . ')', 'error');
             return $this->redirect($this->generateUrl('payments.deposits.add'));
         } elseif ($form['amount'] < $minimum_amount) {
-            $factory->enqueueMessage('The deposited money is less than Minimum Amount set(' . $minimum_amount . ')', 'error');
+            $factory->enqueueMessage('The deposited money is less than Minimum Amount set($' . $minimum_amount . ')', 'error');
             return $this->redirect($this->generateUrl('payments.deposits.add'));
         }
 
