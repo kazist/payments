@@ -74,7 +74,8 @@
                 ]
             },
             "ommitted": [
-                "id"
+                "id",
+                "gateway_id"
             ]
         },
         "table": {
@@ -219,6 +220,38 @@
         {
             "dropdown_filter": "0",
             "nullable": "1",
+            "name": "gateway_id",
+            "html_type": "recordpicker",
+            "mysql_type": "int",
+            "view_side": "",
+            "index": "",
+            "id_name": "",
+            "class_name": "",
+            "default_value": "",
+            "size": "",
+            "readonly": "0",
+            "format_value": "",
+            "parameters": {
+                "general": [],
+                "source": {
+                    "data_source": "db_table",
+                    "join_field": "id",
+                    "display_field": [
+                        "long_name"
+                    ],
+                    "join_table_name": "payments_gateways"
+                },
+                "save": {
+                    "view_side": "both",
+                    "index": ""
+                },
+                "media": [],
+                "payment": []
+            }
+        },
+        {
+            "dropdown_filter": "0",
+            "nullable": "1",
             "name": "completed",
             "html_type": "yesno",
             "mysql_type": "int",
@@ -316,6 +349,7 @@
                     "join_table_name": "users_users"
                 },
                 "save": {
+                    "view_side": "both",
                     "index": ""
                 },
                 "media": [],
@@ -372,6 +406,7 @@
                     "join_table_name": "users_users"
                 },
                 "save": {
+                    "view_side": "both",
                     "index": ""
                 },
                 "media": [],
@@ -433,12 +468,16 @@
             "uu.name AS user_id_name",
             "pd.payment_id",
             "pp.receipt_no AS payment_id_receipt_no",
+            "pd.gateway_id",
+            "pg.long_name AS gateway_id_long_name",
             "pd.completed",
             "pd.successful",
             "pd.amount",
             "pd.created_by",
+            "uu_7031.name AS created_by_name",
             "pd.date_created",
             "pd.modified_by",
+            "uu_4437.name AS modified_by_name",
             "pd.date_modified"
         ],
         "leftjoin": [
@@ -453,6 +492,24 @@
                 "alias": "pp",
                 "name": "#__payments_payments",
                 "on": "pd.payment_id = pp.id"
+            },
+            {
+                "table": "Payments\\Gateways\\Code\\Tables\\Gateways",
+                "alias": "pg",
+                "name": "#__payments_gateways",
+                "on": "pd.gateway_id = pg.id"
+            },
+            {
+                "table": "Users\\Users\\Code\\Tables\\Users",
+                "alias": "uu_7031",
+                "name": "#__users_users",
+                "on": "pd.created_by = uu_7031.id"
+            },
+            {
+                "table": "Users\\Users\\Code\\Tables\\Users",
+                "alias": "uu_4437",
+                "name": "#__users_users",
+                "on": "pd.modified_by = uu_4437.id"
             }
         ]
     }

@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Deposits
  *
- * @ORM\Table(name="payments_deposits", indexes={@ORM\Index(name="user_id_index", columns={"user_id"}), @ORM\Index(name="payment_id_index", columns={"payment_id"})})
+ * @ORM\Table(name="payments_deposits", indexes={@ORM\Index(name="user_id_index", columns={"user_id"}), @ORM\Index(name="payment_id_index", columns={"payment_id"}), @ORM\Index(name="gateway_id_index", columns={"gateway_id"}), @ORM\Index(name="created_by_index", columns={"created_by"}), @ORM\Index(name="modified_by_index", columns={"modified_by"})})
  * @ORM\Entity
  * @ORM\HasLifecycleCallbacks
  */
@@ -42,6 +42,13 @@ class Deposits extends \Kazist\Table\BaseTable
      * @ORM\Column(name="payment_id", type="integer", length=11, nullable=true)
      */
     protected $payment_id;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="gateway_id", type="integer", length=11, nullable=true)
+     */
+    protected $gateway_id;
 
     /**
      * @var integer
@@ -173,6 +180,30 @@ class Deposits extends \Kazist\Table\BaseTable
     public function getPaymentId()
     {
         return $this->payment_id;
+    }
+
+    /**
+     * Set gatewayId
+     *
+     * @param integer $gatewayId
+     *
+     * @return Deposits
+     */
+    public function setGatewayId($gatewayId)
+    {
+        $this->gateway_id = $gatewayId;
+
+        return $this;
+    }
+
+    /**
+     * Get gatewayId
+     *
+     * @return integer
+     */
+    public function getGatewayId()
+    {
+        return $this->gateway_id;
     }
 
     /**
