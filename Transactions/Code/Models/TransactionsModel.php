@@ -79,13 +79,14 @@ class TransactionsModel extends BaseModel {
 
         $form_data['behalf_user_id'] = $form_data['user_id'];
         $form_data['type'] = 'admin';
+
         if ($form_data['amount'] > 0) {
             $form_data['credit'] = $form_data['amount'];
         } else {
             $form_data['debit'] = abs($form_data['amount']);
         }
-
-        parent::save($form_data);
+   
+        return parent::save($form_data);
     }
 
     public function reverseTransaction($id, $type) {
