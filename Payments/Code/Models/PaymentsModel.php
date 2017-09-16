@@ -36,6 +36,7 @@ class PaymentsModel extends BaseModel {
     public $item_id = 0;
     public $description = 0;
     public $quantity = 0;
+    public $is_new = 0;
     public $amount = 0;
     public $user_id = 0;
     public $payment_source = '';
@@ -820,7 +821,7 @@ class PaymentsModel extends BaseModel {
             $data_obj = json_decode(json_encode(array_merge((array) $payment, (array) $data_obj)));
         }
 
-        // print_r($data_obj); exit;
+        
 
         $id = $factory->saveRecord('#__payments_payments', $data_obj);
 
