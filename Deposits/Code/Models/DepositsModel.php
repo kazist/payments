@@ -70,6 +70,7 @@ class DepositsModel extends BaseModel {
                 'gateway_id' => $default_gateway,
                 'pay_subset_id' => $document->subset_id,
                 'item_id' => $deposit->id,
+                'is_new' => 0,
                 'type' => 'deposit',
                 'amount' => $form['amount'],
                 'description' => 'Partial Payments.'

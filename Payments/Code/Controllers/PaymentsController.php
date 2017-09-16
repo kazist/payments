@@ -88,7 +88,7 @@ class PaymentsController extends BaseController {
         $converter = $this->model->getConverter();
         $gateways = $this->model->getPaymentGateways($payment_id);
         $payment = $this->model->getPayment($payment_id);
-
+     
         $gateways_arr = json_decode(json_encode($gateways), true);
         $converter_arr = json_decode(json_encode($converter), true);
 

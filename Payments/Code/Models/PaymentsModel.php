@@ -117,12 +117,12 @@ class PaymentsModel extends BaseModel {
             $query->andWhere('pt.user_id=:user_id');
             $query->setParameter('user_id', $user->id);
             $wallets_amount = $query->loadObject();
- 
+
             $wallets[$key]->amount = $wallets_amount->amount;
         }
 
         $user->wallets = $wallets;
-        
+
         return $user;
     }
 
@@ -223,10 +223,7 @@ class PaymentsModel extends BaseModel {
 
         $deposit_gateway_name = $factory->getSetting('payments_gateway_deposit_gateway');
 
-        $query = new Query();
-        $query->select('pg.*, mm.file as image_file');
-        $query->from('#__payments_gateways', 'pg');
-        $query->leftJoin('pg', '#__media_media', 'mm', 'mm.id = pg.image');
+        $query = $factory->getQueryBuilder('#__payments_gateways', 'pg');
         $query->where('pg.can_payment=1');
         $query->andWhere('pg.published=1');
         $query->orderBy('pg.ordering', 'ASC');
@@ -821,7 +818,7 @@ class PaymentsModel extends BaseModel {
             $data_obj = json_decode(json_encode(array_merge((array) $payment, (array) $data_obj)));
         }
 
-        
+
 
         $id = $factory->saveRecord('#__payments_payments', $data_obj);
 
