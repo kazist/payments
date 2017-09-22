@@ -69,14 +69,14 @@
                             {% for item in payment.items %}
                                 <td>1</td>
                                 <td>{{ item.description }}</td>
-                                <td>{{ converter.symbol }}{{ (item.unit_price * converter.buying|default(1))|number_format(2) }}</td>
+                                <td>{{ converter.symbol|default(converter.code) }} {{ (item.unit_price * converter.buying|default(1))|number_format(2) }}</td>
                             </tr>
                         {% endfor %}
                     {% else %}
                         <tr>
                             <td>1</td>
                             <td>{{ payment.description }}</td>
-                            <td>{{ converter.symbol }}{{ (payment.amount * converter.buying|default(1))|number_format(2) }}</td>
+                            <td>{{ converter.symbol|default(converter.code) }} {{ (payment.amount * converter.buying|default(1))|number_format(2) }}</td>
                         </tr>
                     {% endif %}
 
@@ -88,7 +88,7 @@
                             {% for coupon in payment.coupons %}
                                 <td>&nbsp;</td>
                                 <td>{{ coupon.description }}</td>
-                                <td>-{{ converter.symbol }}{{ (coupon.amount * converter.buying|default(1))|number_format(2) }}</td>
+                                <td>-{{ converter.symbol|default(converter.code) }} {{ (coupon.amount * converter.buying|default(1))|number_format(2) }}</td>
                             </tr>
                         {% endfor %}
                     {% endif %}
@@ -117,12 +117,12 @@
                         {% if rate.highlighted %}
                             <tr>
                                 <th>{{ rate.title }}</th>
-                                <td>{{ converter.symbol }}{{ (rate.amount * converter.buying|default(1))|number_format(2) }}</td>
+                                <td>{{ converter.symbol|default(converter.code) }} {{ (rate.amount * converter.buying|default(1))|number_format(2) }}</td>
                             </tr>
                         {% else %}
                             <tr>
                                 <td>{{ rate.title }}</td>
-                                <td>{{ converter.symbol }}{{ (rate.amount* converter.buying|default(1))|number_format(2) }}</td>
+                                <td>{{ converter.symbol|default(converter.code) }} {{ (rate.amount* converter.buying|default(1))|number_format(2) }}</td>
                             </tr>
                         {% endif %}
                     {% endfor %}

@@ -51,14 +51,16 @@ Payments\Payments\Code\Tables\Payments:
       length: 255
       nullable: true
     amount_required:
+      scale: 2
+      precision: 11
       name: amount_required
-      type: integer
-      length: 11
+      type: decimal
       nullable: true
     amount_paid:
+      scale: 2
+      precision: 11
       name: amount_paid
-      type: integer
-      length: 11
+      type: decimal
       nullable: true
     quantity:
       name: quantity

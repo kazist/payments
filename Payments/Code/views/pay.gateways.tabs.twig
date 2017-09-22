@@ -21,7 +21,7 @@
                             {{ gateway.long_name }}
                         {% endif %}
                         {% if gateway.short_name == 'wallet' %}
-                            (${{ user.total }})
+                            ({{ converter.symbol|default(converter.code) }} {{ (user.total * converter.buying|default(1))|number_format(2) }})
                         {% endif %}
                     </label>
                 </a>

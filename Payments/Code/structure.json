@@ -378,7 +378,7 @@
             "nullable": "1",
             "name": "amount_required",
             "html_type": "text",
-            "mysql_type": "int",
+            "mysql_type": "decimal",
             "view_side": "both",
             "index": "",
             "id_name": "",
@@ -402,7 +402,7 @@
             "nullable": "1",
             "name": "amount_paid",
             "html_type": "text",
-            "mysql_type": "int",
+            "mysql_type": "decimal",
             "view_side": "both",
             "index": "",
             "id_name": "",
@@ -754,10 +754,10 @@
             "pp.is_canceled",
             "pp.is_new",
             "pp.created_by",
-            "uu_4745.name AS created_by_name",
+            "uu_5283.name AS created_by_name",
             "pp.date_created",
             "pp.modified_by",
-            "uu_9794.name AS modified_by_name",
+            "uu_902.name AS modified_by_name",
             "pp.date_modified"
         ],
         "leftjoin": [
@@ -775,15 +775,15 @@
             },
             {
                 "table": "Users\\Users\\Code\\Tables\\Users",
-                "alias": "uu_4745",
+                "alias": "uu_5283",
                 "name": "#__users_users",
-                "on": "pp.created_by = uu_4745.id"
+                "on": "pp.created_by = uu_5283.id"
             },
             {
                 "table": "Users\\Users\\Code\\Tables\\Users",
-                "alias": "uu_9794",
+                "alias": "uu_902",
                 "name": "#__users_users",
-                "on": "pp.modified_by = uu_9794.id"
+                "on": "pp.modified_by = uu_902.id"
             }
         ]
     }

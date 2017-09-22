@@ -86,16 +86,16 @@ class Payments extends \Kazist\Table\BaseTable
     protected $amount;
 
     /**
-     * @var integer
+     * @var string
      *
-     * @ORM\Column(name="amount_required", type="integer", length=11, nullable=true)
+     * @ORM\Column(name="amount_required", type="decimal", precision=11, scale=2, nullable=true)
      */
     protected $amount_required;
 
     /**
-     * @var integer
+     * @var string
      *
-     * @ORM\Column(name="amount_paid", type="integer", length=11, nullable=true)
+     * @ORM\Column(name="amount_paid", type="decimal", precision=11, scale=2, nullable=true)
      */
     protected $amount_paid;
 
@@ -406,7 +406,7 @@ class Payments extends \Kazist\Table\BaseTable
     /**
      * Set amountRequired
      *
-     * @param integer $amountRequired
+     * @param string $amountRequired
      *
      * @return Payments
      */
@@ -420,7 +420,7 @@ class Payments extends \Kazist\Table\BaseTable
     /**
      * Get amountRequired
      *
-     * @return integer
+     * @return string
      */
     public function getAmountRequired()
     {
@@ -430,7 +430,7 @@ class Payments extends \Kazist\Table\BaseTable
     /**
      * Set amountPaid
      *
-     * @param integer $amountPaid
+     * @param string $amountPaid
      *
      * @return Payments
      */
@@ -444,7 +444,7 @@ class Payments extends \Kazist\Table\BaseTable
     /**
      * Get amountPaid
      *
-     * @return integer
+     * @return string
      */
     public function getAmountPaid()
     {

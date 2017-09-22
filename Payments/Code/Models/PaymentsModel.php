@@ -951,13 +951,13 @@ class PaymentsModel extends BaseModel {
             
         } elseif ($required_amount > $paid_amount) {
 
-            $factory->enqueueMessage('Amount Paid (of ' . $paid_amount . ') is less than Amount Required (of ' . $required_amount . ').', 'info');
+            $factory->enqueueMessage('Amount Paid of (' . number_format($paid_amount, 2) . ') is less than Amount Required (of ' . number_format($required_amount, 2) . ').', 'info');
             $factory->enqueueMessage('Amount(' . $paid_amount . ') Was credited to your account. Top up Your account and  use pay with wallet for payment.', 'info');
         } elseif ($paid_amount > $required_amount) {
 
             $over_payment = $paid_amount - $required_amount;
 
-            $factory->enqueueMessage('Amount Paid (of ' . $paid_amount . ') is more than Amount Required (of ' . $required_amount . ').', 'info');
+            $factory->enqueueMessage('Amount Paid of (' . number_format($paid_amount, 2) . ') is more than Amount Required (of ' . number_format($required_amount, 2) . ').', 'info');
             $factory->enqueueMessage('Amount(' . $over_payment . ') Was credited to your account. Top up Your account and  use pay with wallet for payment.', 'info');
         }
 
