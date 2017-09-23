@@ -636,9 +636,25 @@ class PaymentsModel extends BaseModel {
 
         $payment = $factory->getRecord('#__payments_payments', 'pp', array('pp.id=' . (int) $payment_id));
 
+        if ($payment->payment_source == 'payments.deposits') {
+            return false;
+        }
+
+        $amount_query_str = '(pc.start_amount IS NULL AND pc.end_amount IS NULL) OR '
+                . '(pc.start_amount <= :amount AND pc.end_amount IS NULL) OR '
+                . '(pc.start_amount IS NULL AND pc.end_amount >= :amount) OR '
+                . '(pc.start_amount <= :amount AND pc.end_amount >= :amount)';
+
+        $date_query_str = '(pc.start_date IS NULL AND pc.end_date IS NULL) OR '
+                . '(pc.start_date <= :current_date AND pc.end_date IS NULL) OR '
+                . '(pc.start_date IS NULL AND pc.end_date >= :current_date) OR '
+                . '(pc.start_date <= :current_date AND pc.end_date >= :current_date)';
+
         $query = $factory->getQueryBuilder('#__payments_coupons', 'pc');
-        $query->andWhere('pc.start_date < :current_date AND pc.end_date > :current_date');
+        $query->andWhere($date_query_str);
         $query->setParameter('current_date', date('Y-m-d H:i:s'));
+        $query->andWhere($amount_query_str);
+        $query->setParameter('amount', $payment->amount);
 
         $where_arr[] = 'pc.applied = \'all_payment\'';
         if ($payment->is_new) {
