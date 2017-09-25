@@ -867,6 +867,7 @@ class PaymentsModel extends BaseModel {
         $payment = $this->getPaymentById($payment_id);
 
         $this->updateTaxationTransactions($payment);
+        $this->updateCouponsTransactions($payment);
         $this->savePaymentCodeStatus($payment_id, $code, true);
         $factory->enqueueMessage('Thank you. Your payment was Successful.', 'info');
 
@@ -879,6 +880,7 @@ class PaymentsModel extends BaseModel {
 
         $payment = $this->getPaymentById($payment_id);
         $this->updateTaxationTransactions($payment);
+        $this->updateCouponsTransactions($payment);
         $this->savePaymentCodeStatus($payment_id, $code, true);
         $factory->enqueueMessage('Thank you. Your payment was Successful.', 'info');
 
@@ -1004,6 +1006,28 @@ class PaymentsModel extends BaseModel {
         $factory->saveRecord('#__payments_transactions', $data_obj);
 
         return true;
+    }
+
+    public function updateCouponsTransactions($payment) {
+
+        $factory = new KazistFactory();
+
+        if (!empty($payment->coupons)) {
+            foreach ($payment->coupons as $coupon) {
+
+                $data_obj = new \stdClass();
+                $data_obj->user_id = $payment->user_id;
+                $data_obj->behalf_user_id = $payment->user_id;
+                $data_obj->item_id = $payment->item_id;
+                $data_obj->payment_id = $payment->id;
+                $data_obj->description = '[Coupon] ' . trim($coupon->description);
+                $data_obj->debit = -$coupon->amount;
+                $data_obj->type = 'coupon-discount';
+                $data_obj->payment_source = $payment->payment_source;
+
+                $factory->saveRecord('#__payments_transactions', $data_obj);
+            }
+        }
     }
 
     public function updateTaxationTransactions($payment) {
