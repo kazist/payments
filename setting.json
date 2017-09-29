@@ -88,7 +88,7 @@
                     "label": "Deposit Fund Instructions",
                     "default": " This website requires user to deposit money first before performing any transactions. All payment transaction are then completed using the money that users have deposited.",
                     "tooltip": "Set Deposit Fund Instructions to be seen when depositing funds.",
-                    "type": "text"
+                    "type": "editor"
                 }]
         }]
 }
