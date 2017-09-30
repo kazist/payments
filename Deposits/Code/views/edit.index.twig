@@ -53,14 +53,14 @@
                     <div class="form-group amount-group">
                         <label for="amount" class="col-sm-3 control-label">Amount</label>
                         <div class="col-sm-9 kazicode-form-field ">
-                            <div class="input-group">
-                                <input class="form-control input-sm" name="form[amount]" value="" placeholder="Amount in USD" type="text">
-                                <div class="input-group-btn ">
-                                    <input class="btn btn-success btn-sm" name="submit" value="Search" >
-                                    <input class="btn btn-default  btn-sm cancel-search" name="submit" value="Reset">
-                                </div><!-- /btn-group -->
+                            <div class="form-group">
+                                <label class="sr-only" for="exampleInputAmount">Amount (in dollars)</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon">$</div>
+                                    <input type="text" name="form[amount]" class="form-control" id="exampleInputAmount" placeholder="Amount">
+                                    <div class="input-group-addon">USD</div>
+                                </div>
                             </div>
-                            {{ forms.input('amount', 'text', item.title, 'Amount') }}
                         </div>
                     </div>
 
@@ -94,6 +94,10 @@
 
     .domain-instruction{
         margin: 5px;
+    }
+
+    .input-group .input-group-addon {
+        background-color: #eee;
     }
 
 </style>
