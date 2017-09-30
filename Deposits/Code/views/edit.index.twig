@@ -50,8 +50,18 @@
                 </p>
 
                 <div>
-                    <div class="col-sm-6">
-                        {{ forms.input('amount', 'text', item.title, 'Amount') }}
+                    <div class="form-group amount-group">
+                        <label for="amount" class="col-sm-3 control-label">Amount</label>
+                        <div class="col-sm-9 kazicode-form-field ">
+                            <div class="input-group">
+                                <input class="form-control input-sm" name="form[amount]" value="" placeholder="Amount in USD" type="text">
+                                <div class="input-group-btn ">
+                                    <input class="btn btn-success btn-sm" name="submit" value="Search" >
+                                    <input class="btn btn-default  btn-sm cancel-search" name="submit" value="Reset">
+                                </div><!-- /btn-group -->
+                            </div>
+                            {{ forms.input('amount', 'text', item.title, 'Amount') }}
+                        </div>
                     </div>
 
                     <div class="clearfix"></div>

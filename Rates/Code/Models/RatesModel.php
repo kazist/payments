@@ -171,7 +171,7 @@ class RatesModel extends BaseModel {
 
             $subscriber_obj = $subscriber->getUserSubscriptionInfo($transaction_rate->user_id);
 
-            $user = $factory->getQueryBuilder('#__users_users', 'uu', array('id=:id'), array('id' => $transaction_rate->user_id));
+            $user = $factory->getRecord('#__users_users', 'uu', array('id=:id'), array('id' => $transaction_rate->user_id));
 
             $tmp_array['transaction_rate'] = $transaction_rate;
             $tmp_array['user'] = $user;

@@ -46,7 +46,7 @@ class TransactionsController extends BaseController {
         $user = $this->model->getUserById($user_id);
 
         $this->data_arr['user'] = $user;
-        $this->data_arr['return_url'] = base64_encode($this->generateUrl('payments.transactions'));
+        $this->data_arr['return_url'] = base64_encode($this->generateUrl('admin.payments.transactions'));
 
 
         return parent::addAction();
