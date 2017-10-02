@@ -89,13 +89,13 @@ class TransactionsModel extends BaseModel {
         return parent::save($form_data);
     }
 
-    public function reverseTransaction($id, $type) {
+    public function reverseTransaction($id, $payment_source) {
 
         $factory = new KazistFactory();
 
-        $check_arr = array('item_id' => $id, 'source' => $type);
+        $check_arr = array('item_id' => $id, 'payment_source' => $payment_source);
 
-        $records = $factory->getRecords('#__payments_transactions', 'pt', array('item_id=:item_id', 'source=:source'), $check_arr);
+        $records = $factory->getRecords('#__payments_transactions', 'pt', array('item_id=:item_id', 'payment_source=:payment_source'), $check_arr);
 
         if (!empty($records)) {
             foreach ($records as $record) {
@@ -103,7 +103,7 @@ class TransactionsModel extends BaseModel {
                 $credit = $record->credit;
                 $debit = $record->debit;
 
-                $record->source = 'reversed';
+                $record->payment_source = $payment_source;
                 $record->credit = $debit;
                 $record->debit = $credit;
                 $record->description = 'Reversed for :- ' . $record->description . '[Txn:' . $record->id . ']';
