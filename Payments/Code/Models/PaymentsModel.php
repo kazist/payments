@@ -835,11 +835,14 @@ class PaymentsModel extends BaseModel {
         }
 
 
+        if ($data_obj->amount) {
+            $id = $factory->saveRecord('#__payments_payments', $data_obj);
 
-        $id = $factory->saveRecord('#__payments_payments', $data_obj);
-
-        $this->addPaymentItems($id);
-        $this->addPaymentCoupons($id);
+            $this->addPaymentItems($id);
+            $this->addPaymentCoupons($id);
+        } else {
+            return false;
+        }
 
         return $id;
     }
@@ -882,7 +885,7 @@ class PaymentsModel extends BaseModel {
         $this->updateTaxationTransactions($payment);
         $this->updateCouponsTransactions($payment);
         $this->savePaymentCodeStatus($payment_id, $code, true);
-         $factory->enqueueMessage('Thank you. Your payment was Successful.', 'info');
+        $factory->enqueueMessage('Thank you. Your payment was Successful.', 'info');
 
         $this->container->get('dispatcher')->dispatch('payment.successful', new PaymentEvent($payment));
     }
