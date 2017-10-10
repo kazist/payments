@@ -252,10 +252,21 @@ class PaymentsModel extends BaseModel {
                 if ($deposit_gateway_name == $record->id) {
                     $this->deposit_gateway = $record;
                 }
+
+                if (!$record->image) {
+                    $image_path = 'applications/' . $record->form_path . '/image.png';
+
+                    if (file_exists(JPATH_ROOT . $image_path)) {
+                        $record->image = 1;
+                        $record->image_file = $image_path;
+                    }
+                }
             }
 
             $records = array_values($records);
         }
+        
+        $records = array_values($records);
 
         return $records;
     }
@@ -765,10 +776,10 @@ class PaymentsModel extends BaseModel {
 
             $query->andWhere('pp.subset_id=:subset_id');
             $query->andWhere('pp.item_id=:item_id');
-            //$query->andWhere('pp.amount=:amount');
+//$query->andWhere('pp.amount=:amount');
             $query->setParameter('subset_id', $subset_id);
             $query->setParameter('item_id', $item_id);
-            // $query->setParameter('amount', (int) $amount);
+// $query->setParameter('amount', (int) $amount);
             $query->andWhere('(pp.completed=0 OR pp.completed IS NULL)');
         } else {
             $query->andWhere('1=-1');
@@ -833,7 +844,6 @@ class PaymentsModel extends BaseModel {
         if (is_object($payment)) {
             $data_obj = json_decode(json_encode(array_merge((array) $payment, (array) $data_obj)));
         }
-
 
         if ($data_obj->amount) {
             $id = $factory->saveRecord('#__payments_payments', $data_obj);
@@ -1118,7 +1128,7 @@ class PaymentsModel extends BaseModel {
         return $tmp_array;
     }
 
-    //xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx  reverseWithdraw
+//xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx  reverseWithdraw
     public function reversePayment() {
 
         $factory = new KazistFactory();
