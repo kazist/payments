@@ -809,6 +809,10 @@ class PaymentsModel extends BaseModel {
             $data_obj->subset_id = ($this->pay_subset_id) ? $this->pay_subset_id : $this->request->query->get('pay_subset_id', '1');
         }
 
+        if ($this->type || $this->request->query->get('type')) {
+            $data_obj->type = ($this->type) ? $this->type : $this->request->query->get('type');
+        }
+
         if ($this->is_new || $this->request->query->get('is_new')) {
             $data_obj->is_new = ($this->is_new) ? $this->is_new : $this->request->query->get('is_new');
         }
@@ -892,11 +896,12 @@ class PaymentsModel extends BaseModel {
         $factory = new KazistFactory();
 
         $payment = $this->getPaymentById($payment_id);
+    
         $this->updateTaxationTransactions($payment);
         $this->updateCouponsTransactions($payment);
         $this->savePaymentCodeStatus($payment_id, $code, true);
         $factory->enqueueMessage('Thank you. Your payment was Successful.', 'info');
-
+    
         $this->container->get('dispatcher')->dispatch('payment.successful', new PaymentEvent($payment));
     }
 
