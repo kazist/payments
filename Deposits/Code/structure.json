@@ -172,7 +172,8 @@
                     "data_source": "db_table",
                     "join_field": "id",
                     "display_field": [
-                        "name"
+                        "name",
+                        "username"
                     ],
                     "join_table_name": "users_users"
                 },
@@ -434,6 +435,7 @@
             "pd.description",
             "pd.user_id",
             "uu.name AS user_id_name",
+            "uu.username AS user_id_username",
             "pd.payment_id",
             "pp.receipt_no AS payment_id_receipt_no",
             "pp.gateway_id AS payment_id_gateway_id",
@@ -441,10 +443,10 @@
             "pd.successful",
             "pd.amount",
             "pd.created_by",
-            "uu_1472.name AS created_by_name",
+            "uu_1993.name AS created_by_name",
             "pd.date_created",
             "pd.modified_by",
-            "uu_9466.name AS modified_by_name",
+            "uu_8579.name AS modified_by_name",
             "pd.date_modified"
         ],
         "leftjoin": [
@@ -462,15 +464,15 @@
             },
             {
                 "table": "Users\\Users\\Code\\Tables\\Users",
-                "alias": "uu_1472",
+                "alias": "uu_1993",
                 "name": "#__users_users",
-                "on": "pd.created_by = uu_1472.id"
+                "on": "pd.created_by = uu_1993.id"
             },
             {
                 "table": "Users\\Users\\Code\\Tables\\Users",
-                "alias": "uu_9466",
+                "alias": "uu_8579",
                 "name": "#__users_users",
-                "on": "pd.modified_by = uu_9466.id"
+                "on": "pd.modified_by = uu_8579.id"
             }
         ]
     }

@@ -70,6 +70,8 @@ class TransactionsModel extends BaseModel {
         $query->addSelect('pt_uu.username AS trans_username, pt_uu.name AS trans_name, pt_uu.email AS trans_email');
         $query->addSelect('pt_own.username AS own_username, pt_own.name AS own_name, pt_own.email AS own_email');
 
+       // print_r((string)$query); exit;
+        
         return $query;
     }
 
