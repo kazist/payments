@@ -219,7 +219,10 @@ class PaymentsModel extends BaseModel {
 
     public function getPaymentGateways($payment_id) {
 
+        $gateways = array();
+
         $factory = new KazistFactory();
+        $session = $factory->getSession();
 
         $deposit_gateway_name = $factory->getSetting('payments_gateway_deposit_gateway');
 
@@ -247,6 +250,7 @@ class PaymentsModel extends BaseModel {
 
                 if (isset($records[$key])) {
                     $records[$key] = $this->processPaymentGatewayAdvance($payment_id, $record);
+                    $gateways[$record->short_name] = $records[$key];
                 }
 
                 if ($deposit_gateway_name == $record->id) {
@@ -265,8 +269,10 @@ class PaymentsModel extends BaseModel {
 
             $records = array_values($records);
         }
-        
+
         $records = array_values($records);
+
+        $session->set('gateways', $gateways);
 
         return $records;
     }
@@ -896,12 +902,12 @@ class PaymentsModel extends BaseModel {
         $factory = new KazistFactory();
 
         $payment = $this->getPaymentById($payment_id);
-    
+
         $this->updateTaxationTransactions($payment);
         $this->updateCouponsTransactions($payment);
         $this->savePaymentCodeStatus($payment_id, $code, true);
         $factory->enqueueMessage('Thank you. Your payment was Successful.', 'info');
-    
+
         $this->container->get('dispatcher')->dispatch('payment.successful', new PaymentEvent($payment));
     }
 
