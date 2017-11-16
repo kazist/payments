@@ -44,13 +44,15 @@ class DepositsController extends BaseController {
         $user = $factory->getUser();
 
         $form = $this->request->get('form');
-        $form['description'] = 'Deposit $ ' . $form['amount'] . ' to your account';
 
+        $wallet_name = $factory->getSetting('payments_gateway_wallet_name');
         $default_gateway = $factory->getSetting('payments_gateway_default_gateway');
         $tmp_minimum_amount = $factory->getSetting('payments_deposits_minimum_amount');
         $minimum_amount = ($tmp_minimum_amount) ? $tmp_minimum_amount : 10;
         $tmp_maximum_amount = $factory->getSetting('payments_deposits_maximum_amount');
         $maximum_amount = ($tmp_maximum_amount) ? $tmp_maximum_amount : 500;
+
+        $form['description'] = 'Deposit $' . $form['amount'] . ' to your ' . $wallet_name . ' wallet';
 
         if ($form['amount'] > $maximum_amount) {
             $factory->enqueueMessage('The deposited money is more than Maximum Amount set($' . $maximum_amount . ')', 'error');

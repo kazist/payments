@@ -28,6 +28,12 @@
                     "tooltip": "Show Invoice on payment <b>eg address from, address to, invoice id etc</b>",
                     "type": "yesno"
                 }, {
+                    "name": "payments_gateway_wallet_name",
+                    "label": "Wallet Name",
+                    "default": "System",
+                    "tooltip": "Set the name of the Wallet",
+                    "type": "text"
+                }, {
                     "name": "payments_use_transactions_levels",
                     "label": "Use Levels on Trasactions",
                     "default": "0",

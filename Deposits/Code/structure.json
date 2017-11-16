@@ -74,21 +74,25 @@
                 ]
             },
             "ommitted": [
-                "id"
+                "id",
+                "code"
             ]
         },
         "table": {
             "fields": [
                 "description",
+                "code",
                 "user_id",
                 "payment_id",
-                "amount"
+                "amount",
+                "date_created"
             ],
             "has_label": [
                 "description",
                 "user_id",
                 "payment_id",
-                "amount"
+                "amount",
+                "date_created"
             ]
         }
     },
@@ -154,6 +158,31 @@
         },
         {
             "dropdown_filter": "0",
+            "nullable": "1",
+            "name": "code",
+            "html_type": "text",
+            "mysql_type": "none",
+            "view_side": "",
+            "index": "",
+            "id_name": "",
+            "class_name": "",
+            "default_value": "",
+            "size": "",
+            "readonly": "0",
+            "format_value": "",
+            "parameters": {
+                "general": [],
+                "source": [],
+                "save": {
+                    "view_side": "both",
+                    "index": ""
+                },
+                "media": [],
+                "payment": []
+            }
+        },
+        {
+            "dropdown_filter": "0",
             "nullable": "0",
             "name": "user_id",
             "html_type": "recordpicker",
@@ -206,7 +235,8 @@
                     "join_field": "id",
                     "display_field": [
                         "receipt_no",
-                        " gateway_id"
+                        " gateway_id",
+                        " code"
                     ],
                     "join_table_name": "payments_payments"
                 },
@@ -439,14 +469,15 @@
             "pd.payment_id",
             "pp.receipt_no AS payment_id_receipt_no",
             "pp.gateway_id AS payment_id_gateway_id",
+            "pp.code AS payment_id_code",
             "pd.completed",
             "pd.successful",
             "pd.amount",
             "pd.created_by",
-            "uu_1993.name AS created_by_name",
+            "uu_4426.name AS created_by_name",
             "pd.date_created",
             "pd.modified_by",
-            "uu_8579.name AS modified_by_name",
+            "uu_7692.name AS modified_by_name",
             "pd.date_modified"
         ],
         "leftjoin": [
@@ -464,15 +495,15 @@
             },
             {
                 "table": "Users\\Users\\Code\\Tables\\Users",
-                "alias": "uu_1993",
+                "alias": "uu_4426",
                 "name": "#__users_users",
-                "on": "pd.created_by = uu_1993.id"
+                "on": "pd.created_by = uu_4426.id"
             },
             {
                 "table": "Users\\Users\\Code\\Tables\\Users",
-                "alias": "uu_8579",
+                "alias": "uu_7692",
                 "name": "#__users_users",
-                "on": "pd.modified_by = uu_8579.id"
+                "on": "pd.modified_by = uu_7692.id"
             }
         ]
     }
