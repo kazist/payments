@@ -48,7 +48,7 @@ class InvoicesModel extends BaseModel {
         } else {
             $record = $this->getInvoiceByParams();
         }
-       
+
 
         $invoice_id = $this->saveNewInvoice($record->id, $record);
 
@@ -69,23 +69,27 @@ class InvoicesModel extends BaseModel {
         if (!empty($this->items)) {
 
             $factory->deleteRecords('#__payments_invoices_items', array('id=:id'), array('id' => $invoice_id));
-
+           
             foreach ($this->items as $key => $item) {
+                if ($item['amount']) {
+                    $total_amount += $item['unit_price'];
+                    $description .= $item['description'] . ' | ';
 
-                $total_amount += $item['unit_price'];
-                $description .= $item['description'] . ' | ';
+                    $item['invoice_id'] = $invoice_id;
 
-                $item['invoice_id'] = $invoice_id;
-
-                $factory->saveRecord('#__payments_invoices_items', $item);
+                    $factory->saveRecord('#__payments_invoices_items', $item);
+                }
             }
 
-            $invoice_data = new \stdClass();
-            $invoice_data->id = $invoice_id;
-            $invoice_data->amount = $total_amount;
-            $invoice_data->description = $description;
+            if ($total_amount) {
+                
+                $invoice_data = new \stdClass();
+                $invoice_data->id = $invoice_id;
+                $invoice_data->amount = $total_amount;
+                $invoice_data->description = $description;
 
-            $factory->saveRecord('#__payments_invoices', $invoice_data);
+                $factory->saveRecord('#__payments_invoices', $invoice_data);
+            }
         }
     }
 
@@ -109,7 +113,7 @@ class InvoicesModel extends BaseModel {
         $record = $query->loadObject();
 
         $record->items = $factory->getRecords('#__payments_invoices_items', 'pii', array('pii.invoice_id=:invoice_id'), array('invoice_id' => $record->id));
-       
+
         return $record;
     }
 
@@ -195,8 +199,6 @@ class InvoicesModel extends BaseModel {
         if (is_object($invoice)) {
             $data_obj = json_decode(json_encode(array_merge((array) $invoice, (array) $data_obj)));
         }
-  
-        // print_r($data_obj); exit;
 
         $id = $factory->saveRecord('#__payments_invoices', $data_obj);
 

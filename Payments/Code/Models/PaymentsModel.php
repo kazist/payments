@@ -898,7 +898,7 @@ class PaymentsModel extends BaseModel {
     }
 
     public function successfulTransaction($payment_id, $code = '') {
-
+ 
         $factory = new KazistFactory();
 
         $payment = $this->getPaymentById($payment_id);
@@ -907,8 +907,9 @@ class PaymentsModel extends BaseModel {
         $this->updateCouponsTransactions($payment);
         $this->savePaymentCodeStatus($payment_id, $code, true);
         $factory->enqueueMessage('Thank you. Your payment was Successful.', 'info');
-
+       
         $this->container->get('dispatcher')->dispatch('payment.successful', new PaymentEvent($payment));
+ 
     }
 
     public function failTransaction($payment_id) {
