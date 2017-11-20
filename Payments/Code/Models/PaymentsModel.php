@@ -782,10 +782,10 @@ class PaymentsModel extends BaseModel {
 
             $query->andWhere('pp.subset_id=:subset_id');
             $query->andWhere('pp.item_id=:item_id');
-//$query->andWhere('pp.amount=:amount');
+            //$query->andWhere('pp.amount=:amount');
             $query->setParameter('subset_id', $subset_id);
             $query->setParameter('item_id', $item_id);
-// $query->setParameter('amount', (int) $amount);
+            // $query->setParameter('amount', (int) $amount);
             $query->andWhere('(pp.completed=0 OR pp.completed IS NULL)');
         } else {
             $query->andWhere('1=-1');
