@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Transactions
  *
- * @ORM\Table(name="payments_transactions", indexes={@ORM\Index(name="user_id_index", columns={"user_id"}), @ORM\Index(name="payment_id_index", columns={"payment_id"}), @ORM\Index(name="rate_id_index", columns={"rate_id"}), @ORM\Index(name="behalf_user_id_index", columns={"behalf_user_id"}), @ORM\Index(name="created_by_index", columns={"created_by"}), @ORM\Index(name="modified_by_index", columns={"modified_by"})})
+ * @ORM\Table(name="payments_transactions", indexes={@ORM\Index(name="user_id_index", columns={"user_id"}), @ORM\Index(name="item_id_index", columns={"item_id"}), @ORM\Index(name="payment_id_index", columns={"payment_id"}), @ORM\Index(name="payment_source_index", columns={"payment_source"}), @ORM\Index(name="rate_id_index", columns={"rate_id"}), @ORM\Index(name="type_index", columns={"type"}), @ORM\Index(name="level_index", columns={"level"}), @ORM\Index(name="behalf_user_id_index", columns={"behalf_user_id"}), @ORM\Index(name="created_by_index", columns={"created_by"}), @ORM\Index(name="modified_by_index", columns={"modified_by"})})
  * @ORM\Entity
  * @ORM\HasLifecycleCallbacks
  */
@@ -232,21 +232,21 @@ class Transactions extends \Kazist\Table\BaseTable
     }
 
     /**
-     * Set payment_source
+     * Set paymentSource
      *
-     * @param string $payment_source
+     * @param string $paymentSource
      *
      * @return Transactions
      */
-    public function setPaymentSource($payment_source)
+    public function setPaymentSource($paymentSource)
     {
-        $this->payment_source = $payment_source;
+        $this->payment_source = $paymentSource;
 
         return $this;
     }
 
     /**
-     * Get payment_source
+     * Get paymentSource
      *
      * @return string
      */

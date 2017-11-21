@@ -98,10 +98,18 @@ Payments\Transactions\Code\Tables\Transactions:
   indexes:
     user_id_index:
       columns: [user_id]
+    item_id_index:
+      columns: [item_id]
     payment_id_index:
       columns: [payment_id]
+    payment_source_index:
+      columns: [payment_source]
     rate_id_index:
       columns: [rate_id]
+    type_index:
+      columns: [type]
+    level_index:
+      columns: [level]
     behalf_user_id_index:
       columns: [behalf_user_id]
     created_by_index:

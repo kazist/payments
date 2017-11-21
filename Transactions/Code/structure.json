@@ -179,7 +179,7 @@
             "html_type": "text",
             "mysql_type": "int",
             "view_side": "both",
-            "index": "",
+            "index": "index",
             "id_name": "",
             "class_name": "",
             "default_value": "",
@@ -189,9 +189,7 @@
             "parameters": {
                 "general": [],
                 "source": [],
-                "save": {
-                    "index": ""
-                },
+                "save": [],
                 "media": [],
                 "payment": []
             }
@@ -234,7 +232,7 @@
             "html_type": "text",
             "mysql_type": "varchar",
             "view_side": "both",
-            "index": "",
+            "index": "index",
             "id_name": "",
             "class_name": "",
             "default_value": "admin",
@@ -244,9 +242,7 @@
             "parameters": {
                 "general": [],
                 "source": [],
-                "save": {
-                    "index": ""
-                },
+                "save": [],
                 "media": [],
                 "payment": []
             }
@@ -364,7 +360,7 @@
             "html_type": "text",
             "mysql_type": "varchar",
             "view_side": "both",
-            "index": "",
+            "index": "index",
             "id_name": "",
             "class_name": "",
             "default_value": "",
@@ -374,9 +370,7 @@
             "parameters": {
                 "general": [],
                 "source": [],
-                "save": {
-                    "index": ""
-                },
+                "save": [],
                 "media": [],
                 "payment": []
             }
@@ -388,7 +382,7 @@
             "html_type": "text",
             "mysql_type": "varchar",
             "view_side": "both",
-            "index": "",
+            "index": "index",
             "id_name": "",
             "class_name": "",
             "default_value": "",
@@ -398,9 +392,7 @@
             "parameters": {
                 "general": [],
                 "source": [],
-                "save": {
-                    "index": ""
-                },
+                "save": [],
                 "media": [],
                 "payment": []
             }
@@ -661,14 +653,14 @@
             "pt.level",
             "pt.is_capped",
             "pt.behalf_user_id",
-            "uu_4528.name AS behalf_user_id_name",
+            "uu_2628.name AS behalf_user_id_name",
             "pt.token",
             "pt.is_processed",
             "pt.created_by",
-            "uu_3757.name AS created_by_name",
+            "uu_4852.name AS created_by_name",
             "pt.date_created",
             "pt.modified_by",
-            "uu_8009.name AS modified_by_name",
+            "uu_464.name AS modified_by_name",
             "pt.date_modified"
         ],
         "leftjoin": [
@@ -692,21 +684,21 @@
             },
             {
                 "table": "Users\\Users\\Code\\Tables\\Users",
-                "alias": "uu_4528",
+                "alias": "uu_2628",
                 "name": "#__users_users",
-                "on": "pt.behalf_user_id = uu_4528.id"
+                "on": "pt.behalf_user_id = uu_2628.id"
             },
             {
                 "table": "Users\\Users\\Code\\Tables\\Users",
-                "alias": "uu_3757",
+                "alias": "uu_4852",
                 "name": "#__users_users",
-                "on": "pt.created_by = uu_3757.id"
+                "on": "pt.created_by = uu_4852.id"
             },
             {
                 "table": "Users\\Users\\Code\\Tables\\Users",
-                "alias": "uu_8009",
+                "alias": "uu_464",
                 "name": "#__users_users",
-                "on": "pt.modified_by = uu_8009.id"
+                "on": "pt.modified_by = uu_464.id"
             }
         ]
     }
