@@ -25,8 +25,6 @@ use Subscriptions\Subscriptions\Code\Classes\Rank;
  */
 class TransactionsModel extends BaseModel {
 
-    //put your code here
-    //public function getQueryBuilder() {
     public function appendSearchQuery($query) {
 
         $factory = new KazistFactory();
@@ -44,8 +42,12 @@ class TransactionsModel extends BaseModel {
 
         $query = parent:: appendSearchQuery($query);
 
+
         $query->leftJoin('pt', '#__users_users', 'pt_uu', 'pt_uu.id = pt.behalf_user_id');
         $query->leftJoin('pt', '#__users_users', 'pt_own', 'pt_own.id = pt.user_id');
+
+        $query->addSelect('pt_uu.username AS trans_username, pt_uu.name AS trans_name, pt_uu.email AS trans_email');
+        $query->addSelect('pt_own.username AS own_username, pt_own.name AS own_name, pt_own.email AS own_email');
 
         if ($user_id) {
             $query->andWhere('pt.user_id=:user_id');
@@ -67,11 +69,7 @@ class TransactionsModel extends BaseModel {
             $query->setParameter('payment_source', 'affiliates.affiliates');
         }
 
-        $query->addSelect('pt_uu.username AS trans_username, pt_uu.name AS trans_name, pt_uu.email AS trans_email');
-        $query->addSelect('pt_own.username AS own_username, pt_own.name AS own_name, pt_own.email AS own_email');
 
-       // print_r((string)$query); exit;
-        
         return $query;
     }
 
@@ -87,7 +85,7 @@ class TransactionsModel extends BaseModel {
         } else {
             $form_data['debit'] = abs($form_data['amount']);
         }
-   
+
         return parent::save($form_data);
     }
 

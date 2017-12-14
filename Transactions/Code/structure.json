@@ -1,7 +1,7 @@
 {
     "views": {
         "edit": {
-            "structure": {
+            "structure": {    
                 "rows": [
                     {
                         "columns": [
@@ -198,7 +198,7 @@
             "dropdown_filter": "1",
             "nullable": "1",
             "name": "payment_id",
-            "html_type": "select",
+            "html_type": "recordpicker",
             "mysql_type": "int",
             "view_side": "both",
             "index": "",
@@ -251,7 +251,7 @@
             "dropdown_filter": "1",
             "nullable": "1",
             "name": "rate_id",
-            "html_type": "select",
+            "html_type": "recordpicker",
             "mysql_type": "int",
             "view_side": "both",
             "index": "",
