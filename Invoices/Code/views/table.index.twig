@@ -1,0 +1,98 @@
+{# empty Twig template #}
+
+{% import "form.macro.twig" as forms %}
+
+{% set search = document.search %}
+
+<h1 class="component-header"> Invoice History </h1>
+
+<form id="{{ main_form_id }}" action="{{ generate_url('payments.payments') }}" method="post" >
+
+    <div class="col-sm-12">
+        <div class="col-sm-3">
+            <b>Payment Method</b><br>
+            {{ forms.input(' search.gateway_id', 'select', search.gateway_id, null, null, null, null, null, gatewaysinput  ) }}
+        </div>
+        <div class="col-sm-4">
+            <b>Date Range</b><br>
+            <div class="date_created_start_wrapper">
+                {{ forms.input(' search.date_created.start', 'datetime', search.date_created.start ) }}
+            </div>
+            <div class="date_created_end_wrapper">
+                {{ forms.input(' search.date_created.end', 'datetime', search.date_created.end ) }}
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <b></b><br>
+            <button class="btn btn-success btn-sm" type="submit" name="submit">Search</button>
+            <button class="btn btn-default btn-sm" type="submit" name="clear" value="clear">Clear</button>
+        </div>
+    </div>
+
+    <div class="clearfix"></div>
+    <br>
+
+    <div class="table-responsive">
+        <table class="table table-condensed table-bordered">
+            <thead>
+                <tr>
+                    <th align="left">Description</th>
+                    <th align="left">Invoice No</th>
+                    <th align="left">Transaction Code</th>
+                    <th>Amount</th>
+                    <th>Due Date</th>
+                    <th>Status</th>
+                </tr>
+            </thead> 
+            <tbody>
+                {% if items|length>0 %}
+
+                    {% for item in items %}
+                        <tr>
+                            <td>{{ item.description }}</td>
+                            <td>{{ item.invoice_no }}</td>
+                            <td>{{ item.receipt_no }}</td>
+                            <td>{{ item.amount }}</td>
+                            <td>{{ item.expiry_date }}</td>
+                            <td align="right">
+                                {% if not item.is_canceled %}
+                                    {% if  item.successful %}
+                                        <label class="label label-success">Paid</label>
+                                    {% elseif not item.completed %}
+                                        <label class="label label-default">Pending</label>
+                                    {% else %}
+                                        <label class="label label-primary">Progress</label>
+                                    {% endif %}
+                                {% else %}
+                                    <label class="label label-danger">Canceled</label>
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
+
+
+    <div class="clearfix"></div>
+
+    {% include "items.pagination.twig"%}
+
+    {% include "form.hidden.twig" %}
+
+    {{ forms.input('_token' ) }}
+
+</form>
+
+<style>
+    .date_created_start_wrapper{
+        width: 45% !important;
+        float: left;
+    }
+
+    .date_created_end_wrapper{
+        width: 45% !important;
+        float: right;
+    }
+</style>

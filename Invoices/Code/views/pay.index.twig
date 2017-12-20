@@ -1,0 +1,124 @@
+{# empty Twig template #}
+
+{% import "form.macro.twig" as forms %}
+{% import _self as payment_macro %}
+
+{{ set_assets('applications/Payments/assets/css/payment.css') }}
+{{ set_assets('applications/Payments/assets/js/payment.js') }}
+
+<section class="invoice">
+
+    <!-- Table row -->
+    <h3>Currently Pending Payments</h3>
+    <div class="row">
+        <div class="col-xs-12 table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th align="left">Description</th>
+                        <th align="left">Invoice No</th>
+                        <th align="left">Transaction Code</th>
+                        <th>Amount</th>
+                        <th>Due Date</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    {% if invoices|length>0 %}
+
+                        {% for item in invoices %}
+                            <tr>
+                                <td>{{ item.description }}</td>
+                                <td>{{ item.invoice_no }}</td>
+                                <td>{{ item.receipt_no }}</td>
+                                <td>{{ item.amount }}</td>
+                                <td>{{ item.expiry_date }}</td>
+                                <td align="right">
+                                    {% if not item.is_canceled %}
+                                        {% if  item.successful %}
+                                            <label class="label label-success">Paid</label>
+                                        {% elseif not item.completed %}
+                                            <label class="label label-default">Pending</label>
+                                        {% else %}
+                                            <label class="label label-primary">Progress</label>
+                                        {% endif %}
+                                    {% else %}
+                                        <label class="label label-danger">Canceled</label>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    {% endif %}
+                    
+                    {% if payment.items|length>0 %}
+                        <tr>
+                            {% for item in payment.items %}
+                                <td>{{ item.description }}</td>
+                            </tr>
+                        {% endfor %}
+                    {% else %}
+                        <tr>
+                            <td>{{ payment.description }}</td>
+                        </tr>
+                    {% endif %}
+
+                    
+                </tbody>
+            </table>
+        </div>
+        <!-- /.col -->
+    </div>
+
+
+    {% include "pay.gateways.twig" ignore missing %} 
+
+</section>
+
+
+{% macro invoice(gateway, payment, converter) %}
+    <div class="table-responsive">
+        <table class="table">
+            <tbody>
+                <tr>
+                    <th style="width:50%">Description:</th>
+                    <th>Amount</td>
+                </tr>
+                {% if gateway.rates|length > 0  %}
+                    {% for rate in gateway.rates %}
+                        {% if rate.highlighted %}
+                            <tr>
+                                <th>{{ rate.title }}</th>
+                                <td>{{ converter.symbol|default(converter.code) }} {{ (rate.amount * converter.buying|default(1))|number_format(2) }}</td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td>{{ rate.title }}</td>
+                                <td>{{ converter.symbol|default(converter.code) }} {{ (rate.amount* converter.buying|default(1))|number_format(2) }}</td>
+                            </tr>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+
+            </tbody>
+        </table>
+    </div>
+
+{% endmacro %}      
+
+{% macro form(gateway, payment, user, converter) %}
+
+    {% if gateway.parameters|length > 0 %}
+        {% for parameter in gateway.parameters %}
+            <input type="hidden" name="{{ parameter.name }}" value="{{ parameter.value }}" />
+        {% endfor %}
+    {% endif %}      
+
+    {% include gateway.short_name ~".payment.form.twig" ignore missing %} 
+
+
+    <input class="payment_id" type="hidden" name="payment_id" value="{{ payment.id }}">
+    <input class="payment_type" type="hidden" name="payment_type" value="{{ gateway.short_name }}">
+
+{% endmacro %}
+
+

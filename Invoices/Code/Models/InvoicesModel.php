@@ -69,7 +69,7 @@ class InvoicesModel extends BaseModel {
         if (!empty($this->items)) {
 
             $factory->deleteRecords('#__payments_invoices_items', array('id=:id'), array('id' => $invoice_id));
-           
+
             foreach ($this->items as $key => $item) {
                 if ($item['amount']) {
                     $total_amount += $item['unit_price'];
@@ -82,7 +82,7 @@ class InvoicesModel extends BaseModel {
             }
 
             if ($total_amount) {
-                
+
                 $invoice_data = new \stdClass();
                 $invoice_data->id = $invoice_id;
                 $invoice_data->amount = $total_amount;
@@ -205,6 +205,54 @@ class InvoicesModel extends BaseModel {
         $this->addInvoiceItems($id);
 
         return $id;
+    }
+
+    public function getInvoices() {
+
+        $factory = new KazistFactory();
+        $user = $factory->getUser();
+
+        $query = new Query();
+        $query->select('pi.*');
+        $query->from('#__payments_invoices', 'pi');
+
+        if ($user->id) {
+            $query->andWhere('pi.user_id=:user_id');
+            $query->setParameter('user_id', $user->id);
+            $query->andWhere('pi.successful=0 OR pi.successful IS NULL OR pi.successful=\'\'');
+        } else {
+            $query->andWhere('1=-1');
+        }
+
+        $records = $query->loadObjectList();
+
+        foreach ($records as $key => $record) {
+            $records[$key]->items = $factory->getRecords('#__payments_invoices_items', 'pii', array('pii.invoice_id=:invoice_id'), array('invoice_id' => $record->id));
+        }
+
+
+        return $records;
+    }
+
+    public function getPrepayments() {
+
+        $factory = new KazistFactory();
+        $user = $factory->getUser();
+
+        $query = new Query();
+        $query->select('pp.*');
+        $query->from('#__payments_prepayments', 'pp');
+
+        if ($user->id) {
+            $query->andWhere('pp.user_id=:user_id');
+            $query->setParameter('user_id', $user->id);
+        } else {
+            $query->andWhere('1=-1');
+        }
+
+        $records = $query->loadObjectList();
+
+        return $records;
     }
 
 }

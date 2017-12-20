@@ -1,0 +1,66 @@
+Payments\Prepayments\Code\Tables\Prepayments:
+  table: payments_prepayments
+  type: entity
+  id:
+    id:
+      type: integer
+      generator: { strategy: AUTO }
+  fields:
+    payment_source:
+      name: payment_source
+      type: integer
+      length: 11
+      nullable: false
+    item_id:
+      name: item_id
+      type: integer
+      length: 11
+      nullable: false
+    user_id:
+      name: user_id
+      type: integer
+      length: 11
+      nullable: true
+    package_source:
+      name: package_source
+      type: string
+      length: 255
+      nullable: true
+    date_created:
+      name: date_created
+      type: datetime
+      nullable: true
+    date_modified:
+      name: date_modified
+      type: datetime
+      nullable: true
+    modified_by:
+      name: modified_by
+      type: integer
+      length: 11
+      nullable: true
+    created_by:
+      name: created_by
+      type: integer
+      length: 11
+      nullable: true
+  indexes:
+    payment_source_index:
+      columns: [payment_source]
+    item_id_index:
+      columns: [item_id]
+    user_id_index:
+      columns: [user_id]
+    package_source_index:
+      columns: [package_source]
+    modified_by_index:
+      columns: [modified_by]
+    created_by_index:
+      columns: [created_by]
+  lifecycleCallbacks:
+    prePersist:
+      - onPrePersist
+      - onPrePersistCallbacks
+    preUpdate:
+      - onPreUpdate
+      - onPreUpdateCallbacks

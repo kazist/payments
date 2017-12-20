@@ -1,0 +1,60 @@
+{# empty Twig template #}
+
+{% import "form.macro.twig" as forms %}
+
+{% set search = document.search %}
+
+<form id="{{ main_form_id }}" action="{{ generate_url('admin.payments.payments', {'user_id':user_id}) }}" method="post" >
+    <div class="custom-search">
+        <div class="col-sm-2">
+            <b>Transaction Code</b><br>
+            {{ forms.input(' search.code', 'text', search.code) }}
+        </div>
+        <div class="col-sm-2">
+            <b>Gateway</b><br>
+            {{ forms.input(' search.gateway_id', 'select', search.gateway_id, null, null, null, null, null, gatewaysinput  ) }}
+        </div>
+        <div class="col-sm-2">
+            <b>Search Member</b><br>
+            {{ forms.input(' search.from', 'text', search.from) }}
+        </div>
+        <div class="col-sm-4">
+            <b>Date Range</b><br>
+            <div class="date_created_start_wrapper">
+                {{ forms.input(' search.date_created.start', 'datetime', search.date_created.start ) }}
+            </div>
+            <div class="date_created_end_wrapper">
+                {{ forms.input(' search.date_created.end', 'datetime', search.date_created.end ) }}
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <b></b><br>
+            <button class="btn btn-success btn-sm" type="submit" name="submit">Search</button>
+            <button class="btn btn-default btn-sm" type="submit" name="clear" value="clear">Clear</button>
+        </div>
+    </div>
+
+    {{ forms.input('_token' ) }}
+
+</form>
+
+
+<div class="clearfix"></div>
+<br>
+
+<style>
+    .custom-search .col-sm-1, .custom-search .col-sm-2, .custom-search .col-sm-3, .custom-search .col-sm-9, .custom-search .col-sm-12{
+        margin:0;
+        padding:0 2px;
+    }
+
+    .date_created_start_wrapper{
+        width: 45% !important;
+        float: left;
+    }
+
+    .date_created_end_wrapper{
+        width: 45% !important;
+        float: right;
+    }
+</style>

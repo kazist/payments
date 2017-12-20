@@ -854,6 +854,7 @@ class PaymentsModel extends BaseModel {
         if (is_object($payment)) {
             $data_obj = json_decode(json_encode(array_merge((array) $payment, (array) $data_obj)));
         }
+       
 
         if ($data_obj->amount) {
             $id = $factory->saveRecord('#__payments_payments', $data_obj);

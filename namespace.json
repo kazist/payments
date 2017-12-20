@@ -74,5 +74,9 @@
     "PaymentsPaymentsCoupons": {
         "namespace": "Payments\\Payments\\Coupons",
         "controller": "CouponsController"
+    },
+    "PaymentsPrepayments": {
+        "namespace": "Payments\\Prepayments",
+        "controller": "PrepaymentsController"
     }
 }

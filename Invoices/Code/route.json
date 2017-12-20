@@ -1,0 +1,251 @@
+{
+    "frontend": [{
+            "title": "Invoice List",
+            "description": "Management of Invoices.",
+            "controller": "Payments\\Invoices\\Code\\Controllers\\InvoicesController::indexAction",
+            "permissions": "can_view, can_viewown",
+            "unique_name": "payments.invoices",
+            "route": "payments/invoices",
+            "arguments": "",
+            "keywords": "invoice, list",
+            "priority": "0.5",
+            "changefreq": "weekly",
+            "login_required": 1,
+            "roles": {
+                "SUPER_ADMIN": ["can_viewown"],
+                "ADMIN": ["can_viewown"],
+                "MODERATOR": ["can_viewown"],
+                "USER": ["can_viewown"]
+            }
+        }, {
+            "title": "Invoice Ajax",
+            "description": "Invoice Ajax.",
+            "controller": "Payments\\Invoices\\Code\\Controllers\\InvoicesController::ajaxsavejsonAction",
+            "unique_name": "payments.invoices.ajaxsavejson",
+            "route": "payments/invoices/ajaxsavejson",
+            "permissions": "can_view, can_viewown",
+            "arguments": "",
+            "keywords": "ajaxsavejson, list",
+            "priority": "0.5",
+            "changefreq": "weekly",
+            "login_required": 1
+        }, {
+            "title": "Invoice Detail: {{ item.name }}",
+            "description": "Invoice Detail: {{ item.name }}",
+            "controller": "Payments\\Invoices\\Code\\Controllers\\InvoicesController::detailAction",
+            "unique_name": "payments.invoices.detail",
+            "route": "payments/invoices/detail/{id}",
+            "permissions": "can_view, can_viewown",
+            "arguments": {
+                "id": null
+            },
+            "keywords": "invoice, list, {{ item.name }}",
+            "priority": "0.5",
+            "changefreq": "weekly",
+            "login_required": 1,
+            "roles": {
+                "SUPER_ADMIN": ["can_viewown"],
+                "ADMIN": ["can_viewown"],
+                "MODERATOR": ["can_viewown"],
+                "USER": ["can_viewown"]
+            }
+        }, {
+            "title": "Invoice Save: {{ item.name }}",
+            "description": "Invoice Save: {{ item.name }}",
+            "controller": "Payments\\Invoices\\Code\\Controllers\\InvoicesController::saveAction",
+            "unique_name": "payments.invoices.save",
+            "route": "payments/invoices/save",
+            "permissions": "can_add, can_write, can_writeown",
+            "arguments": {
+                "id": null
+            },
+            "keywords": "invoice, save, {{ item.name }}",
+            "priority": "0.5",
+            "changefreq": "weekly",
+            "login_required": 1,
+            "roles": {
+                "SUPER_ADMIN": ["can_add"],
+                "ADMIN": ["can_add"],
+                "MODERATOR": ["can_add"],
+                "USER": ["can_add"]
+            }
+        }, {
+            "title": "Invoice pay",
+            "description": "Invoice pay",
+            "controller": "Payments\\Invoices\\Code\\Controllers\\InvoicesController::payAction",
+            "unique_name": "payments.invoices.pay",
+            "route": "payments/invoices/pay",
+            "permissions": "can_viewown",
+            "arguments": {
+                "id": null
+            },
+            "keywords": "invoice, pay, {{ item.name }}",
+            "priority": "0.5",
+            "changefreq": "weekly",
+            "login_required": 1,
+            "roles": {
+                "SUPER_ADMIN": ["can_viewown"],
+                "ADMIN": ["can_viewown"],
+                "MODERATOR": ["can_viewown"],
+                "USER": ["can_viewown"]
+            }
+        }, {
+            "title": " new invoice",
+            "description": " new invoice",
+            "controller": "Payments\\Invoices\\Code\\Controllers\\InvoicesController::newinvoiceAction",
+            "unique_name": "payments.invoices.newinvoice",
+            "route": "payments/invoices/newinvoice",
+            "permissions": "can_add",
+            "arguments": {
+                "id": null
+            },
+            "keywords": "invoice, pay, {{ item.name }}",
+            "priority": "0.5",
+            "changefreq": "weekly",
+            "login_required": 1,
+            "roles": {
+                "SUPER_ADMIN": ["can_add"],
+                "ADMIN": ["can_add"],
+                "MODERATOR": ["can_add"],
+                "USER": ["can_add"]
+            }
+        }]
+    ,
+    "backend": [{
+            "title": "General Tasks",
+            "description": "General Tasks.",
+            "controller": "Payments\\Invoices\\Code\\Controllers\\Admin\\InvoicesController::taskAction",
+            "unique_name": "admin.payments.invoices.task",
+            "route": "admin/payments/invoices/task",
+            "permissions": "can_add, can_write, can_writeown",
+            "arguments": "",
+            "keywords": "invoices, task",
+            "priority": "0.5",
+            "changefreq": "weekly",
+            "login_required": 1,
+            "roles": {
+                "SUPER_ADMIN": ["can_add", "can_write", "can_writeown"],
+                "ADMIN": ["can_add", "can_write", "can_writeown"]
+            }
+        }, {
+            "title": "Invoice List",
+            "description": "Management of Invoices.",
+            "controller": "Payments\\Invoices\\Code\\Controllers\\Admin\\InvoicesController::indexAction",
+            "permissions": "can_view, can_viewown",
+            "unique_name": "admin.payments.invoices",
+            "route": "admin/payments/invoices",
+            "arguments": "",
+            "keywords": "invoice, list",
+            "priority": "0.5",
+            "changefreq": "weekly",
+            "login_required": 1,
+            "roles": {
+                "SUPER_ADMIN": ["can_view", "can_viewown"],
+                "ADMIN": ["can_view", "can_viewown"]
+            }
+        }, {
+            "title": "Add Invoice ",
+            "description": "Add Invoice .",
+            "controller": "Payments\\Invoices\\Code\\Controllers\\Admin\\InvoicesController::addAction",
+            "unique_name": "admin.payments.invoices.add",
+            "route": "admin/payments/invoices/add",
+            "permissions": "can_add",
+            "arguments": {},
+            "keywords": "invoice,add",
+            "priority": "0.5",
+            "changefreq": "weekly",
+            "login_required": 1,
+            "roles": {
+                "SUPER_ADMIN": ["can_add"],
+                "ADMIN": ["can_add"]
+            }
+        }, {
+            "title": "Edit Invoice {{ item.name }}",
+            "description": "Edit Invoice {{ item.name }}.",
+            "controller": "Payments\\Invoices\\Code\\Controllers\\Admin\\InvoicesController::editAction",
+            "unique_name": "admin.payments.invoices.edit",
+            "route": "admin/payments/invoices/edit/{id}",
+            "permissions": "can_add, can_write, can_writeown",
+            "arguments": {
+                "id": null
+            },
+            "keywords": "invoice, list, {{ item.name }}",
+            "priority": "0.5",
+            "changefreq": "weekly",
+            "login_required": 1,
+            "roles": {
+                "SUPER_ADMIN": ["can_add", "can_write", "can_writeown"],
+                "ADMIN": ["can_add"]
+            }
+        }, {
+            "title": "Invoice Detail: {{ item.name }}",
+            "description": "Invoice Detail: {{ item.name }}",
+            "controller": "Payments\\Invoices\\Code\\Controllers\\Admin\\InvoicesController::detailAction",
+            "unique_name": "admin.payments.invoices.detail",
+            "route": "admin/payments/invoices/detail/{id}",
+            "permissions": "can_view, can_viewown",
+            "arguments": {
+                "id": null
+            },
+            "keywords": "invoice, list, {{ item.name }}",
+            "priority": "0.5",
+            "changefreq": "weekly",
+            "login_required": 1,
+            "roles": {
+                "SUPER_ADMIN": ["can_view", "can_viewown"],
+                "ADMIN": ["can_view", "can_viewown"]
+            }
+        }, {
+            "title": "Invoice Delete: {{ item.name }}",
+            "description": "Invoice Delete: {{ item.name }}",
+            "controller": "Payments\\Invoices\\Code\\Controllers\\Admin\\InvoicesController::deleteAction",
+            "unique_name": "admin.payments.invoices.delete",
+            "route": "admin/payments/invoices/delete/{id}",
+            "permissions": "can_delete, can_deleteown",
+            "arguments": {
+                "id": null
+            },
+            "keywords": "invoice, delete, {{ item.name }}",
+            "priority": "0.5",
+            "changefreq": "weekly",
+            "login_required": 1,
+            "roles": {
+                "SUPER_ADMIN": ["can_delete"]
+            }
+        }, {
+            "title": "Invoice Save: {{ item.name }}",
+            "description": "Invoice Save: {{ item.name }}",
+            "controller": "Payments\\Invoices\\Code\\Controllers\\Admin\\InvoicesController::saveAction",
+            "unique_name": "admin.payments.invoices.save",
+            "route": "admin/payments/invoices/save",
+            "permissions": "can_add, can_write, can_writeown",
+            "arguments": {
+                "id": null
+            },
+            "keywords": "invoice, save, {{ item.name }}",
+            "priority": "0.5",
+            "changefreq": "weekly",
+            "login_required": 1,
+            "roles": {
+                "SUPER_ADMIN": ["can_add", "can_write", "can_writeown"],
+                "ADMIN": ["can_add"]
+            }
+        }, {
+            "title": "Reverse Invoice",
+            "description": "Reverse Invoice",
+            "controller": "Payments\\Invoices\\Code\\Controllers\\Admin\\InvoicesController::reverseinvoiceAction",
+            "unique_name": "admin.payments.invoices.reverseinvoice",
+            "route": "admin.payments/invoices/reverseinvoice/{id}",
+            "arguments": {
+                "id": null
+            },
+            "keywords": "business, reverse, invoice, {{ item.name }}",
+            "priority": "0.5",
+            "changefreq": "weekly",
+            "login_required": 1,
+            "roles": {
+                "SUPER_ADMIN": ["can_delete", "can_deleteown"],
+                "ADMIN": ["can_add", "can_delete", "can_writeown"]
+            }
+        }]
+} 	
