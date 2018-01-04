@@ -83,11 +83,11 @@
     "payments_deposits_edit_label_date_modified": "Date Modified",
     "payments_deposits_edit_placeholder_date_modified": "Date Modified",
     "payments_deposits_edit_tooltip_date_modified": "Date Modified",
-    "payments_deposits_title_gateway_id": "gateway_id",
-    "payments_deposits_description_gateway_id": "gateway_id",
-    "payments_deposits_table_header_gateway_id": "gateway_id",
-    "payments_deposits_table_description_gateway_id": "gateway_id",
-    "payments_deposits_edit_label_gateway_id": "gateway_id",
-    "payments_deposits_edit_placeholder_gateway_id": "gateway_id",
-    "payments_deposits_edit_tooltip_gateway_id": "gateway_id"
+    "payments_deposits_title_gateway_id": "Gateway",
+    "payments_deposits_description_gateway_id": "Gateway",
+    "payments_deposits_table_header_gateway_id": "Gateway",
+    "payments_deposits_table_description_gateway_id": "Gateway",
+    "payments_deposits_edit_label_gateway_id": "Gateway",
+    "payments_deposits_edit_placeholder_gateway_id": "Gateway",
+    "payments_deposits_edit_tooltip_gateway_id": "Gateway"
 }

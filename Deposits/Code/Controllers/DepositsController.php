@@ -52,7 +52,7 @@ class DepositsController extends BaseController {
         $tmp_maximum_amount = $factory->getSetting('payments_deposits_maximum_amount');
         $maximum_amount = ($tmp_maximum_amount) ? $tmp_maximum_amount : 500;
 
-        $form['description'] = 'Deposit $' . $form['amount'] . ' to your ' . $wallet_name . ' wallet';
+        $form['description'] = 'Deposit $' . $form['amount'] . ' to your ' . $wallet_name . ' wallet : ' . $user->username;
 
         if ($form['amount'] > $maximum_amount) {
             $factory->enqueueMessage('The deposited money is more than Maximum Amount set($' . $maximum_amount . ')', 'error');

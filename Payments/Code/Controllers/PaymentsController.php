@@ -31,15 +31,15 @@ class PaymentsController extends BaseController {
     }
 
     public function cancelAction() {
-        
+        return $this->redirectToRoute('payments.payments');
     }
 
     public function returnAction() {
-        
+        return $this->redirectToRoute('payments.payments');
     }
 
     public function notifyAction() {
-        
+        return $this->redirectToRoute('payments.payments');
     }
 
     public function ajaxsavejsonAction() {
@@ -54,10 +54,10 @@ class PaymentsController extends BaseController {
         $payment_url = $this->request->get('payment_url');
         $token = $this->request->get('_token');
         $form = $this->request->request->all();
-        
+
         $gateway = $gateways[$payment_type];
-        
-        $payment_params =$gateway->json;
+
+        $payment_params = $gateway->json;
 
         $this->model = new PaymentsModel();
         $this->model->savePaymentJson($payment_id, $payment_params, $payment_type);
