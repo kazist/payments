@@ -69,6 +69,9 @@ class TransactionsModel extends BaseModel {
             $query->setParameter('payment_source', 'affiliates.affiliates');
         }
 
+        $query->orderBy('pt.id', 'DESC');
+        
+       // print_r((string)$query); exit;
 
         return $query;
     }
