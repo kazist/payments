@@ -144,17 +144,21 @@ class PaymentsModel extends BaseModel {
 
     public function getConverterAmount($amount, $gateway, $is_up = true) {
 
-        $query = new Query();
-        $query->select('*');
-        $query->from('#__setup_currencies', 'sc');
-        $query->where('sc.id=:id');
-        $query->setParameter('id', $gateway->currency_id);
-        $record = $query->loadObject();
+        if ($gateway->currency_id) {
+            $query = new Query();
+            $query->select('*');
+            $query->from('#__setup_currencies', 'sc');
+            $query->where('sc.id=:id');
+            $query->setParameter('id', $gateway->currency_id);
+            $record = $query->loadObject();
 
-        if ($is_up) {
-            $new_amount = ($record->buying) ? $amount * $record->buying : $amount * $record->rate;
+            if ($is_up) {
+                $new_amount = ($record->buying) ? $amount * $record->buying : $amount * $record->rate;
+            } else {
+                $new_amount = ($record->buying) ? $amount / $record->buying : $amount / $record->rate;
+            }
         } else {
-            $new_amount = ($record->buying) ? $amount / $record->buying : $amount / $record->rate;
+            $new_amount = $amount;
         }
 
         return $new_amount;
@@ -854,7 +858,7 @@ class PaymentsModel extends BaseModel {
         if (is_object($payment)) {
             $data_obj = json_decode(json_encode(array_merge((array) $payment, (array) $data_obj)));
         }
-       
+
 
         if ($data_obj->amount) {
             $id = $factory->saveRecord('#__payments_payments', $data_obj);
@@ -899,7 +903,7 @@ class PaymentsModel extends BaseModel {
     }
 
     public function successfulTransaction($payment_id, $code = '') {
- 
+
         $factory = new KazistFactory();
 
         $payment = $this->getPaymentById($payment_id);
@@ -908,9 +912,8 @@ class PaymentsModel extends BaseModel {
         $this->updateCouponsTransactions($payment);
         $this->savePaymentCodeStatus($payment_id, $code, true);
         $factory->enqueueMessage('Thank you. Your payment was Successful.', 'info');
-       
+
         $this->container->get('dispatcher')->dispatch('payment.successful', new PaymentEvent($payment));
- 
     }
 
     public function failTransaction($payment_id) {
@@ -1016,7 +1019,7 @@ class PaymentsModel extends BaseModel {
         if ($payment->gateway_id) {
             $payment_obj->gateway_id = $payment->gateway_id;
         }
-
+    
         $factory->saveRecord('#__payments_payments', $payment_obj);
 
         $data_obj = new \stdClass();
