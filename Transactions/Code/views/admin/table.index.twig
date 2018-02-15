@@ -26,6 +26,7 @@
                     <th>From</th>
                     <th>To</th>
                     <th>Date</th>
+                    <th>Created By</th>
                     <th>Money In(USD)</th>
                     <th>Money Out(USD)</th>
                 </tr>
@@ -49,6 +50,7 @@
                             <td>{{ item.trans_name }} ({{ item.trans_username }})</td>
                             <td>{{ item.own_name }} ({{ item.own_username }})</td>
                             <td>{{ item.date_created ? item.date_created|date('d M Y H:i:s',  document.timezone) }}</td>
+                            <td>{{ item.created_by ? item.creator_username }}</td>
                             <td align="right">{{ item.credit ? item.credit|number_format(2) }}</td>
                             <td align="right">{{ item.debit ? item.debit|number_format(2) }}</td>
                         </tr>

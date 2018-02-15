@@ -45,9 +45,11 @@ class TransactionsModel extends BaseModel {
 
         $query->leftJoin('pt', '#__users_users', 'pt_uu', 'pt_uu.id = pt.behalf_user_id');
         $query->leftJoin('pt', '#__users_users', 'pt_own', 'pt_own.id = pt.user_id');
+        $query->leftJoin('pt', '#__users_users', 'pt_creator', 'pt_creator.id = pt.created_by');
 
         $query->addSelect('pt_uu.username AS trans_username, pt_uu.name AS trans_name, pt_uu.email AS trans_email');
         $query->addSelect('pt_own.username AS own_username, pt_own.name AS own_name, pt_own.email AS own_email');
+        $query->addSelect('pt_creator.username AS creator_username, pt_own.name AS creator_name, pt_own.email AS creator_email');
 
         if ($user_id) {
             $query->andWhere('pt.user_id=:user_id');
