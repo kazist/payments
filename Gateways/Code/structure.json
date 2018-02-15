@@ -476,37 +476,37 @@
             "name": "transfer_rates",
             "title": "Tranfer Charge Rates",
             "type": "module",
-            "description": "undefined"
+            "description": ""
         },
         {
             "name": "withdraw_rates",
             "title": "Withdraw Charge Rates",
             "type": "module",
-            "description": "undefined"
+            "description": ""
         },
         {
             "name": "payment_rates",
             "title": "Payment Charge Rates",
             "type": "module",
-            "description": "undefined"
+            "description": ""
         },
         {
             "name": "allowed_in",
             "title": "Allowed In",
             "type": "module",
-            "description": "undefined"
+            "description": ""
         },
         {
             "name": "disallowed_in",
             "title": "Disallowed In",
             "type": "module",
-            "description": "undefined"
+            "description": ""
         },
         {
             "name": "parameters",
             "title": "Parameters",
             "type": "module",
-            "description": "undefined"
+            "description": ""
         }
     ],
     "fields": [

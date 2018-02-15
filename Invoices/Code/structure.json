@@ -112,7 +112,7 @@
             "name": "invoice_items",
             "title": "Invoice Items",
             "type": "module",
-            "description": "undefined"
+            "description": ""
         }
     ],
     "fields": [
