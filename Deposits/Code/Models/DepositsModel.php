@@ -39,11 +39,13 @@ class DepositsModel extends BaseModel {
         $query->addSelect('pg.short_name as gateway_id_short_name');
 
         if ($search['gateway_id'] <> '') {
-            $query->where('pp.gateway_id = ' . (int) $search['gateway_id']);
+            $query->where('pp.gateway_id = :gateway_id');
+            $query->setParameter('gateway_id', (int) $search['gateway_id']);
         }
 
         if ($user_id) {
-            $query->andwhere('pd.user_id=' . (int) $user_id);
+            $query->andwhere('pd.user_id=:user_id');
+            $query->setParameter('user_id', (int) $user_id);
             $query->andwhere('pd.completed=1');
             $query->andwhere('pd.successful=1');
         }

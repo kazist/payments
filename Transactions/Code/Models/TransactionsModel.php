@@ -72,8 +72,8 @@ class TransactionsModel extends BaseModel {
         }
 
         $query->orderBy('pt.id', 'DESC');
-        
-       // print_r((string)$query); exit;
+
+        // print_r((string)$query); exit;
 
         return $query;
     }
@@ -170,7 +170,8 @@ class TransactionsModel extends BaseModel {
 
         $query = $this->getQueryBuilder('#__payments_transactions', 'pt');
         $query->select('DISTINCT pt.type');
-        $query->andWhere('pt.user_id =' . (int) $user->id);
+        $query->andWhere('pt.user_id = :user_id');
+        $query->setParameter('user_id', (int) $user->id);
         if ($view_name == 'commission') {
             $query->andWhere('pt.payment_source=:payment_source');
             $query->setParameter('payment_source', 'affiliates.affiliates');

@@ -61,14 +61,16 @@ class PaymentsModel extends BaseModel {
                 $user_id = $this->request->query->get('user_id');
 
                 if ($user_id) {
-                    $query->andWhere('pp.user_id=' . $user_id);
+                    $query->andWhere('pp.user_id=:user_id');
+                    $query->setParameter('user_id', (int) $user_id);
                 } elseif ($search['from']) {
                     $query->andWhere('pp.user_id=:user_id');
                     $query->setParameter('user_id', $this->getUserIdByUsername($search['from']));
                 }
             } else {
                 if ($user_id) {
-                    $query->andWhere('pp.user_id=' . $user_id);
+                    $query->andWhere('pp.user_id=:user_id');
+                    $query->setParameter('user_id', (int) $user_id);
                 } else {
                     $query->andWhere('1=-1');
                 }
@@ -1019,7 +1021,7 @@ class PaymentsModel extends BaseModel {
         if ($payment->gateway_id) {
             $payment_obj->gateway_id = $payment->gateway_id;
         }
-    
+
         $factory->saveRecord('#__payments_payments', $payment_obj);
 
         $data_obj = new \stdClass();

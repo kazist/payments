@@ -191,7 +191,8 @@ class RatesModel extends BaseModel {
 
         $query = $this->getTransactionsRateQuery($rate_id);
         $query->select('ft.*');
-        $query->where('ft.user_id=' . $user_id);
+        $query->where('ft.user_id=:user_id');
+        $query->setParameter('user_id', (int) $user_id);
 
         $records = $query->loadObjectList();
 
