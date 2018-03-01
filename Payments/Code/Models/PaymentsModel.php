@@ -633,6 +633,16 @@ class PaymentsModel extends BaseModel {
         return $this->generateUrl('' . $app_name . '.' . $com_name . '.' . $subset_name . '.edit', array('id', $item_id));
     }
 
+    public function hideCouponAmount($payment = '') {
+        
+        foreach($payment->coupons AS $coupon){
+            $payment->amount = $payment->amount-$coupon->amount;
+        }
+        
+        unset($payment->coupons);
+        
+        return $payment;
+    }
     public function getPayment($payment_id = '') {
 
         if ($payment_id) {
@@ -682,6 +692,8 @@ class PaymentsModel extends BaseModel {
         $where_arr[] = 'pc.applied = \'all_payment\'';
         if ($payment->is_new) {
             $where_arr[] = 'pc.applied = \'all_new\'';
+        }else{
+            $where_arr[] = 'pc.applied = \'all_renew\'';
         }
 
         $query->andWhere(implode(' OR ', $where_arr));

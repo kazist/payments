@@ -40,6 +40,12 @@
                     "tooltip": "Enable Levels to Payment Transactions ",
                     "type": "yesno"
                 }, {
+                    "name": "payments_show_coupon_on_invoice",
+                    "label": "Show Coupon On Invoice",
+                    "default": "1",
+                    "tooltip": "Enable Show Coupon On Invoice",
+                    "type": "yesno"
+                }, {
                     "name": "payments_gateway_default_gateway",
                     "label": "Default Gateway",
                     "default": "",

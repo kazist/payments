@@ -88,10 +88,12 @@ class PaymentsController extends BaseController {
 
     public function payAction() {
 
+        $factory = new KazistFactory();
         $this->model = new PaymentsModel();
 
         $payment_id = $this->request->get('payment_id');
 
+       $show_coupon= $factory->getSetting('payments_show_coupon_on_invoice',1);
         $user = $this->model->getUser();
         $converter = $this->model->getConverter();
         $gateways = $this->model->getPaymentGateways($payment_id);
@@ -99,6 +101,10 @@ class PaymentsController extends BaseController {
 
         $gateways_arr = json_decode(json_encode($gateways), true);
         $converter_arr = json_decode(json_encode($converter), true);
+        
+        if(!$show_coupon){
+            $payment = $this->model->hideCouponAmount($payment);
+        }
 
         $data_arr['deposit_gateway'] = $this->model->deposit_gateway;
         $data_arr['gateways'] = $gateways_arr;

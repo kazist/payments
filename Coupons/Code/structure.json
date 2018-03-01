@@ -52,6 +52,7 @@
                                             "fields": [
                                                 "is_percent",
                                                 "published",
+                                                "is_visible",
                                                 "applied"
                                             ]
                                         }
@@ -344,6 +345,10 @@
                             "text": "All New"
                         },
                         {
+                            "value": "all_renew",
+                            "text": "All Renew"
+                        },
+                        {
                             "value": "all_payment",
                             "text": "All Payments"
                         },
@@ -366,6 +371,31 @@
             "dropdown_filter": "0",
             "nullable": "1",
             "name": "is_percent",
+            "html_type": "yesno",
+            "mysql_type": "int",
+            "view_side": "",
+            "index": "",
+            "id_name": "",
+            "class_name": "",
+            "default_value": "",
+            "size": "",
+            "readonly": "0",
+            "format_value": "",
+            "parameters": {
+                "general": [],
+                "source": [],
+                "save": {
+                    "view_side": "both",
+                    "index": ""
+                },
+                "media": [],
+                "payment": []
+            }
+        },
+        {
+            "dropdown_filter": "0",
+            "nullable": "1",
+            "name": "is_visible",
             "html_type": "yesno",
             "mysql_type": "int",
             "view_side": "",
@@ -556,12 +586,13 @@
             "pc.end_date",
             "pc.applied",
             "pc.is_percent",
+            "pc.is_visible",
             "pc.published",
             "pc.created_by",
             "uu.name AS created_by_name",
             "pc.date_created",
             "pc.modified_by",
-            "uu_3742.name AS modified_by_name",
+            "uu_871.name AS modified_by_name",
             "pc.date_modified"
         ],
         "leftjoin": [
@@ -573,9 +604,9 @@
             },
             {
                 "table": "Users\\Users\\Code\\Tables\\Users",
-                "alias": "uu_3742",
+                "alias": "uu_871",
                 "name": "#__users_users",
-                "on": "pc.modified_by = uu_3742.id"
+                "on": "pc.modified_by = uu_871.id"
             }
         ]
     }

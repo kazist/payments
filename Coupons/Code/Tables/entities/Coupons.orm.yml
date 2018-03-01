@@ -49,6 +49,11 @@ Payments\Coupons\Code\Tables\Coupons:
       type: integer
       length: 11
       nullable: true
+    is_visible:
+      name: is_visible
+      type: integer
+      length: 11
+      nullable: true
     published:
       name: published
       type: integer

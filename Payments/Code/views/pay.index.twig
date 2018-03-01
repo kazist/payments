@@ -80,7 +80,7 @@
                         </tr>
                     {% endif %}
 
-                    {% if payment.coupons|length>0 %}
+                    {% if payment.coupons|length>0 and get_setting('payments_show_coupon_on_invoice', 1) %}
                         <tr>
                             <th colspan="4"> Discount </th>
                         </tr>

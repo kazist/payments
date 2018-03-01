@@ -3,11 +3,11 @@
     "title": "Coupons List",
     "explanation": "Coupons List",
     "description": "Coupons List",
-    "version": 37,
+    "version": 39,
     "has_view": "1",
     "tie_field": "0",
     "email_on_new": "0",
     "email_on_edit": "0",
     "email_on_delete": "0",
-    "date_file_modified": "2017-08-25 09:14:29"
+    "date_file_modified": "2018-02-28 11:07:24"
 }

@@ -88,6 +88,13 @@ class Coupons extends \Kazist\Table\BaseTable
     /**
      * @var integer
      *
+     * @ORM\Column(name="is_visible", type="integer", length=11, nullable=true)
+     */
+    protected $is_visible;
+
+    /**
+     * @var integer
+     *
      * @ORM\Column(name="published", type="integer", length=11, nullable=true)
      */
     protected $published;
@@ -345,6 +352,30 @@ class Coupons extends \Kazist\Table\BaseTable
     public function getIsPercent()
     {
         return $this->is_percent;
+    }
+
+    /**
+     * Set isVisible
+     *
+     * @param integer $isVisible
+     *
+     * @return Coupons
+     */
+    public function setIsVisible($isVisible)
+    {
+        $this->is_visible = $isVisible;
+
+        return $this;
+    }
+
+    /**
+     * Get isVisible
+     *
+     * @return integer
+     */
+    public function getIsVisible()
+    {
+        return $this->is_visible;
     }
 
     /**
