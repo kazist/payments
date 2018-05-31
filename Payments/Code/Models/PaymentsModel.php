@@ -94,7 +94,7 @@ class PaymentsModel extends BaseModel {
         return $user->id;
     }
 
-    public function getUser($user_id) {
+    public function getUser($user_id = '') {
 
         $factory = new KazistFactory();
 
@@ -634,15 +634,16 @@ class PaymentsModel extends BaseModel {
     }
 
     public function hideCouponAmount($payment = '') {
-        
-        foreach($payment->coupons AS $coupon){
-            $payment->amount = $payment->amount-$coupon->amount;
+
+        foreach ($payment->coupons AS $coupon) {
+            $payment->amount = $payment->amount - $coupon->amount;
         }
-        
+
         unset($payment->coupons);
-        
+
         return $payment;
     }
+
     public function getPayment($payment_id = '') {
 
         if ($payment_id) {
@@ -692,7 +693,7 @@ class PaymentsModel extends BaseModel {
         $where_arr[] = 'pc.applied = \'all_payment\'';
         if ($payment->is_new) {
             $where_arr[] = 'pc.applied = \'all_new\'';
-        }else{
+        } else {
             $where_arr[] = 'pc.applied = \'all_renew\'';
         }
 
@@ -936,7 +937,7 @@ class PaymentsModel extends BaseModel {
 
         $payment = $this->getPaymentById($payment_id);
         $this->savePaymentCodeStatus($payment_id);
-        $factory->enqueueMessage('Sorry. Your payment is Payment has Failed.', 'error');
+        $factory->enqueueMessage('Sorry. Your payment has Failed.', 'error');
 
         $this->container->get('dispatcher')->dispatch('payment.fail', new PaymentEvent($payment));
     }
