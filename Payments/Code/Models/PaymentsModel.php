@@ -922,12 +922,12 @@ class PaymentsModel extends BaseModel {
         $factory = new KazistFactory();
 
         $payment = $this->getPaymentById($payment_id);
-
+  
         $this->updateTaxationTransactions($payment);
         $this->updateCouponsTransactions($payment);
         $this->savePaymentCodeStatus($payment_id, $code, true);
         $factory->enqueueMessage('Thank you. Your payment was Successful.', 'info');
-
+       
         $this->container->get('dispatcher')->dispatch('payment.successful', new PaymentEvent($payment));
     }
 
